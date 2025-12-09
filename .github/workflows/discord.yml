@@ -1,0 +1,30 @@
+name: Discord Notify
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+  pull_request:
+    branches:
+      - "*"
+    types: [opened, reopened, ready_for_review, closed]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord notification
+        uses: Ilshidur/action-discord@master
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🔔 **${{ github.repository }} 이벤트 발생!**
+            👤 사용자: ${{ github.actor }}
+            📌 타입: ${{ github.event_name }}
+            📝 메시지 / 제목:
+            - Push: ${{ github.event.head_commit.message }}
+            - PR:   ${{ github.event.pull_request.title }}
+            🔗 링크:
+            - PR 링크: ${{ github.event.pull_request.html_url }}
