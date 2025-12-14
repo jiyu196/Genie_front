@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Genie_front
 
-## Getting Started
 
-First, run the development server:
+## 🎨 Frontend Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Genie튠의 사용자 화면과 관리자 대시보드를 구현합니다.  
+(학생 창작 흐름 + 운영자 관리 기능 구성 기반) 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 👦 회사 사이트 (User UI)
+-- 로그인 / 회원가입
+-- 회사 소개
+-- 제품 소개  
+-- (나중에 지니튠 사이트로 연동)
+-- 공지사항
+-- 제품 구독플랜
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 👦 사용자(아이들) 화면 (User UI)
+- 메인 페이지: 서비스 소개 및 시작 버튼
+- 단어 입력 화면: 누가/언제/어디서/무엇을/동사 입력, 필터링 알림
+- 분석 결과 화면: AI 문장 교정 결과 및 안전 표현 가이드 표시
+- 웹툰 출력 화면: 4컷 이미지 표시, 다운로드 및 재생성 기능 제공
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🛠 관리자 대시보드 (Admin UI)
+- 서비스 현황 페이지: 생성 건수·사용 통계 시각화
+- 프롬프트 데이터 관리: 학생 입력 단어 조회 및 필터링
+- 분석 결과 검토: AI 교정 문장 리스트 확인
+- 사용자/운영 관리: 계정 및 활동 내역 조회
 
-## Learn More
+### 🧩 공통 기능
+- Button, Input 등 공통 컴포넌트 설계
+- 반응형 UI 적용
+- 백엔드 API 연동(AI 문장교정/이미지 생성/대시보드 데이터)
+- 상태관리 적용(Redux 또는 Context)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 2025/12/10
+- 레퍼런스 사이트 조사
+- 프로토 타입 초안 작성
+- 중간 점검 발표
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 2025/12/11
+- 요구사항 정의서와 테이블을 기반으로 b2b사이트, 학생사이트, 관리자 대시보드 프로토타입 작성
 
-## Deploy on Vercel
+## 2025/12/12
+- 프로토타입 수정 및 보완
+- 컴포넌트 정의서 작성
+- 프론트 기술스택 및 라이브러리 설정
+- 패키지 구조 설정
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 2025/12/14
+- 프로젝트 패키지 재구성
+- 학생화면 UI 코드 구현(임시: 인덱스, 단어채팅, 로그인, 내학습방)
