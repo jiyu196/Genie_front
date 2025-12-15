@@ -1,11 +1,13 @@
-import './learn.css';
-import ChatTimeline from './_components/ChatTimeline';
+import '../learn.css';
+import WordTimeline from './WordTimeline';
 
 export default function LearnPage() {
+
+
     return (
         <div className="learn-bg">
                     <section className="learn-card">
-                        <ChatTimeline />
+                        <WordTimeline />
                     </section>
         </div>
     );
@@ -25,7 +27,7 @@ export default function LearnPage() {
 //                 {/* 프레임 안 실제 UI */}
 //                 <div className="chat-content">
 //
-//                     <ChatTimeline />
+//                     <WordTimeline />
 //                 </div>
 //
 //             </div>

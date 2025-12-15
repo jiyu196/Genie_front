@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import ChatBubble from './ChatBubble';
-import ChatInput from './ChatInput';
-import { wordQuestions } from './questions';
+import ChatBubble from '../_components/ChatBubble';
+import WordInput from './WordInput';
+import { wordQuestions } from '../_components/questions';
 
 type Message = {
     id: number;
@@ -19,42 +19,45 @@ type Step =
     | 'WORD_QNA'
     | 'SENTENCE'
     | 'IMAGE_LOADING'
-    | 'IMAGE_DONE'
     | 'REFINE_DONE';
 
-export default function ChatTimeline() {
+export default function WordTimeline() {
     const [step, setStep] = useState<Step>('SELECT_MODE');
     const [messages, setMessages] = useState<Message[]>([]);
     const [questionIndex, setQuestionIndex] = useState(0);
-    const [answers, setAnswers] = useState<Record<string, string>>({});
     const bottomRef = useRef<HTMLDivElement>(null);
     const messageIdRef = useRef(0);
 
     const pushMessage = (msg: Omit<Message, 'id'>) => {
         messageIdRef.current += 1;
-        setMessages(prev => [
-            ...prev,
-            { id: messageIdRef.current, ...msg },
-        ]);
+        setMessages(prev => [...prev, { id: messageIdRef.current, ...msg }]);
     };
 
-
-    // 자동 스크롤
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    /** 모드 선택 */
+    /** 시작 */
     if (step === 'SELECT_MODE') {
         return (
-            <div className="center-buttons">
+            <div className="flex items-center justify-center h-full">
                 <button
-                    className="mode-btn"
+                    className="px-6 py-3 rounded-2xl bg-[#d48c8c] text-white font-semibold"
                     onClick={() => {
-                        setStep('INTRO');
-                        setMessages([]);
-                        pushMessage({ sender: 'bot', type: 'text', content: '단어로 이야기를 만들어볼까?' });
-                        pushMessage({ sender: 'bot', type: 'button', content: '좋아!' });
+                        setStep('RULE');
+                        pushMessage({
+                            sender: 'bot',
+                            type: 'text',
+                            content: '내가 질문하면 단어를 하나씩 입력해줘 😊',
+                        });
+                        setTimeout(() => {
+                            pushMessage({
+                                sender: 'bot',
+                                type: 'text',
+                                content: wordQuestions[0].text,
+                            });
+                            setStep('WORD_QNA');
+                        }, 500);
                     }}
                 >
                     단어로 이야기 만들기
@@ -63,24 +66,8 @@ export default function ChatTimeline() {
         );
     }
 
-    /** 버튼 클릭 처리 */
-    const handleButtonClick = () => {
-        setStep('RULE');
-        pushMessage({ sender: 'bot', type: 'text', content: '내가 물어보는 질문에 단어를 입력해줘!' });
-        setTimeout(() => {
-            pushMessage({
-                sender: 'bot',
-                type: 'text',
-                content: wordQuestions[0].text,
-            });
-            setStep('WORD_QNA');
-        }, 300);
-    };
-
     /** 단어 입력 처리 */
     const handleAnswer = (value: string) => {
-        const q = wordQuestions[questionIndex];
-        setAnswers(prev => ({ ...prev, [q.key]: value }));
         pushMessage({ sender: 'user', type: 'text', content: value });
 
         const nextIndex = questionIndex + 1;
@@ -93,7 +80,7 @@ export default function ChatTimeline() {
                     type: 'text',
                     content: wordQuestions[nextIndex].text,
                 });
-            }, 300);
+            }, 400);
         } else {
             makeSentence();
         }
@@ -102,22 +89,29 @@ export default function ChatTimeline() {
     /** 문장 생성 */
     const makeSentence = () => {
         setStep('SENTENCE');
-        const sentence = '강아지가 공원에서 즐겁게 뛰어놀았어.'; // TODO: 조사/받침 로직
 
         setTimeout(() => {
-            pushMessage({ sender: 'bot', type: 'text', content: '네가 만든 문장이야!' });
-            pushMessage({ sender: 'user', type: 'text', content: sentence });
+            pushMessage({
+                sender: 'bot',
+                type: 'text',
+                content: '네가 고른 단어로 문장을 만들어봤어 ✨',
+            });
+            pushMessage({
+                sender: 'user',
+                type: 'text',
+                content: '강아지가 공원에서 즐겁게 뛰어놀았어.',
+            });
             loadImages();
-        }, 400);
+        }, 600);
     };
 
-    /** 이미지 생성 연출 */
+    /** 이미지 생성 */
     const loadImages = () => {
         setStep('IMAGE_LOADING');
         pushMessage({
             sender: 'bot',
             type: 'text',
-            content: '조금만 기다려줘! Genie가 그림 이야기를 만들고 있어!',
+            content: '이제 이 문장으로 그림을 만들어볼게 🎨',
         });
 
         setTimeout(() => {
@@ -132,24 +126,26 @@ export default function ChatTimeline() {
             pushMessage({
                 sender: 'bot',
                 type: 'text',
-                content: '날뛰다 → 뛰어놀다 (더 부드러운 표현이에요)',
+                content: '“날뛰다”를 “뛰어놀다”로 바꿨어 😊',
             });
         }, 1000);
     };
 
     return (
-        <div className="chat-area">
-            {messages.map(msg => (
-                <ChatBubble
-                    key={msg.id}
-                    message={msg}
-                    onButtonClick={handleButtonClick}
-                />
-            ))}
+        <div className="flex flex-col h-full">
 
-            {step === 'WORD_QNA' && <ChatInput onSubmit={handleAnswer} />}
+            {/* 채팅 로그 */}
+            <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
+                {messages.map(msg => (
+                    <ChatBubble key={msg.id} message={msg} />
+                ))}
+                <div ref={bottomRef} />
+            </div>
 
-            <div ref={bottomRef} />
+            {/* 🔽 단어 입력창 (하단 고정) */}
+            {step === 'WORD_QNA' && (
+                <WordInput onSubmit={handleAnswer} />
+            )}
         </div>
     );
 }
