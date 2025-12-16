@@ -1,6 +1,18 @@
+import Image from "next/image";
+
 export default function LoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#f6eeee]">
+            {/* 캐릭터 */}
+            <div className="absolute -top-20 left-1/2 -translate-x-1/2">
+                <Image
+                    src="/images/character.svg"
+                    alt="지니"
+                    width={160}
+                    height={160}
+                    className="animate-bounce"
+                />
+            </div>
             <div className="w-[420px] bg-[#fffdf9] rounded-[32px] px-9 py-12 flex flex-col gap-5 shadow-lg">
                 <h2 className="text-[28px] font-extrabold text-[#4a3b3b] text-center">
                     로그인

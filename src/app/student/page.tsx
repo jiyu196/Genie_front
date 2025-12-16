@@ -3,15 +3,16 @@ import Image from "next/image";
 
 export default function StudentMainPage() {
     return (
-        <div className="min-h-screen bg-[#f6eeee] flex flex-col">
+        <div className="h-screen overflow-hidden bg-[#f6eeee] flex flex-col">
+
 
             {/* 메인 */}
-            <main className="flex-1 flex items-center justify-center relative">
+            <main className="flex-1 flex items-start justify-center relative pt-30">
+
 
                 <div className="relative bg-[#fffdf9] w-[min(92vw,1100px)] min-h-[70vh] rounded-[48px] px-16 py-20 flex flex-col items-center justify-center text-center shadow-sm">
-
                     {/* 캐릭터 */}
-                    <div className="absolute -top-24 left-1/2 -translate-x-1/2">
+                    <div className="absolute -top-20 left-1/2 -translate-x-1/2">
                         <Image
                             src="/images/character.svg"
                             alt="지니"
@@ -20,6 +21,7 @@ export default function StudentMainPage() {
                             className="animate-bounce"
                         />
                     </div>
+
 
                     {/* 말풍선 */}
                     <div className="mb-8 bg-[#fdecec] px-6 py-3 rounded-full text-sm font-semibold text-[#d48c8c]">

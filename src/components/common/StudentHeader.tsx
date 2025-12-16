@@ -6,14 +6,18 @@ export default function StudentHeader() {
     return (
         <header
             className="
-            relative z-10
+            relative
+            z-10
             h-20
             px-6
-            flex items-center
+            flex
+            items-center
             justify-between
-            overflow-visible
+            overflow-hidden
+            mt-6
             "
         >
+
 
         {/* 로고 */}
             <Link href="/student">
@@ -34,7 +38,7 @@ export default function StudentHeader() {
                     <button
                         className="
                             ml-6
-                            text-sm
+                            text-md
                             font-semibold
                             text-[#4a3b3b]
                             hover:text-[#d48c8c]
@@ -49,7 +53,7 @@ export default function StudentHeader() {
                     <button
                         className="
                             ml-6
-                            text-sm
+                            text-md
                             font-semibold
                             text-[#4a3b3b]
                             hover:text-[#d48c8c]
