@@ -1,8 +1,8 @@
-import B2BHeader from "@/components/common/B2BHeader";
-import Banner from "@/components/common/Banner";
-import NoticePreview from "@/components/common/NoticePreview";
-import LearningEffect from "@/components/common/LearningEffect";
-import B2BFooter from "@/components/common/B2BFooter";
+import B2BHeader from "@/components/b2b/B2BHeader";
+import Banner from "@/components/b2b/Banner";
+import NoticePreview from "@/components/b2b/NoticePreview";
+import LearningEffect from "@/components/b2b/LearningEffect";
+import B2BFooter from "@/components/b2b/B2BFooter";
 
 export default function B2BPage() {
     return (

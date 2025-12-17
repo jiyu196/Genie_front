@@ -32,3 +32,11 @@ html, body {
     height: 100%;
     background: #f6eeee; /* 검정 제거 */
 }
+
+/* globals.css 또는 auth-input 정의된 곳 */
+.auth-input {
+    @apply w-full h-[44px] px-4 rounded-lg border border-gray-300
+    text-sm placeholder-gray-400
+    focus:outline-none focus:ring-0 focus:border-gray-300;
+}
+

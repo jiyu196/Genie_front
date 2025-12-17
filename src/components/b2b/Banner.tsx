@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Button from "@/components/b2b/Button";
+import Link from "next/link";
 
 export default function Banner() {
     return (
@@ -23,12 +25,16 @@ export default function Banner() {
                     </p>
 
                     <div className="mt-10 flex gap-4">
-                        <button className="px-6 py-3 rounded-full bg-[#1F3A5F] text-white font-medium">
-                            상품 구독 플랜
-                        </button>
-                        <button className="px-6 py-3 rounded-full border border-[#1F3A5F]/30">
-                            서비스 소개
-                        </button>
+                        <Link href="/b2b/plan">
+                            <Button className="px-6 py-3 rounded-full bg-[#1F3A5F] text-white font-medium cursor-pointer transition hover:brightness-80">
+                                상품 구독 플랜
+                            </Button>
+                        </Link>
+                        <Link href="/b2b/solution">
+                            <Button variant="secondary" className="h-[44px] px-4 cursor-pointer transition hover:brightness-90">
+                                교육 솔루션 소개
+                            </Button>
+                        </Link>
                     </div>
                 </div>
 

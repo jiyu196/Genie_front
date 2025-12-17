@@ -1,6 +1,6 @@
 // app/b2b/(auth)/login/page.tsx
 import Link from "next/link";
-import Button from "@/components/common/Button";
+import Button from "@/components/b2b/Button";
 
 export default function LoginPage() {
     return (
@@ -18,7 +18,7 @@ export default function LoginPage() {
                 />
             </div>
 
-            <Button className="w-full mt-6 text-[#F4F6FF] hover:text-[#4c5c6b]/100 cursor-pointer">
+            <Button className="w-full mt-6 text-[#F4F6FF] hover:brightness-50 cursor-pointer">
                 로그인
             </Button>
 
