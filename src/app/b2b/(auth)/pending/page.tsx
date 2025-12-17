@@ -11,41 +11,32 @@ export default function PendingPage() {
                     관리자 승인 대기 중
                 </h1>
 
-                <p className="text-md text-gray-600 leading-relaxed mb-6">
-                    기관 회원가입이 <b className="text-red-700">정상적으로 접수</b>되었습니다.<br />
-                    구독 문의를 통해 승인 절차가 진행되며, 승인 완료 후 <br />Genie 서비스를 이용하실 수 있습니다.
+                <p className="text-md text-gray-600 leading-relaxed mb-8">
+                    기관 회원가입이 <b className="text-red-700">정상적</b>으로 접수되었습니다.<br />
+                    관리자 승인 완료 후 Genie 서비스를 이용하실 수 있습니다.
                 </p>
-
 
                 <div className="bg-[#f9fafb] rounded-xl px-6 py-5 text-sm text-gray-700 mb-8 text-left">
                     <ul className="space-y-2">
                         <li>• 승인까지 <b>영업일 기준 1~2일</b> 소요됩니다.</li>
-                        <li>• 승인 전까지 실제 서비스 이용은 제한됩니다.</li>
-                        <li className="pt-2 text-gray-600">
-                            ※ 아래 데모를 통해 서비스 화면과 학습 흐름을 미리 체험하실 수 있습니다.
-                        </li>
+                        <li>• 승인 전까지 서비스 이용은 제한됩니다.</li>
                     </ul>
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    {/* 데모 체험 */}
-                    <Link href="/demo/student">
-                        <Button className="w-full cursor-pointer transition hover:brightness-80">
-                            서비스 데모 체험하기
-                        </Button>
-                    </Link>
+                    {/*/!* 데모 체험 *!/*/}
+                    {/*<Link href="/demo/student">*/}
+                    {/*    <Button className="w-full cursor-pointer transition hover:brightness-80">*/}
+                    {/*        서비스 데모 체험하기*/}
+                    {/*    </Button>*/}
+                    {/*</Link>*/}
+                    <Button className="w-full cursor-pointer transition hover:brightness-80" disabled>
+                        승인 대기 중
+                    </Button>
 
-                    {/* 구독 플랜 */}
-                    <Link href="/b2b/plan">
-                        <Button variant="secondary" className="w-full cursor-pointer">
-                            구독 플랜 보기
-                        </Button>
-                    </Link>
-
-                    {/* 로그인 */}
-                    <Link href="/b2b/login">
-                        <Button variant="secondary" className="w-full cursor-pointer">
-                            로그인 페이지로 돌아가기
+                    <Link href="/b2b/">
+                        <Button variant="secondary" className="w-full cursor-pointer transition hover:brightness-90">
+                            메인 페이지로 돌아가기
                         </Button>
                     </Link>
                 </div>

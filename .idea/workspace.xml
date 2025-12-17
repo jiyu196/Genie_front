@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="리드미 작성">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/pending/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/pending/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/plan/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/plan/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/solution/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/solution/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/B2BFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/B2BFooter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/B2BHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/B2BHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/Banner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/Banner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/LearningEffect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/LearningEffect.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/NoticePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/NoticePreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/register/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/learning" />
+        <entry key="$PROJECT_DIR$" value="feature/b2b" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -68,38 +57,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feature/b2b",
-    "ignore.virus.scanning.warn.message": "true",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "C:/Users/tj/Genie_Project/src/app/student/learn/sentence",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.Next.js: 서버 측.executor": "Run",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "ts.external.directory.path": "C:\\Users\\tj\\Genie_Project\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/admin&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tj/Genie_Project/src/app/student/learn/sentence&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: 서버 측.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\tj\\Genie_Project\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\sentence" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tj\Genie_Project\src\components\b2b" />
       <recent name="C:\Users\tj\Genie_Project\public\images" />
       <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(auth)\signup" />
       <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(auth)" />
       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\word" />
-      <recent name="C:\Users\tj\Genie_Project\public" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: 서버 측">
@@ -134,7 +123,7 @@
       <workItem from="1765761109602" duration="15183000" />
       <workItem from="1765845061629" duration="1949000" />
       <workItem from="1765847285675" duration="35278000" />
-      <workItem from="1765932427412" duration="12527000" />
+      <workItem from="1765932427412" duration="30193000" />
     </task>
     <task id="LOCAL-00001" summary="레이아웃 위치 수정(page수정)">
       <option name="closed" value="true" />
@@ -160,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765887819340</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정">
+      <option name="closed" value="true" />
+      <created>1765954104939</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765954104939</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +167,7 @@
     <MESSAGE value="레이아웃 위치 수정(page수정)" />
     <MESSAGE value="b2b 사이트(header, footer, company, solution, plan, notice, login, signup) 레이아웃 구성" />
     <MESSAGE value="리드미 작성" />
-    <option name="LAST_COMMIT_MESSAGE" value="리드미 작성" />
+    <MESSAGE value="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정" />
   </component>
 </project>

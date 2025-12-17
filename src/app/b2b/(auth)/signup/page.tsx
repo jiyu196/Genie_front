@@ -1,5 +1,6 @@
 // app/b2b/(auth)/signup/page.tsx
 import Button from "@/components/b2b/Button";
+import Link from "next/link";
 
 export default function SignupBizCheckPage() {
     return (
@@ -26,12 +27,13 @@ export default function SignupBizCheckPage() {
                     className="auth-input"
                     placeholder="사업자등록번호 (- 없이 입력)"
                 />
-
+            <Link href="/b2b/signup/register">
                 <Button
                     className="w-full cursor-pointer transition hover:brightness-80"
                 >
                     사업자 조회
                 </Button>
+            </Link>
             </section>
 
             {/* 안내 메시지 영역 (상태별로 분기 렌더링 예정) */}
