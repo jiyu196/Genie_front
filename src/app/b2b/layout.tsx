@@ -1,7 +1,6 @@
 // app/b2b/layout.tsx
-import Header from "@/components/common/B2BHeader";
-import B2BFooter from "@/components/common/B2BFooter";
-import B2BHeader from "@/components/common/B2BHeader";
+import B2BFooter from "@/components/b2b/B2BFooter";
+import B2BHeader from "@/components/b2b/B2BHeader";
 
 export default function B2BLayout({
                                       children,

@@ -1,5 +1,6 @@
 // app/b2b/plan/page.tsx
-import Button from "@/components/common/Button";
+import Button from "@/components/b2b/Button";
+import Link from "next/link";
 
 export default function PlanPage() {
     return (
@@ -7,7 +8,7 @@ export default function PlanPage() {
             {/* Hero */}
             <section className="py-24 bg-[#F4F6FF] text-center">
                 <h1 className="text-3xl font-bold text-[#19344e] mb-4">
-                    GenieTune 기관 구독 플랜
+                    Genie 구독 플랜
                 </h1>
                 <p className="text-gray-600 text-lg">
                     교육 기관을 위한 단일 구독 플랜으로<br />
@@ -19,15 +20,16 @@ export default function PlanPage() {
             <section className="max-w-[1100px] mx-auto px-6 py-20">
                 <div className="max-w-[520px] mx-auto border-1 border-[#19344e] rounded-3xl p-10 text-center shadow-sm">
                     <h2 className="text-2xl font-bold mb-2 text-[#F59E0B]">
-                        GenieTune 기관 플랜
+                        Genie 플랜
                     </h2>
                     <p className="text-gray-500 mb-8">
                         승인된 교육 기관만 이용 가능한 공식 구독 플랜
                     </p>
-
+                <Link href="/b2b/inquiry">
                     <Button className="w-full cursor-pointer hover:brightness-95">
                         도입 문의하기
                     </Button>
+                </Link>
                 </div>
             </section>
 
@@ -100,7 +102,7 @@ export default function PlanPage() {
 
             {/* Notice */}
             <section className="bg-[#F4F6FF] py-16 text-center">
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-600 leading-relaxed font-bold">
                     GenieTune은 관리자 승인 완료 후 서비스 이용이 가능하며,<br />
                     기관별 운영 환경에 따라 제공 범위가 달라질 수 있습니다.<br />
                     자세한 내용은 별도 문의를 통해 안내드립니다.

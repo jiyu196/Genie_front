@@ -17,7 +17,7 @@ export default function SolutionPage() {
                     />
                 </div>
                 <h1 className="text-3xl font-bold text-[#19344e] leading-relaxed mb-4">
-                    GenieTune 교육 솔루션
+                    Genie 교육 솔루션
                 </h1>
                 <p className="text-gray-600 text-lg">
                     아이들의 문장을 이야기로, 이야기를 상상력으로 확장하는<br />
