@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/pending/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/pending/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/register/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/register/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/AdminSideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AdminSideBar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +20,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -84,11 +83,11 @@
       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\sentence" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(auth)\signup" />
+      <recent name="C:\Users\tj\Genie_Project\src\app\admin\members\signup-requests" />
+      <recent name="C:\Users\tj\Genie_Project\src\app\admin\members" />
       <recent name="C:\Users\tj\Genie_Project\src\components\b2b" />
       <recent name="C:\Users\tj\Genie_Project\public\images" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(auth)\signup" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(auth)" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\word" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: 서버 측">
@@ -123,7 +122,8 @@
       <workItem from="1765761109602" duration="15183000" />
       <workItem from="1765845061629" duration="1949000" />
       <workItem from="1765847285675" duration="35278000" />
-      <workItem from="1765932427412" duration="30193000" />
+      <workItem from="1765932427412" duration="30516000" />
+      <workItem from="1766017837833" duration="8936000" />
     </task>
     <task id="LOCAL-00001" summary="레이아웃 위치 수정(page수정)">
       <option name="closed" value="true" />
@@ -157,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765954104939</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현">
+      <option name="closed" value="true" />
+      <created>1765975757581</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765975757581</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,6 +176,7 @@
     <MESSAGE value="b2b 사이트(header, footer, company, solution, plan, notice, login, signup) 레이아웃 구성" />
     <MESSAGE value="리드미 작성" />
     <MESSAGE value="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정" />
+    <MESSAGE value="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현" />
   </component>
 </project>
