@@ -5,7 +5,7 @@ export const sidebarMenu = [
         items: [
             {
                 label: "기관 정보",
-                href: "/b2b/dashboard/organization",
+                href: "/b2b/mypage/organization",
             },
         ],
     },
@@ -14,7 +14,7 @@ export const sidebarMenu = [
         items: [
             {
                 label: "Genie툰 학생계정 관리",
-                href: "/b2b/dashboard/students",
+                href: "/b2b/mypage/students",
             },
         ],
     },
@@ -22,12 +22,8 @@ export const sidebarMenu = [
         title: "구독 & 결제",
         items: [
             {
-                label: "구독 정보",
-                href: "/b2b/dashboard/plan",
-            },
-            {
-                label: "결제 내역",
-                href: "/b2b/dashboard/plan#billing",
+                label: "구독 및 결제정보",
+                href: "/b2b/mypage/plan",
             },
         ],
     },
@@ -35,13 +31,10 @@ export const sidebarMenu = [
         title: "계정관리 & 탈퇴",
         items: [
             {
-                label: "비밀번호 변경",
-                href: "/b2b/dashboard/settings/password",
+                label: "비밀번호 변경 및 회원탈퇴",
+                href: "/b2b/mypage/settings",
             },
-            {
-                label: "회원 탈퇴",
-                href: "/b2b/dashboard/settings/withdrawal",
-            },
+
         ],
     },
 ];

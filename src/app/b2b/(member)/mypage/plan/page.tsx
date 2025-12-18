@@ -1,6 +1,6 @@
 export default function PlanPage() {
     return (
-        <section className="space-y-8">
+        <section className="max-w-[960px] ml-8 space-y-8">
             <h1 className="text-xl font-semibold text-[#19344e]">
                 구독 & 결제
             </h1>
@@ -29,7 +29,7 @@ export default function PlanPage() {
 
                 <ul className="space-y-3 text-sm">
                     <li className="flex justify-between">
-                        <span>2025.01.01</span>
+                        <span>2025.02.01</span>
                         <span>₩1,200,000</span>
                     </li>
                     <li className="flex justify-between text-gray-400">

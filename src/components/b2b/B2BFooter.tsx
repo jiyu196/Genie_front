@@ -1,7 +1,9 @@
 import Image from 'next/image';
 
 export default function B2BFooter() {
+
     return (
+
         <footer className="bg-[#F4F6FF] border-t border-[#19344e]/10">
             <div className="mx-auto max-w-[1200px] px-6 py-8 text-sm text-[#19344e]/70">
 

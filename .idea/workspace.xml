@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="회원가입쪽 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/members/signup-requests/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/members/signup-requests/[id]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/company/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(public)/company/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/inquiry2/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/mypage/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/mypage/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/mypage/students/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/notice/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(public)/notice/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/notice/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(public)/notice/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/plan/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(public)/plan/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/solution/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(public)/solution/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/b2b/NoticePreview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/NoticePreview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(member)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/organization/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/organization/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/plan/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/plan/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/settings/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/settings/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/students/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(member)/mypage/students/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/B2BFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/B2BFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/SideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/SideBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/SideBarMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/SideBarMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/error.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +28,8 @@
       <list>
         <option value="JavaScript File" />
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -92,11 +91,11 @@
       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\sentence" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)" />
+      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)\mypage" />
+      <recent name="C:\Users\tj\Genie_Project\src\app" />
       <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)\mypage\settings" />
       <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)\mypage\settings\password" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)\mypage" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(public)\notice" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(public)" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: 서버 측">
@@ -174,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765975757581</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="회원가입쪽 수정">
+      <option name="closed" value="true" />
+      <created>1766042314364</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1766042314364</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +193,7 @@
     <MESSAGE value="리드미 작성" />
     <MESSAGE value="B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정" />
     <MESSAGE value="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현" />
+    <MESSAGE value="회원가입쪽 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="회원가입쪽 수정" />
   </component>
 </project>

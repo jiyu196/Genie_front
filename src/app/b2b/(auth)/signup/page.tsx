@@ -3,6 +3,7 @@ import Button from "@/components/b2b/Button";
 import Link from "next/link";
 
 export default function SignupRegisterPage() {
+
     return (
         <div className="w-full max-w-[480px] bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.06)] px-10 py-9">
             <h1 className="text-2xl font-bold text-center text-[#19344e] mb-8">
@@ -28,7 +29,10 @@ export default function SignupRegisterPage() {
                     <Button
                         variant="secondary"
                         type="button"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 h-[30px] px-4 py-0 text-xs leading-none flex items-center justify-center whitespace-nowrap"
+                        className="
+                        absolute right-3 top-1/2 -translate-y-1/2 h-[30px]
+                        px-4 py-0 text-xs leading-none flex items-center justify-center whitespace-nowrap
+                        text-[#19344e]/70 hover:text-[#19344e] transition"
                     >
                         인증
                     </Button>
@@ -52,20 +56,31 @@ export default function SignupRegisterPage() {
                 <h2 className="font-semibold text-lg text-gray-700">
                     사업자 인증
                 </h2>
-                <div className="relative curs">
+                <div className="relative curs ">
                     <input
                         className="auth-input pr-24"
                         placeholder="사업자등록번호 입력"
                     />
-
+                </div>
+                <div className="relative curs ">
+                    <input
+                        className="auth-input pr-24"
+                        placeholder="대표명"
+                    />
+                </div>
+                <div className="relative curs ">
+                    <input
+                        className="auth-input pr-24"
+                        placeholder="설립일"
+                    />
+                </div>
                     <Button
                         variant="secondary"
                         type="button"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 h-[30px] px-4 py-0 text-xs leading-none flex items-center justify-center whitespace-nowrap"
+                        className="w-full h-[32px] text-xs py-0 leading-none opacity-80 hover:opacity-100 cursor-pointer"
                     >
                         조회
                     </Button>
-                </div>
                 <input
                     className="auth-input cursor-not-allowed bg-gray-100"
                     placeholder="기관명"
