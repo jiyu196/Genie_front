@@ -14,7 +14,7 @@ export default function Button({
     return (
         <button
             className={clsx(
-                'rounded-full px-6 py-3 text-sm font-medium transition',
+                'rounded-full px-6 py-3 text-sm font-medium transition cursor-pointer',
                 variant === 'primary' &&
                 'bg-[#19344e] text-[#F4F6FF] hover:bg-[#19344e]',
                 variant === 'secondary' &&

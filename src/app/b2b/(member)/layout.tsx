@@ -5,7 +5,6 @@ export default async function MemberLayout({ children }: { children: React.React
 
     return (
         <div className="min-h-screen flex">
-            <aside>사이드바</aside>
             <Sidebar/>
 
             <main className="flex-1">

@@ -1,42 +1,43 @@
 export default function OrganizationPage() {
     return (
-        <section className="space-y-6">
-            <h1 className="text-xl font-semibold text-[#19344e]">
-                기본 정보
-            </h1>
+        <section className="max-w-[960px] ml-8 space-y-8">
+            {/* 페이지 헤더 */}
+            <div>
+                <h1 className="text-2xl font-bold text-[#19344e]">
+                    기본 정보
+                </h1>
+                <p className="text-sm text-[#19344e]/60 mt-1">
+                    기관 계정의 기본 정보를 확인할 수 있습니다.
+                </p>
+            </div>
 
-            <div className="bg-white rounded-2xl p-8 shadow-sm space-y-6 max-w-[640px]">
-                <div>
-                    <label className="block text-sm text-gray-500 mb-1">
-                        기관명
-                    </label>
-                    <input
-                        value="OO초등학교"
-                        readOnly
-                        className="auth-input cursor-not-allowed bg-gray-100"
-                    />
+            {/* 승인 상태 요약 */}
+            <div className="bg-white rounded-2xl shadow-sm max-w-[640px] overflow-hidden">
+                {/* 카드 헤더 */}
+                <div className="flex items-center gap-2 px-6 py-4 bg-[#F4F6FF]/50 text-green-700 text-sm font-medium">
+                    <span className="text-green-700">●</span>
+                    승인 완료
                 </div>
 
-                <div>
-                    <label className="block text-sm text-gray-500 mb-1">
-                        담당자 이메일
-                    </label>
-                    <input
-                        value="admin@school.ac.kr"
-                        readOnly
-                        className="auth-input cursor-not-allowed bg-gray-100"
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-sm text-gray-500 mb-1">
-                        승인 상태
-                    </label>
-                    <span className="inline-block px-3 py-1 text-sm rounded-full bg-green-100 text-green-700">
-                        승인 완료
-                    </span>
+                {/* 카드 바디 */}
+                <div className="p-8 space-y-6">
+                    <InfoRow label="기관명" value="서울초등학교" />
+                    <InfoRow label="담당자 이메일" value="admin@school.ac.kr" />
                 </div>
             </div>
+
         </section>
+    );
+}
+
+/* 보조 컴포넌트 */
+function InfoRow({ label, value }: { label: string; value: string }) {
+    return (
+        <div className="flex items-center justify-between border-b last:border-b-0 pb-4 last:pb-0">
+            <span className="text-sm text-gray-500">{label}</span>
+            <span className="text-sm font-medium text-[#19344e]">
+                {value}
+            </span>
+        </div>
     );
 }
