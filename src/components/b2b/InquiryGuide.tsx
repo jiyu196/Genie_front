@@ -1,4 +1,4 @@
-// app/inquiry/_components/InquiryGuide.tsx
+// app/components/b2b/InquiryGuide
 export default function InquiryGuide() {
     return (
         <div className="min-h-[calc(100vh-120px)] flex items-center justify-center bg-[#f6f8fb]">
