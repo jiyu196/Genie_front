@@ -2,7 +2,7 @@ import Button from "@/components/b2b/Button";
 
 export default function StudentsPage() {
     return (
-        <section className="max-w-[960px] ml-8 space-y-8">
+        <section className="max-w-[960px] ml-8 mt-7 space-y-8">
             {/* 페이지 헤더 */}
             <div>
                 <h1 className="text-2xl font-bold text-[#19344e]">

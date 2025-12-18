@@ -27,11 +27,11 @@ export default function B2BHeader() {
                         <Image src="/images/b2bLogo.svg" alt="Genie" width={120} height={36} />
                     </Link>
 
-                    <nav className="hidden md:flex gap-8 text-sm font-medium text-[#19344e]/80">
-                        <Link href="/b2b/company" className="hover:text-[#19344e]">회사소개</Link>
-                        <Link href="/b2b/solution" className="hover:text-[#19344e]">교육 솔루션</Link>
-                        <Link href="/b2b/plan" className="hover:text-[#19344e]">구독 플랜</Link>
-                        <Link href="/b2b/notice" className="hover:text-[#19344e]">공지사항</Link>
+                    <nav className="hidden md:flex gap-8 text-sm font-medium  text-[#19344e]/80 ">
+                        <Link href="/b2b/company" className="hover:text-[#19344e] font-bold">회사소개</Link>
+                        <Link href="/b2b/solution" className="hover:text-[#19344e] font-bold">교육 솔루션</Link>
+                        <Link href="/b2b/plan" className="hover:text-[#19344e] font-bold">구독 플랜</Link>
+                        <Link href="/b2b/notice" className="hover:text-[#19344e] font-bold">공지사항</Link>
                     </nav>
 
                     <div className="flex items-center gap-4 text-sm text-[#19344e]/80 hover:text-[#19344e]">
