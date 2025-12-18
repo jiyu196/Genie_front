@@ -54,7 +54,7 @@ export default function NoticePreview() {
                         {notices.map(notice => (
                             <li key={notice.id}>
                                 <Link
-                                    href={`/b2b/notice/${notice.id}`}
+                                    href={`/src/app/b2b/(public)/notice/${notice.id}`}
                                     className="
                                     flex items-center justify-between
                                     bg-white

@@ -67,6 +67,11 @@ export default function SignupRegisterPage() {
                     </Button>
                 </div>
                 <input
+                    className="auth-input cursor-not-allowed bg-gray-100"
+                    placeholder="기관명"
+                    readOnly
+                />
+                <input
                     className="auth-input"
                     placeholder="담당자 이름"
                 />
