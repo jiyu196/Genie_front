@@ -1,19 +1,18 @@
-export async function checkBusiness(data: {
-    bizNumber: string;
-    representativeName: string;
-    openingDate: string;
-}) {
-    const res = await fetch("/api/rest/business/validate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
+// src/services/business.ts
+import { CHECK_BIZ_NUMBER } from "@/graphql/business/checkBizNumber";
+import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
-    if(!res.ok) {
-        throw new Error("사업자 조회 요청에 실패했습니다");
+export const checkBusiness = async (
+    client: ApolloClient<NormalizedCacheObject>,
+    input: {
+        bizNumber: string;
+        representativeName: string;
+        openingDate: string;
     }
-    return res.json();
-}
-
+) => {
+    return client.mutate({
+        mutation: CHECK_BIZ_NUMBER,
+        variables: { input },
+        fetchPolicy: "no-cache",
+    });
+};
