@@ -8,50 +8,198 @@ import {REGISTER_MUTATION} from "@/graphql/auth/register";
 import {useRouter} from "next/navigation";
 import {useMutation} from "@apollo/client";
 import {CHECK_BIZ_NUMBER} from "@/graphql/business/checkBizNumber";
+import {SEND_EMAIL_CODE_MUTATION} from "@/graphql/auth/sendEmailCode";
+import {VERIFY_EMAIL_CODE_MUTATION} from "@/graphql/auth/verifyEmailCode";
+import EmailVerificationSection from "@/components/b2b/signup/EmailVerificationSection";
+import BusinessVerificationSection from "@/components/b2b/signup/BusinessVerificationSection";
+import OrganizationInfoSection from "@/components/b2b/signup/OrganizationInfoSection";
+import AgreementSection from "@/components/b2b/signup/AgreementSection";
+import PasswordSection from "@/components/b2b/signup/PasswordSection";
+
 
 export default function SignupRegisterPage() {
-    const [register] = useMutation(REGISTER_MUTATION, {
+// 이메일 인증번호 발송 mutation
+    const [sendEmailCode] = useMutation(SEND_EMAIL_CODE_MUTATION, {
         fetchPolicy: "no-cache",
     });
-    const [bizMessage, setBizMessage] = useState<string | null>(null);
+
+// 이메일 인증번호 검증 mutation
+    const [verifyEmailCode] = useMutation(VERIFY_EMAIL_CODE_MUTATION, {
+        fetchPolicy: "no-cache",
+    })
+
+// 사업자 번호 조회 mutation
+// - 사업자 인증 단계에서 "조회" 버튼 눌렀을 때 실행 / - 국세청 기반 사업자 상태 확인
     const [checkBizNumber] = useMutation(CHECK_BIZ_NUMBER, {
         fetchPolicy: "no-cache",
     });
 
-    const [isChecked, setIsChecked] = useState(false);
+// 회원가입 요청 mutation
+// - 최종 "가입 요청" 버튼 눌렀을 때 실행 / - 성공 시 PENDING / REJECTED 상태 반환
+    const [register] = useMutation(REGISTER_MUTATION, {
+        fetchPolicy: "no-cache", // 캐시 무시, 항상 최신 상태로 처리
+    });
 
-    const router = useRouter();
+// 사업자 조회 결과 메시지
+// - 정상 / 휴업 / 폐업 / 에러 메시지 출력용
+    const [bizMessage, setBizMessage] = useState<string | null>(null);
+// 사업자 조회 버튼이 이미 눌렸는지 여부
+// - true면 재조회 방지 (버튼 비활성화)
+    const [isChecked, setIsChecked] = useState(false);
+// 사업자 인증 최종 성공 여부
+// - true여야만 다음 단계(기관명 입력, 가입 요청) 진행 가능
+    const [isBizVerified, setIsBizVerified] = useState(false);
+// 사업자등록번호 입력값
     const [bizNumber, setBizNumber] = useState("");
+// 대표자명 입력값
     const [representativeName, setRepresentativeName] = useState("");
+// 개업일(설립일) 입력값
     const [openingDate, setOpeningDate] = useState("");
 
+// 이메일 인증
+// 인증번호
+    const [emailCode, setEmailCode] = useState("");
+// 발송 여부
+    const [isEmailSent, setIsEmailSent] = useState(false);
+// 인증 완료여부
+    const [isEmailVerified, setIsEmailVerified] = useState(false);
+// 이메일 안내메시지
+    const [emailMessage, setEmailMessage] = useState<string | null>(null);
+// 인증 제한시간
+    const [remainSeconds, setRemainSeconds] = useState(0);
+
+// 메일 인증 타이머 표시
+    const formatTime = (seconds: number) => {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m}:${s.toString().padStart(2, "0")}`;
+    };
+
+    // 로그인 ID로 사용할 이메일
+// - 이메일 인증 단계에서도 사용
     const [email, setEmail] = useState("");
+// 비밀번호
     const [password, setPassword] = useState("");
+// 기관명
+// - 사업자 인증 후 자동 세팅 or readOnly 처리 예정
     const [organizationName, setOrganizationName] = useState("");
+// 담당자 이름
     const [contactName, setContactName] = useState("");
 
-    const [isBizVerified, setIsBizVerified] = useState(false);
+// 회원가입 요청 중인지 여부
+// - 가입 요청 버튼 중복 클릭 방지 / - 로딩 처리용
     const [isSubmitting, setIsSubmitting] = useState(false);
+// 회원가입 결과에 따라 페이지 이동용
+// - PENDING → /b2b/pending
+    const router = useRouter();
+
+// 비밀번호
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+
+// 이용약관
+
+    // 가입요청 상태
+    const [isTermsAgreed, setIsTermsAgreed] = useState(false);
+
+    const canSubmit =
+        isBizVerified &&
+        isEmailVerified &&
+        isPasswordValid &&
+        isTermsAgreed &&
+        organizationName.trim().length > 0 &&
+        contactName.trim().length > 0;
+
 
     // // 입력값 바뀌면 사업자 조회 다시 가능
-    // useEffect(() => {
-    //     setIsChecked(false);
-    //     setIsBizVerified(false);
-    //     setBizMessage(null);
-    // }, [bizNumber, representativeName, openingDate]);
+    useEffect(() => {
+        setIsChecked(false);
+        setIsBizVerified(false);
+        setBizMessage(null);
+    }, [bizNumber, representativeName, openingDate]);
+
+    // 이메일 인증시간 제한
+    useEffect(() => {
+        if(!isEmailSent || isEmailVerified) return;
+        if(remainSeconds <= 0) return;
+
+        const timer = setInterval(() => {
+            setRemainSeconds((prev) => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [isEmailSent, isEmailVerified, remainSeconds]);
+
+    // 시간 만료 처리
+    useEffect(() => {
+        if(remainSeconds === 0 && isEmailSent && !isEmailVerified) {
+            setEmailMessage("인증 시간이 만료되었습니다. 다시 발송해주세요");
+            setIsEmailSent(false);
+            setEmailCode("");  // 입력값 초기화
+        }
+    }, [remainSeconds, isEmailSent, isEmailVerified]);
+
+    // 인증메일 발송버튼
+    const onSendEmailCode = async () => {
+        if(!email) {
+            setEmailMessage("이메일을 입력해주세요.");
+            return;
+        }
+        try {
+            const res = await sendEmailCode({
+                variables: {
+                    input: {
+                        email,
+                        type: "SIGNUP",
+                    },
+                },
+            });
+            if(res.data.sendVerificationEmail.result) {
+                setIsEmailSent(true);
+                setRemainSeconds(300);
+                setEmailMessage("인증번호가 이메일로 발송되었습니다. 아래에 인증번호를 입력해주세요");
+            }
+        } catch (e) {
+            setEmailMessage("인증메일 발송에 실패했습니다.");
+        }
+    };
+
+    // 인증번호 확인 버튼
+    const onVerifyEmailCode = async () => {
+        if(!emailCode) {
+            setEmailMessage("인증번호를 입력해주세요.");
+            return;
+        }
+        try {
+            const res = await verifyEmailCode({
+                variables: {
+                    input: {
+                        email,
+                        code: emailCode,
+                        type: "SIGNUP",
+                    },
+                },
+            });
+            if (res.data.verifyCode.result) {
+                setIsEmailVerified(true);
+                setEmailMessage("이메일 인증이 완료되었습니다.");
+            } else {
+                setEmailMessage("인증번호가 올바르지 않습니다.");
+            }
+        } catch (e) {
+            setEmailMessage("이메일 인증 중 오류가 발생했습니다.");
+        }
+    };
 
     // 사업자 조회 버튼
     const onCheckBusiness = async () => {
-        if(isChecked) return;
+        if (isChecked) return;
 
-        // 초기화를 한번 해줘야함. 캐시초기화
+        // 조회 시작 시 초기화
         setIsBizVerified(false);
         setBizMessage(null);
 
         try {
-            console.log(bizNumber);
-            console.log(representativeName);
-            console.log(openingDate);
             const res = await checkBizNumber({
                 fetchPolicy: "no-cache",
                 variables: {
@@ -62,25 +210,23 @@ export default function SignupRegisterPage() {
                     },
                 },
             });
-            console.log(res);
 
-            // 같은 요청 여러번 날렸을 때 방어코드
-            // graph1l 에러방어
-            if(!res.data || !res.data.checkBizNumber) {
+            const result = res?.data?.checkBizNumber;
+
+            // 응답 방어
+            if (!result) {
                 setBizMessage("사업자 조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
-                setIsChecked(true); // 한번 조회하면 버튼 비활성화
+                setIsChecked(true);
                 return;
             }
 
-            const result = res.data.checkBizNumber;
-
-            // 상태코드 방어
-            if(!result.businessStatusCode) {
+            if (!result.businessStatusCode) {
                 setBizMessage("사업자 상태를 확인할 수 없습니다.");
+                setIsChecked(true);
                 return;
             }
 
-            // 폐업 / 휴업일때 가입 불가능
+            // 휴업 / 폐업
             if (result.businessStatusCode !== "01") {
                 setBizMessage(
                     result.businessStatusCode === "02"
@@ -91,20 +237,26 @@ export default function SignupRegisterPage() {
                 return;
             }
 
-            // 정상일 때만 다음 단계 허용
+            // 여기부터가 "정상 사업자 처리"
             setBizMessage("정상 사업자입니다. 회원가입을 진행해주세요.");
             setIsBizVerified(true);
             setIsChecked(true);
 
+            // 기관명 자동 세팅 (있을 경우)
+            if (result.organizationName) {
+                setOrganizationName(result.organizationName);
+            }
 
-        } catch(e: any) {
-        console.error("biz 에러:", e);
-        console.error("graphQL 에러:", e?.graphQLErrors);
-        setBizMessage("사업자 조회 중 오류가 발생했습니다. 잠시후 다시 시도해주세요.");
-        setIsBizVerified(false);
-        setIsChecked(true);
+        } catch (e: any) {
+            console.error("biz 에러:", e);
+            console.error("graphQL 에러:", e?.graphQLErrors);
+
+            setBizMessage("사업자 조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+            setIsBizVerified(false);
+            setIsChecked(true);
         }
     };
+
 
     // 회원가입 버튼
     const onSubmit = async () => {
@@ -157,185 +309,81 @@ export default function SignupRegisterPage() {
                 기관 / 단체 회원가입
             </h1>
 
-            {/* 로그인 정보 */}
-            <section className="space-y-4 mb-6">
-                <h2 className="font-semibold text-lg text-gray-700">
-                    로그인 정보
-                </h2>
-                <div className="relative">
-                    <input
-                        className="auth-input"
-                        placeholder="이메일 (로그인 ID)"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <Button
-                        variant="secondary"
-                        type="button"
-                        className="
-                        absolute right-3 top-1/2 -translate-y-1/2 h-[30px]
-                        px-4 py-0 text-xs leading-none flex items-center justify-center whitespace-nowrap
-                        text-[#19344e]/70 hover:text-[#19344e] transition"
-                    >
-                        인증메일 발송
-                    </Button>
-                </div>
+            {/*이메일 인증 및 비밀번호 입력*/}
+            <EmailVerificationSection
+                email={email}
+                setEmail={setEmail}
+                emailCode={emailCode}
+                setEmailCode={setEmailCode}
+                isEmailSent={isEmailSent}
+                isEmailVerified={isEmailVerified}
+                remainSeconds={remainSeconds}
+                emailMessage={emailMessage}
+                onSendEmailCode={onSendEmailCode}
+                onVerifyEmailCode={onVerifyEmailCode}
+            />
 
-                <div className="relative">
-                    <input
-                        className="auth-input pr-24"
-                        placeholder="이메일 인증번호 입력"
-                    />
-                    <Button
-                        variant="secondary"
-                        type="button"
-                        className="
-                        absolute right-3 top-1/2 -translate-y-1/2 h-[30px]
-                        px-4 py-0 text-xs leading-none flex items-center justify-center whitespace-nowrap
-                        text-[#19344e]/70 hover:text-[#19344e] transition"
-                    >
-                        확인
-                    </Button>
-                </div>
-
-                <input
-                    className="auth-input"
-                    type="password"
-                    placeholder="비밀번호 (8~16자)"
+            {/*비밀번호 입력*/}
+                <PasswordSection
+                    password={password}
+                    setPassword={setPassword}
+                    onValidChange={setIsPasswordValid}
                 />
 
-                <input
-                    className="auth-input"
-                    type="password"
-                    placeholder="비밀번호 확인"
+
+            {/*사업자 조회*/}
+            {isPasswordValid && (
+                <BusinessVerificationSection
+                    bizNumber={bizNumber}
+                    setBizNumber={setBizNumber}
+                    representativeName={representativeName}
+                    setRepresentativeName={setRepresentativeName}
+                    openingDate={openingDate}
+                    setOpeningDate={setOpeningDate}
+                    isChecked={isChecked}
+                    isBizVerified={isBizVerified}
+                    bizMessage={bizMessage}
+                    onCheckBusiness={onCheckBusiness}
                 />
-            </section>
+            )}
 
-            {/* 사업자 진위여부 검증 */}
-            <section className="space-y-4 mb-6 ">
-                <h2 className="font-semibold text-lg text-gray-700">
-                    사업자 인증
-                </h2>
-                <div className="relative curs ">
-                    <input
-                        className="auth-input pr-24"
-                        placeholder="사업자등록번호 입력 ( - 생략)"
-                        value={bizNumber}
-                        onChange={(e) => setBizNumber(e.target.value)}
-                    />
-                </div>
-                <div className="relative curs ">
-                    <input
-                        className="auth-input pr-24"
-                        placeholder="대표명 입력"
-                        value={representativeName}
-                        onChange={(e) => setRepresentativeName(e.target.value)}
-                    />
-                </div>
-                <div className="relative curs ">
-                    <input
-                        className="auth-input pr-24"
-                        placeholder="설립일 예) 20200105"
-                        value={openingDate}
-                        onChange={(e) => setOpeningDate(e.target.value)}
-                    />
-                </div>
+
+            {/*추가정보 입력(기관명, 담당자)*/}
+            {isBizVerified && (
+                <OrganizationInfoSection
+                    organizationName={organizationName}
+                    setOrganizationName={setOrganizationName}
+                    contactName={contactName}
+                    setContactName={setContactName}
+                    isBizVerified={isBizVerified}
+                />
+
+            )}
+
+            {/*이용약관*/}
+            {isBizVerified && (
+                <AgreementSection
+                    onAgreeChange={setIsTermsAgreed}
+                />
+            )}
+
+            {/*가입요청*/}
+            {/*사업자인증전 -> 버튼 없음/ 약관 미동의 -> 비활성/ 동의 -> 활성*/}
+            {isBizVerified && (
                 <Button
-                    variant="secondary"
-                    type="button"
-                    onClick={onCheckBusiness}
-                    disabled={isChecked}
-                    className={`
-    w-full h-[32px] text-xs py-0 leading-none transition
-    ${isChecked ? "opacity-50 cursor-not-allowed" : ""}
-  `}
-                >
-                    {isChecked ? "조회 완료" : "조회"}
-                </Button>
-
-                {isChecked && (
-                    <p className="text-[11px] text-gray-500 text-center mt-1">
-                        사업자 조회가 완료되어 재조회가 불가합니다.
-                    </p>
-                )}
-                {bizMessage && (
-                    <p
-                        className={`text-sm mt-2 text-center ${
-                            isBizVerified ? "text-green-700" : "text-red-700"
-                        }`}
-                    >
-                        {bizMessage}
-                    </p>
-                )}
-
-
-            </section>
-
-                {isBizVerified && (
-                    <>
-                <section>
-                    <input
-                        className="auth-input"
-                        placeholder="기관명"
-                        value={organizationName}
-                        readOnly
-                    />
-                    <input
-                        className="auth-input"
-                        placeholder="담당자 이름"
-                        value={contactName}
-                        onChange={(e) => setContactName(e.target.value)}
-                    />
-
-
-                    <div className="space-y-1">
-                        <label className="text-sm text-red-700">
-                            * 담장자 재직확인용 재직증명서 첨부 (필수)
-                        </label>
-                        <input
-                            type="file"
-                            className="auth-input cursor-pointer h-[44px] flex items-center file:h-full"
-                            accept=".pdf,.jpg,.png"
-                        />
-                        <p className="text-xs text-gray-500">
-                            * 사업자 진위여부 확인을 위한 서류입니다.
-                        </p>
-                        <p className="text-xs text-gray-500">
-                            * 제출된 서류는 관리자 검토 후 승인됩니다.
-                        </p>
-                    </div>
-
-                </section>
-
-
-                {/* 약관 동의 */}
-                <div className="text-sm space-y-2 mb-6">
-                    <label className="flex gap-2 cursor-pointer">
-                        <input type="checkbox" />
-                        Genie 이용약관 동의 (필수)
-                    </label>
-                    <label className="flex gap-2 cursor-pointer">
-                        <input type="checkbox" />
-                        개인정보 수집 및 이용 동의 (필수)
-                    </label>
-                    <label className="flex gap-2 cursor-pointer">
-                        <input type="checkbox" />
-                        마케팅 정보 수신 동의 (선택)
-                    </label>
-                </div>
-
-                <Button
-                    className="w-full cursor-pointer transition hover:brightness-80"
                     onClick={onSubmit}
-                    disabled={!isBizVerified || isSubmitting}
+                    disabled={!canSubmit || isSubmitting}
+                    className={`w-full ${
+                        !canSubmit ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                 >
                     가입 요청
                 </Button>
-            </>
             )}
-            <p className="text-xs text-center text-red-700 mt-4">
-                * 가입 요청 후 관리자 승인 완료 시 서비스 이용이 가능합니다.
-            </p>
+
+
         </div>
-    );
-}
+
+        )
+    }
+
