@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="사업자 인증 api 연동(코드 분리 및 보완 진행중)">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="pull받기 전 커밋">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +122,7 @@
       <workItem from="1765932427412" duration="30516000" />
       <workItem from="1766017837833" duration="8936000" />
       <workItem from="1766105309809" duration="25616000" />
-      <workItem from="1766363893539" duration="800000" />
+      <workItem from="1766363893539" duration="2140000" />
     </task>
     <task id="LOCAL-00001" summary="레이아웃 위치 수정(page수정)">
       <option name="closed" value="true" />
@@ -204,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766135991232</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="pull받기 전 커밋">
+      <option name="closed" value="true" />
+      <created>1766364793279</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1766364793279</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +228,7 @@
     <MESSAGE value="마이페이지 레이아웃 구성(기본정보, 학생관리, 구독&amp;결제, 계정관리&amp;탈퇴)" />
     <MESSAGE value="마이페이지 수정" />
     <MESSAGE value="사업자 인증 api 연동(코드 분리 및 보완 진행중)" />
-    <option name="LAST_COMMIT_MESSAGE" value="사업자 인증 api 연동(코드 분리 및 보완 진행중)" />
+    <MESSAGE value="pull받기 전 커밋" />
+    <option name="LAST_COMMIT_MESSAGE" value="pull받기 전 커밋" />
   </component>
 </project>
