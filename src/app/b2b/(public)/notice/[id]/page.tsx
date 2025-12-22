@@ -1,4 +1,4 @@
-// app/b2b/notice/[id]/page.tsx
+// app/b2b/notice/[email]/page.tsx
 import Link from "next/link";
 
 export default function NoticeDetailPage() {

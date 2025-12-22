@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="회원가입 &amp; 로그인 api 연동">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/auth/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/auth/register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/apolloClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/apolloClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/banner.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/banner.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/members/signup-requests/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/members/signup-requests/[email]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/b2b/(public)/notice/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(public)/notice/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/B2BHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/B2BHeader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,11 +84,11 @@
       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\sentence" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tj\Genie_Project\public\images" />
       <recent name="C:\kiylab\genie_front\src" />
       <recent name="C:\Users\tj\Genie_Project\src\graphql\auth" />
       <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)" />
       <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)\mypage" />
-      <recent name="C:\Users\tj\Genie_Project\src\app" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: 서버 측">
@@ -201,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766055933130</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="회원가입 &amp; 로그인 api 연동">
+      <option name="closed" value="true" />
+      <created>1766403216261</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1766403216261</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +223,7 @@
     <MESSAGE value="회원가입쪽 수정" />
     <MESSAGE value="마이페이지 레이아웃 구성(기본정보, 학생관리, 구독&amp;결제, 계정관리&amp;탈퇴)" />
     <MESSAGE value="마이페이지 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="마이페이지 수정" />
+    <MESSAGE value="회원가입 &amp; 로그인 api 연동" />
+    <option name="LAST_COMMIT_MESSAGE" value="회원가입 &amp; 로그인 api 연동" />
   </component>
 </project>
