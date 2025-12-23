@@ -60,7 +60,7 @@ export default function BusinessVerificationSection({
                 type="button"
                 onClick={onCheckBusiness}
                 disabled={isChecked}
-                className={`w-full h-[32px] text-xs ${
+                className={`w-full h-[40px] text-xs ${
                     isChecked ? "opacity-50 cursor-not-allowed" : ""
                 }`}
             >
