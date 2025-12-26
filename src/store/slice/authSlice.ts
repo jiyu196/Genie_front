@@ -22,7 +22,7 @@ interface AuthState {
 const initialState: AuthState = {
     isAuthenticated: false,
     user: null,
-    loading: false,
+    loading: true,
     error: null,
 };
 
@@ -53,14 +53,20 @@ const authSlice = createSlice({
             })
 
             // 초기 인증 (새로고침)
+            .addCase(initializeAuthThunk.pending, (state) => {
+                state.loading = true;
+            })
             .addCase(initializeAuthThunk.fulfilled, (state, action) => {
+                state.loading = false;
                 state.isAuthenticated = true;
                 state.user = action.payload;
             })
             .addCase(initializeAuthThunk.rejected, (state) => {
+                state.loading = false;
                 state.isAuthenticated = false;
                 state.user = null;
             });
+
     },
 });
 

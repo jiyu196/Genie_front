@@ -2,21 +2,29 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "@/store";
 import { logout } from "@/store/slice/authSlice";
 import Button from "@/components/b2b/Button";
+import {useRouter} from "next/navigation";
+import {logoutThunk} from "@/store/thunk/authThunk";
 
 
 export default function B2BHeader() {
     const [scrolled, setScrolled] = useState(false);
 
     const dispatch = useDispatch<AppDispatch>();
+    const router = useRouter();
     const { isAuthenticated, user } = useSelector(
         (state: RootState) => state.auth
     );
+
+    const handleLogout = async () => {
+        await dispatch(logoutThunk());
+        router.replace("/b2b/login");
+    };
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 8);
@@ -59,7 +67,7 @@ export default function B2BHeader() {
                                 </Link>
 
                                 <Button
-                                    onClick={() => dispatch(logout())}
+                                    onClick={handleLogout}
                                     className="text-[#19344e]/90 hover:bg-gray-600"
                                     variant="primary">
                                     로그아웃

@@ -1,8 +1,9 @@
+// src/store/thunk/authThunk.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apolloClient } from "@/lib/apolloClient";
-import { LOGIN_MUTATION } from "@/graphql/auth/login";
+import {LOGIN_MUTATION, LOGOUT_MUTATION} from "@/graphql/auth/login";
 import { ME_QUERY } from "@/graphql/auth/me";
-import type { User } from "@/store/slice/authSlice";
+import {logout, User} from "@/store/slice/authSlice";
 
 // 로그인 1. login mutation -> 쿠키발급 / 2. me query -> 사용자 정보(조회)
 export const loginThunk = createAsyncThunk<
@@ -51,5 +52,18 @@ export const initializeAuthThunk = createAsyncThunk<
         } catch {
             return rejectWithValue("NO_SESSION");
         }
+    }
+);
+
+// 로그아웃
+export const logoutThunk = createAsyncThunk(
+"auth/logout",
+    async (_, { dispatch }) => {
+    await apolloClient.mutate({
+        mutation: LOGOUT_MUTATION,
+    });
+
+    // redux 상태 초기화
+        dispatch(logout());
     }
 );

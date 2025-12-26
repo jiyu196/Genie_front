@@ -38,6 +38,8 @@ export default function BusinessVerificationSection({
                 className="auth-input"
                 placeholder="사업자등록번호 입력 ( - 생략)"
                 value={bizNumber}
+                inputMode="numeric"
+                maxLength={10}
                 onChange={(e) => setBizNumber(e.target.value)}
             />
 
