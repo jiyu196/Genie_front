@@ -28,6 +28,13 @@ export default function BusinessVerificationSection({
             bizMessage,
             onCheckBusiness,
         }: Props) {
+
+    const isBizInputValid =
+        bizNumber.length === 10 &&
+        openingDate.length === 8 &&
+        representativeName.trim().length > 0;
+
+
     return (
         <section className="space-y-4 mb-6">
             <h2 className="font-semibold text-lg text-gray-700">
@@ -40,7 +47,10 @@ export default function BusinessVerificationSection({
                 value={bizNumber}
                 inputMode="numeric"
                 maxLength={10}
-                onChange={(e) => setBizNumber(e.target.value)}
+                onChange={(e) => {
+                    const onlyNumber = e.target.value.replace(/[^0-9]/g, "");
+                    setBizNumber(onlyNumber);
+                }}
             />
 
             <input
@@ -52,18 +62,23 @@ export default function BusinessVerificationSection({
 
             <input
                 className="auth-input"
-                placeholder="설립일 예) 20200105"
+                inputMode="numeric"
+                maxLength={8}
+                placeholder="설립일 예) 20210105"
                 value={openingDate}
-                onChange={(e) => setOpeningDate(e.target.value)}
+                onChange={(e) => {
+                    const onlyNumber = e.target.value.replace(/[^0-9]/g, "");
+                    setOpeningDate(onlyNumber);
+                }}
             />
 
             <Button
                 variant="secondary"
                 type="button"
                 onClick={onCheckBusiness}
-                disabled={isChecked}
+                disabled={isChecked || !isBizInputValid}
                 className={`w-full h-[40px] text-xs ${
-                    isChecked ? "opacity-50 cursor-not-allowed" : ""
+                    isChecked || !isBizInputValid ? "opacity-50 cursor-not-allowed pointer-events-none" : ""
                 }`}
             >
                 {isChecked ? "조회 완료" : "조회"}
