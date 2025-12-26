@@ -4,6 +4,8 @@ import "./globals.css";
 import ApolloClientProvider from "@/lib/ApolloProvider";
 import InitializeAuth from "@/app/InitializeAuth";
 import ReduxProvider from "@/app/ReduxProvider";
+import {notoSans} from "@/app/font";
+import AuthGate from "@/app/AuthGate";
 
 
 
@@ -24,12 +26,19 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ko">
-            <body className={`${inter.variable} antialiased`}>
+            <body className={`
+          ${notoSans.variable}
+          font-sans
+          bg-background-light text-text-primary-light
+          dark:bg-background-dark dark:text-text-primary-dark
+        `}>
                         <ReduxProvider>
                             <InitializeAuth/>
+                            <AuthGate>
                             <ApolloClientProvider>
                                 {children}
                             </ApolloClientProvider>
+                            </AuthGate>
                         </ReduxProvider>
             </body>
         </html>

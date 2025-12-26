@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from "next/link";
 
 export default function B2BFooter() {
 
@@ -12,7 +13,10 @@ export default function B2BFooter() {
                     <span className="hover:text-[#19344e] cursor-pointer">이용약관</span>
                     <span className="hover:text-[#19344e] cursor-pointer">개인정보 처리방침</span>
                     <span className="hover:text-[#19344e] cursor-pointer">운영정책</span>
+                    <Link href="/b2b/notice">
                     <span className="hover:text-[#19344e] cursor-pointer">공지사항</span>
+                    </Link>
+
                 </div>
 
                 {/* 메인 정보 영역 */}

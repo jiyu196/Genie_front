@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { initializeAuthThunk } from "@/store/thunk/authThunk";
-import type { AppDispatch } from "@/store";
+import type {AppDispatch, RootState} from "@/store";
 
 export default function InitializeAuth() {
     const dispatch = useDispatch<AppDispatch>();
+    const loading = useSelector((state: RootState) => state.auth.loading);
 
     useEffect(() => {
         dispatch(initializeAuthThunk());
