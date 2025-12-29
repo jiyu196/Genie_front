@@ -7,6 +7,7 @@ export const ME_QUERY = gql`
       accountStatus
       bizNumber
       organizationName
+      representativeName
       contactName
       registerStatus
       role

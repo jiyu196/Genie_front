@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="로그아웃 기능 추가">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="기관명, 개업일 숫자만 입력 가능하게 &amp; 길이 제한 설정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/b2b/signup/BusinessVerificationSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/signup/BusinessVerificationSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/members/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/members/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/members/signup-requests/[email]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/members/signup-requests/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/AdminSideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/AdminSideBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/DashboardCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/DashboardCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/signup/OrganizationInfoSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/signup/OrganizationInfoSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphql/auth/me.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/auth/me.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/apolloClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/apolloClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/slice/authSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slice/authSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,11 +92,11 @@
       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\sentence" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tj\Genie_Project\src\hook\admin" />
       <recent name="C:\Users\tj\Genie_Project\src\app" />
       <recent name="C:\Users\tj\Genie_Project\public\images" />
       <recent name="C:\kiylab\genie_front\src" />
       <recent name="C:\Users\tj\Genie_Project\src\graphql\auth" />
-      <recent name="C:\Users\tj\Genie_Project\src\app\b2b\(member)" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: 서버 측">
@@ -126,7 +137,8 @@
       <workItem from="1766321000009" duration="4248000" />
       <workItem from="1766450532681" duration="18851000" />
       <workItem from="1766538953298" duration="4786000" />
-      <workItem from="1766709157751" duration="22367000" />
+      <workItem from="1766709157751" duration="23223000" />
+      <workItem from="1766969142834" duration="29787000" />
     </task>
     <task id="LOCAL-00001" summary="레이아웃 위치 수정(page수정)">
       <option name="closed" value="true" />
@@ -232,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766736588851</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="기관명, 개업일 숫자만 입력 가능하게 &amp; 길이 제한 설정">
+      <option name="closed" value="true" />
+      <created>1766740112985</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1766740112985</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +271,7 @@
     <MESSAGE value="로그인 후 마이페이지 연결 / (리덕스 뮤테이션)/ admin [email] 경로 변경" />
     <MESSAGE value="회원가입 조회 버튼 크기 조정/ 이미지 파일 변경" />
     <MESSAGE value="로그아웃 기능 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="로그아웃 기능 추가" />
+    <MESSAGE value="기관명, 개업일 숫자만 입력 가능하게 &amp; 길이 제한 설정" />
+    <option name="LAST_COMMIT_MESSAGE" value="기관명, 개업일 숫자만 입력 가능하게 &amp; 길이 제한 설정" />
   </component>
 </project>

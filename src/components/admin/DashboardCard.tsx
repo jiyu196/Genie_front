@@ -8,6 +8,7 @@ export default function DashboardCard({
     title: string;
     value: string;
     highlight?: boolean;
+    onClick?: () => void;
 }) {
     return (
         <div className="bg-white border border-gray-200 px-5 py-4">
