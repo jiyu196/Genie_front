@@ -19,3 +19,18 @@ export interface MemberPageResponse {
     isFirst: boolean;
     isLast: boolean;
 }
+
+// types/member.ts (또는 auth/member.ts)
+export type Member = {
+    email: string;
+    accountStatus: "ACTIVE" | "INACTIVE" | "DELETED";
+    bizNumber: string;
+    organizationName: string;
+    representativeName: string;
+    contactName: string;
+    registerStatus: "PENDING" | "APPROVED" | "REJECTED" | "CANCELLED";
+    role: "MEMBER" | "SUBSCRIBER" | "ADMIN";
+    approvedAt?: string | null;
+    isTempPassword: boolean;
+    passwordUpdatedAt: string;
+};

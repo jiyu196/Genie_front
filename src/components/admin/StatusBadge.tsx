@@ -1,29 +1,51 @@
 type RegisterStatus = "PENDING" | "APPROVED" | "REJECTED";
 
-const statusStyle: Record<RegisterStatus, string> = {
-    PENDING: "bg-gray-50 text-gray-600 border-gray-300",
-    APPROVED: "bg-green-50 text-green-600 border-green-200",
-    REJECTED: "bg-red-50 text-red-600 border-red-200",
+
+// Badge 색 지정
+const STATUS_META: Record <
+    RegisterStatus,
+        {
+            label: string;
+            dotColor: string;
+            className: string;
+        }
+    > = {
+    PENDING: {
+        label: "승인 대기",
+        dotColor: "text-gray-400",
+        className: "bg-gray-50 text-gray-600 border-gray-300",
+    },
+    APPROVED: {
+        label: "승인 완료",
+        dotColor: "text-green-500",
+        className: "bg-green-50 text-green-600 border-green-200",
+    },
+    REJECTED: {
+        label: "반려",
+        dotColor: "text-red-500",
+        className: "bg-red-50 text-red-600 border-red-200",
+    },
 };
 
-const statusLabel: Record<RegisterStatus, string> = {
-    PENDING: "승인 대기",
-    APPROVED: "승인 완료",
-    REJECTED: "반려",
-};
+export default function StatusBadge({
+                                        status,
+                                    }: {
+    status: RegisterStatus;
+}) {
+    const meta = STATUS_META[status];
 
-export default function StatusBadge({ status }: { status: RegisterStatus }) {
     return (
         <span
             className={`
-        inline-flex items-center
-        px-2.5 py-0.5
-        text-xs font-medium
-        border rounded-full
-        ${statusStyle[status]}
-      `}
+                inline-flex items-center gap-1.5
+                px-2.5 py-0.5
+                text-xs font-medium
+                border rounded-full
+                ${meta.className}
+            `}
         >
-      {statusLabel[status]}
-    </span>
+            <span className={`text-[10px] ${meta.dotColor}`}>●</span>
+            {meta.label}
+        </span>
     );
 }
