@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 const menus = [
     { label: "대시보드", href: "/admin" },
     { label: "회원 관리", href: "/admin/members" },
-    { label: "회원가입 요청 상세", href: "/admin/members/signup-requests/1" },
     { label: "매출 관리", href: "/admin/subscriptions" },
     { label: "프롬프트 관리", href: "/admin/prompts" },
     { label: "금칙어 관리", href: "/admin/forbidden-words" },
@@ -25,8 +24,10 @@ export default function AdminSidebar() {
             <nav className="px-2">
                 {menus.map(menu => {
                     const active =
-                        pathname === menu.href ||
-                        pathname.startsWith(menu.href + "/");
+                        menu.href === "/admin"
+                            ? pathname === "/admin"
+                            : pathname === menu.href || pathname.startsWith(menu.href + "/");
+
 
                     return (
                         <Link

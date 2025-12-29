@@ -4,6 +4,14 @@ type OrganizationInfoSectionProps = {
     contactName: string;
     setContactName: (v: string) => void;
     isBizVerified: boolean;
+
+    // 사업자등록증 첨부파일
+    businessFile?: File | null;
+    setBusinessFile?: (f: File | null) => void;
+
+    // 재직증명서 첨부파일
+    employmentFile?: File | null;
+    setEmploymentFile?: (f: File | null) => void;
 };
 
 export default function OrganizationInfoSection({
@@ -12,7 +20,9 @@ export default function OrganizationInfoSection({
         contactName,
         setContactName,
         isBizVerified,
-        }: OrganizationInfoSectionProps) {
+        setBusinessFile,
+        setEmploymentFile,
+}: OrganizationInfoSectionProps) {
     return (
         <section className="space-y-4">
             <input
@@ -30,19 +40,43 @@ export default function OrganizationInfoSection({
                 onChange={(e) => setContactName(e.target.value)}
             />
 
+            {/* 사업자등록증 */}
             <div className="space-y-1.5">
-                <label className="text-sm text-red-700">
-                    * 담당자 재직확인용 재직증명서 첨부 (필수)
+                <label className="text-sm font-medium text-red-700">
+                    * 사업자등록증 첨부 (필수)
                 </label>
 
                 <input
                     type="file"
-                    className="auth-input cursor-pointer h-[44px] flex items-center file:h-full"
                     accept=".pdf,.jpg,.png"
+                    className="auth-input cursor-pointer h-[44px] flex items-center file:h-full"
+                    onChange={(e) =>
+                        setBusinessFile?.(e.target.files?.[0] ?? null)
+                    }
                 />
 
                 <p className="text-xs text-gray-500">
-                    * 사업자 진위여부 확인을 위한 서류입니다.
+                    * 기관 사업자 확인을 위한 서류입니다.
+                </p>
+            </div>
+
+            {/* 재직증명서 */}
+            <div className="space-y-1.5">
+                <label className="text-sm font-medium text-red-700">
+                    * 담당자 재직증명서 첨부 (필수)
+                </label>
+
+                <input
+                    type="file"
+                    accept=".pdf,.jpg,.png"
+                    className="auth-input cursor-pointer h-[44px] flex items-center file:h-full"
+                    onChange={(e) =>
+                        setEmploymentFile?.(e.target.files?.[0] ?? null)
+                    }
+                />
+
+                <p className="text-xs text-gray-500">
+                    * 담당자 재직 여부 확인용 서류입니다.
                 </p>
                 <p className="text-xs text-gray-500">
                     * 제출된 서류는 관리자 검토 후 승인됩니다.

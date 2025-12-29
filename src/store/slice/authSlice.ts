@@ -8,6 +8,7 @@ export interface User {
     accountStatus: string;
     bizNumber: string;
     organizationName: string;
+    representativeName: string;
     contactName: string;
     approvedAt?: string | null;
 }
