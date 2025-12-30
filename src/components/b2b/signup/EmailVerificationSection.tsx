@@ -12,6 +12,7 @@ type Props = {
 
     remainSeconds: number;
     emailMessage: string | null;
+    emailMessageType: string | null;
 
     onSendEmailCode: () => void;
     onVerifyEmailCode: () => void;
@@ -26,6 +27,7 @@ export default function EmailVerificationSection({
      isEmailVerified,
      remainSeconds,
      emailMessage,
+     emailMessageType,
      onSendEmailCode,
      onVerifyEmailCode,
  }: Props) {
@@ -64,7 +66,13 @@ export default function EmailVerificationSection({
 
                 </div>
 
-                <div className="min-h-[16px] text-xs text-center mt-2 text-blue-600">
+                <div className={`min-h-[16px] text-xs text-center mt-2 ${
+                    emailMessageType === "error"
+                    ? "text-red-600"
+                    : emailMessageType === "success"
+                    ? "text-green-600"
+                    : "text-red-400"
+                }`}>
                     {emailMessage}
                 </div>
             </div>

@@ -2,7 +2,6 @@
 "use client";
 
 import Button from "@/components/b2b/Button";
-import {checkBusiness} from "@/services/business";
 import {useState, useEffect} from "react";
 import {REGISTER_MUTATION} from "@/graphql/auth/register";
 import {useRouter} from "next/navigation";
@@ -10,6 +9,7 @@ import {useMutation} from "@apollo/client";
 import {CHECK_BIZ_NUMBER} from "@/graphql/business/checkBizNumber";
 import {SEND_EMAIL_CODE_MUTATION} from "@/graphql/auth/sendEmailCode";
 import {VERIFY_EMAIL_CODE_MUTATION} from "@/graphql/auth/verifyEmailCode";
+import {EMAIL_CHECK_MUTATION} from "@/graphql/auth/checkEmail";
 import EmailVerificationSection from "@/components/b2b/signup/EmailVerificationSection";
 import BusinessVerificationSection from "@/components/b2b/signup/BusinessVerificationSection";
 import OrganizationInfoSection from "@/components/b2b/signup/OrganizationInfoSection";
@@ -22,6 +22,11 @@ export default function SignupRegisterPage() {
     const [sendEmailCode] = useMutation(SEND_EMAIL_CODE_MUTATION, {
         fetchPolicy: "no-cache",
     });
+
+// 이메일 중복 검사
+    const [checkEmail] = useMutation(EMAIL_CHECK_MUTATION, {
+        fetchPolicy: "no-cache",
+    })
 
 // 이메일 인증번호 검증 mutation
     const [verifyEmailCode] = useMutation(VERIFY_EMAIL_CODE_MUTATION, {
@@ -61,6 +66,8 @@ export default function SignupRegisterPage() {
     const [emailCode, setEmailCode] = useState("");
 // 발송 여부
     const [isEmailSent, setIsEmailSent] = useState(false);
+// 이메일 중복 검사 시 타입(색상)
+    const [emailMessageType, setEmailMessageType] = useState<"error" | "success" | null>(null);
 // 인증 완료여부
     const [isEmailVerified, setIsEmailVerified] = useState(false);
 // 이메일 안내메시지
@@ -147,6 +154,14 @@ export default function SignupRegisterPage() {
             return;
         }
         try {
+            // 이메일 중복 검사
+            await checkEmail({
+                variables: {
+                    input: {email},
+                },
+            });
+
+            // 중복이 아니라면 인증메일 발송
             const res = await sendEmailCode({
                 variables: {
                     input: {
@@ -159,9 +174,17 @@ export default function SignupRegisterPage() {
                 setIsEmailSent(true);
                 setRemainSeconds(300);
                 setEmailMessage("인증번호가 이메일로 발송되었습니다. 아래에 인증번호를 입력해주세요");
+                setEmailMessageType("success");
             }
-        } catch (e) {
+        } catch (e: any) {
+           const message = e?.graphQLErrors?.[0]?.message;
+
+            if (message?.includes("이미 사용 중")) {
+                setEmailMessage("이미 가입된 이메일입니다.");
+                return;
+            }
             setEmailMessage("인증메일 발송에 실패했습니다.");
+            setEmailMessageType("error");
         }
     };
 
@@ -321,6 +344,7 @@ export default function SignupRegisterPage() {
                 isEmailVerified={isEmailVerified}
                 remainSeconds={remainSeconds}
                 emailMessage={emailMessage}
+                emailMessageType={emailMessageType}
                 onSendEmailCode={onSendEmailCode}
                 onVerifyEmailCode={onVerifyEmailCode}
             />
@@ -330,6 +354,7 @@ export default function SignupRegisterPage() {
                     password={password}
                     setPassword={setPassword}
                     onValidChange={setIsPasswordValid}
+                    disabled={!isEmailVerified}
                 />
 
 
