@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="- 회원 승인 상태에 따른 마이페이지 접근&#10;--&gt; PENDING(승인 대기중 페이지 노출), APPROVED(마이페이지 접근가능.승인 정보 표시) , REJECTED(반려 안내 및 전화문의 페이지 노출)&#10;- 이용약관 구분 및 상태 전달/ 조회 기능 연동">
+    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="이메일 중복 검사 및 보완">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/b2b/(auth)/signup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/b2b/signup/EmailVerificationSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/signup/EmailVerificationSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/b2b/signup/PasswordSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/signup/PasswordSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphql/auth/sendEmailCode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphql/auth/sendEmailCode.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/admin/StatusBadge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/StatusBadge.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/b2b/mypage/ApprovalHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/b2b/mypage/ApprovalHeader.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +130,7 @@
       <workItem from="1766538953298" duration="4786000" />
       <workItem from="1766709157751" duration="23223000" />
       <workItem from="1766969142834" duration="34515000" />
-      <workItem from="1767054564248" duration="23302000" />
+      <workItem from="1767054564248" duration="25453000" />
     </task>
     <task id="LOCAL-00001" summary="레이아웃 위치 수정(page수정)">
       <option name="closed" value="true" />
@@ -277,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767078259751</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="이메일 중복 검사 및 보완">
+      <option name="closed" value="true" />
+      <created>1767082648947</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1767082648947</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,6 +307,7 @@
     <MESSAGE value="관리자 회원관리 목록, 상세 모달 구조 구현&#10;- 회원 목록 테이블 + 상세 모달&#10;- 회원 상태&#10;- 상세 모달 내부에서 승인/반려 처리" />
     <MESSAGE value="마이페이지 승인, 개인정보 연동 구현중" />
     <MESSAGE value="- 회원 승인 상태에 따른 마이페이지 접근&#10;--&gt; PENDING(승인 대기중 페이지 노출), APPROVED(마이페이지 접근가능.승인 정보 표시) , REJECTED(반려 안내 및 전화문의 페이지 노출)&#10;- 이용약관 구분 및 상태 전달/ 조회 기능 연동" />
-    <option name="LAST_COMMIT_MESSAGE" value="- 회원 승인 상태에 따른 마이페이지 접근&#10;--&gt; PENDING(승인 대기중 페이지 노출), APPROVED(마이페이지 접근가능.승인 정보 표시) , REJECTED(반려 안내 및 전화문의 페이지 노출)&#10;- 이용약관 구분 및 상태 전달/ 조회 기능 연동" />
+    <MESSAGE value="이메일 중복 검사 및 보완" />
+    <option name="LAST_COMMIT_MESSAGE" value="이메일 중복 검사 및 보완" />
   </component>
 </project>

@@ -17,7 +17,7 @@ const STATUS_META: Record <
     },
     APPROVED: {
         label: "승인 완료",
-        dotColor: "text-green-500",
+        dotColor: "text-green-600",
         className: "bg-green-50 text-green-600 border-green-200",
     },
     REJECTED: {
