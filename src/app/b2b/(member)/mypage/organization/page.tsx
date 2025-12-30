@@ -1,17 +1,26 @@
-import { redirect } from "next/navigation";
-import { getCurrentMember } from "@/graphql/auth/member";
+// app/b2b/mypage/organization/page.tsx
+"use client";
+
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import type { RootState } from "@/store";
 import OrganizationClient from "@/components/b2b/mypage/OrganizationClient";
-import type { Member } from "@/types/admin/member";
 
-export default async function OrganizationPage() {
-    const member: Member = await getCurrentMember();
+export default function OrganizationPage() {
+    const router = useRouter();
+    const { user } = useSelector((state: RootState) => state.auth);
 
-    if (
-        member.registerStatus === "PENDING" ||
-        member.registerStatus === "CANCELLED"
-    ) {
-        redirect("/b2b/pending");
+    if (!user) return null;
+
+    if (user.registerStatus === "PENDING") {
+        router.replace("/b2b/pending");
+        return null;
     }
 
-    return <OrganizationClient member={member} />;
+    if (user.registerStatus === "REJECTED") {
+        router.replace("/b2b/rejected");
+        return null;
+    }
+
+    return <OrganizationClient member={user} />;
 }

@@ -33,20 +33,20 @@ export default function Error({
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <button
-                        onClick={reset}
-                        className="inline-flex items-center justify-center h-[44px] px-6 rounded-full
-                                   bg-[#19344e] text-white text-sm font-medium
-                                   hover:bg-[#162c42] transition"
-                    >
-                        다시 시도하기
-                    </button>
+                    {/*<button*/}
+                    {/*    onClick={reset}*/}
+                    {/*    className="inline-flex items-center justify-center h-[44px] px-6 rounded-full*/}
+                    {/*               bg-[#19344e] text-white text-sm font-medium*/}
+                    {/*               hover:bg-[#162c42] transition"*/}
+                    {/*>*/}
+                    {/*    다시 시도하기*/}
+                    {/*</button>*/}
 
                     <button
                         onClick={() => location.href = '/'}
                         className="inline-flex items-center justify-center h-[44px] px-6 rounded-full
                                    border border-[#19344e] text-[#19344e] text-sm font-medium
-                                   hover:bg-[#F4F6FF] transition"
+                                   hover:bg-[#F4F6FF] transition cursor-pointer"
                     >
                         홈으로 이동
                     </button>
