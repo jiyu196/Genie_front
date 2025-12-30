@@ -1,22 +1,19 @@
-// import StatusBadge from "@/components/admin/StatusBadge";
-//
-// type RegisterStatus = "PENDING" | "APPROVED" | "REJECTED" | "CANCELLED";
-//
-// export default function ApprovalHeader({
-//                                            status,
-//                                        }: {
-//     status: RegisterStatus;
-// }) {
-//     return (
-//         <div className="flex items-center gap-3 px-6 py-4 bg-[#F4F6FF]/50">
-//             <StatusBadge status={status} />
-//
-//             <span className="text-sm text-[#19344e]/70">
-//                 {status === "APPROVED" && "관리자 승인 완료 상태입니다."}
-//                 {status === "REJECTED" && "관리자 승인 반려 상태입니다."}
-//                 {status === "PENDING" && "관리자 승인 대기 상태입니다."}
-//                 {status === "CANCELLED" && "가입이 취소된 계정입니다."}
-//             </span>
-//         </div>
-//     );
-// }
+// components/b2b/mypage/ApprovedHeader.tsx
+import { CheckCircle2 } from "lucide-react";
+
+export default function ApprovedHeader() {
+    return (
+        <div className="flex items-start gap-3 px-6 py-5 bg-white rounded-xl border border-[#e5e7eb]">
+            <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
+
+            <div className="space-y-1">
+                <p className="text-sm font-semibold text-[#19344e]">
+                    관리자 승인 완료
+                </p>
+                <p className="text-sm text-gray-600">
+                    Genie 서비스를 정상적으로 이용하실 수 있습니다.
+                </p>
+            </div>
+        </div>
+    );
+}

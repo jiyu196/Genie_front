@@ -24,18 +24,20 @@ export default function LoginPage() {
         const result = await dispatch(loginThunk({ email, password }));
 
         // 로그인 성공시
-        if(loginThunk.fulfilled.match(result)) {
+        if (loginThunk.fulfilled.match(result)) {
             const user = result.payload;
 
-            // 승인상태
-            if(user.registerStatus === "PENDING") {
-                router.push("/b2b/pending");
-            } else if (user.registerStatus === "APPROVED") {
-                router.push("/b2b");
-            } else {
-                setError("승인 거절된 계정입니다.");
+            switch (user.registerStatus) {
+                case "PENDING":
+                    router.replace("/b2b/pending");
+                    return;
+                case "REJECTED":
+                    router.replace("/b2b/rejected");
+                    return;
+                case "APPROVED":
+                    router.replace("/b2b");
+                    return;
             }
-            return;
         }
 
         // 로그인 실패시

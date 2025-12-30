@@ -98,9 +98,10 @@ export default function SignupRegisterPage() {
 
 
 // 이용약관
-
     // 가입요청 상태
     const [isTermsAgreed, setIsTermsAgreed] = useState(false);
+    // 약관 카테고리 리스트 상태
+    const [agreedTermsCategory, setAgreedTermsCategory] = useState<string[]>([]);
 
     const canSubmit =
         isBizVerified &&
@@ -251,7 +252,7 @@ export default function SignupRegisterPage() {
             console.error("biz 에러:", e);
             console.error("graphQL 에러:", e?.graphQLErrors);
 
-            setBizMessage("사업자 조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+            setBizMessage("이미 등록되어있는 사업자로 가입이 불가합니다.");
             setIsBizVerified(false);
             setIsChecked(true);
         }
@@ -273,6 +274,7 @@ export default function SignupRegisterPage() {
                         openingDate,
                         organizationName,
                         contactName,
+                        agreedTermsCategory,
                     },
                 },
             });
@@ -364,6 +366,7 @@ export default function SignupRegisterPage() {
             {isBizVerified && (
                 <AgreementSection
                     onAgreeChange={setIsTermsAgreed}
+                    onTermsChange={setAgreedTermsCategory}
                 />
             )}
 

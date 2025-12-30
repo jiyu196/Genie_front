@@ -24,12 +24,6 @@ export default function PendingPage() {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    {/*/!* 데모 체험 *!/*/}
-                    {/*<Link href="/demo/student">*/}
-                    {/*    <Button className="w-full cursor-pointer transition hover:brightness-80">*/}
-                    {/*        서비스 데모 체험하기*/}
-                    {/*    </Button>*/}
-                    {/*</Link>*/}
                     <Button className="w-full cursor-pointer transition hover:brightness-80" disabled>
                         승인 대기 중
                     </Button>
