@@ -70,7 +70,7 @@ export default function PasswordSection({
                         disabled ? "bg-gray-100 cursor-not-allowed" : ""
                     }`}
                     type="password"
-                    placeholder="비밀번호 확인"
+                    placeholder="비밀번호 재입력"
                     value={confirm}
                     onChange={(e) =>  {
                         if (!disabled) setConfirm(e.target.value)}}

@@ -275,7 +275,7 @@ export default function SignupRegisterPage() {
             console.error("biz 에러:", e);
             console.error("graphQL 에러:", e?.graphQLErrors);
 
-            setBizMessage("이미 등록되어있는 사업자로 가입이 불가합니다.");
+            setBizMessage("사업자 조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
             setIsBizVerified(false);
             setIsChecked(true);
         }
