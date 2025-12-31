@@ -36,7 +36,7 @@ export default function RejectedPage() {
                         </Button>
                     </a>
 
-                    <Link href="/b2b/">
+                    <Link href="/b2b">
                         <Button variant="secondary" className="w-full cursor-pointer transition hover:brightness-90">
                             메인 페이지로 돌아가기
                         </Button>

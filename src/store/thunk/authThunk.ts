@@ -28,8 +28,11 @@ export const loginThunk = createAsyncThunk<
                 fetchPolicy: "no-cache",
             });
 
+            if(!meRes.data?.me){
+                return rejectWithValue("LOGIN_FAILED");
+            }
             return meRes.data.me;
-        } catch {
+        } catch(e) {
             return rejectWithValue("LOGIN_FAILED");
         }
     }

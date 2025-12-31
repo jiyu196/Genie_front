@@ -8,43 +8,40 @@ import { useDispatch } from "react-redux";
 import type { AppDispatch } from "@/store";
 import { loginThunk } from "@/store/thunk/authThunk";
 import {useRouter} from "next/navigation";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+
 
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const[error, setError] = useState<String | null>(null);
+    const[error, setError] = useState<string | null>(null);
+
+    // 로그인 시도 중 로그인 페이지 머무름 제거용
+    const [submitting, setSubmitting] = useState(false);
 
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
 
     const handleLogin = async () => {
         setError(null);
+        setSubmitting(true);
 
-        const result = await dispatch(loginThunk({ email, password }));
-
-        // 로그인 성공시
-        if (loginThunk.fulfilled.match(result)) {
-            const user = result.payload;
-
-            switch (user.registerStatus) {
-                case "PENDING":
-                    router.replace("/b2b/pending");
-                    return;
-                case "REJECTED":
-                    router.replace("/b2b/rejected");
-                    return;
-                case "APPROVED":
-                    router.replace("/b2b");
-                    return;
-            }
+        try {
+            await dispatch(loginThunk({ email, password })).unwrap();
+            // 성공 시 → AuthGate가 이동 처리
+        } catch (err) {
+            setSubmitting(false);
+            setError("아이디 또는 비밀번호가 올바르지 않습니다.");
         }
-
-        // 로그인 실패시
-        setError("아이디 또는 비밀번호가 올바르지 않습니다.");
     };
 
+
+
     return (
+        <>
+                {/* 전체 화면 덮는 spinner */}
+                {/*{submitting && !error && <LoadingSpinner />}*/}
         <div className="w-full max-w-[440px] bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.06)] px-10 py-8">
             <h1 className="text-2xl font-bold text-center text-[#19344e] mb-8">
                 로그인
@@ -99,5 +96,6 @@ export default function LoginPage() {
                 * 관리자 승인 완료 후 서비스 이용이 가능합니다.
             </p>
         </div>
+        </>
     );
 }
