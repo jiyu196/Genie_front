@@ -1,0 +1,115 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"684aaee8-b4d9-41f9-a9fa-492c29c72220\" name=\"변경\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/app/student/page.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/student/page.tsx\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"JavaScript File\" />\r\n        <option value=\"tsconfig.json\" />\r\n        <option value=\"TypeScript JSX File\" />\r\n        <option value=\"TypeScript File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;jiyu196&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/jiyu196/Genie_front.git&quot;,\r\n    &quot;accountId&quot;: &quot;dadbc0dc-8e91-4c90-80dd-50e1ebe575ae&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"36rODx4miLyjAKiVLDVJqCqT5dF\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"feature/learning\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"js.debugger.nextJs.config.created.client\": \"true\",\r\n    \"js.debugger.nextJs.config.created.server\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/tj/Genie_Project/src/app/student/learn/sentence\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"npm.Next.js: 서버 측.executor\": \"Run\",\r\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\r\n    \"ts.external.directory.path\": \"C:\\\\kiylab\\\\genie_front\\\\node_modules\\\\typescript\\\\lib\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\tj\\Genie_Project\\src\\app\\student\\learn\\sentence\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\kiylab\\genie_front\\src\" />\r\n      <recent name=\"C:\\Users\\tj\\Genie_Project\\src\\graphql\\auth\" />\r\n      <recent name=\"C:\\Users\\tj\\Genie_Project\\src\\app\\b2b\\(member)\" />\r\n      <recent name=\"C:\\Users\\tj\\Genie_Project\\src\\app\\b2b\\(member)\\mypage\" />\r\n      <recent name=\"C:\\Users\\tj\\Genie_Project\\src\\app\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"npm.Next.js: 서버 측\">\r\n    <configuration name=\"Next.js: 클라이언트 측에서 디버그\" type=\"JavascriptDebugType\" uri=\"http://localhost:3000/\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Next.js: 서버 측\" type=\"js.build_tools.npm\">\r\n      <package-json value=\"$PROJECT_DIR$/package.json\" />\r\n      <command value=\"run\" />\r\n      <scripts>\r\n        <script value=\"dev\" />\r\n      </scripts>\r\n      <node-interpreter value=\"project\" />\r\n      <envs />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.27397.92\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\r\n      <changelist id=\"684aaee8-b4d9-41f9-a9fa-492c29c72220\" name=\"변경\" comment=\"\" />\r\n      <created>1765761107864</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1765761107864</updated>\r\n      <workItem from=\"1765761109602\" duration=\"15183000\" />\r\n      <workItem from=\"1765845061629\" duration=\"1949000\" />\r\n      <workItem from=\"1765847285675\" duration=\"35278000\" />\r\n      <workItem from=\"1765932427412\" duration=\"30516000\" />\r\n      <workItem from=\"1766017837833\" duration=\"8936000\" />\r\n      <workItem from=\"1766105309809\" duration=\"25220000\" />\r\n      <workItem from=\"1766321000009\" duration=\"4248000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"레이아웃 위치 수정(page수정)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1765850079620</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1765850079620</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"b2b 사이트(header, footer, company, solution, plan, notice, login, signup) 레이아웃 구성\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1765887546909</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1765887546909</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"리드미 작성\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1765887819340</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1765887819340</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1765954104939</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1765954104939</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1765975757581</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1765975757581</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"회원가입쪽 수정\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1766042314364</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1766042314364</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"마이페이지 레이아웃 구성(기본정보, 학생관리, 구독&amp;결제, 계정관리&amp;탈퇴)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1766054733105</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1766054733105</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"마이페이지 수정\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1766055600390</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1766055600390</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"마이페이지 수정\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1766055933130</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1766055933130</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"레이아웃 위치 수정(page수정)\" />\r\n    <MESSAGE value=\"b2b 사이트(header, footer, company, solution, plan, notice, login, signup) 레이아웃 구성\" />\r\n    <MESSAGE value=\"리드미 작성\" />\r\n    <MESSAGE value=\"B2B 회원가입 흐름 정리(승인, 데모)/ 회원가입 폼 수정\" />\r\n    <MESSAGE value=\"B2B브랜치에서 마이페이지 이어서해야함/ 관리자 페이지 임시구현\" />\r\n    <MESSAGE value=\"회원가입쪽 수정\" />\r\n    <MESSAGE value=\"마이페이지 레이아웃 구성(기본정보, 학생관리, 구독&amp;결제, 계정관리&amp;탈퇴)\" />\r\n    <MESSAGE value=\"마이페이지 수정\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"마이페이지 수정\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8528e79a91deb6ff7b9347f2191a5a9311fcafa1)
++++ b/.idea/workspace.xml	(date 1767500371229)
+@@ -4,9 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="">
++    <list default="true" id="684aaee8-b4d9-41f9-a9fa-492c29c72220" name="변경" comment="학생사이트 인덱스 일부수정">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/student/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/student/page.tsx" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,7 +39,7 @@
+   <component name="GithubPullRequestsUISettings">{
+   &quot;selectedUrlAndAccountId&quot;: {
+     &quot;url&quot;: &quot;https://github.com/jiyu196/Genie_front.git&quot;,
+-    &quot;accountId&quot;: &quot;dadbc0dc-8e91-4c90-80dd-50e1ebe575ae&quot;
++    &quot;accountId&quot;: &quot;58b67787-7e60-4fe0-83f6-c1ce27d004ed&quot;
+   }
+ }</component>
+   <component name="ProjectColorInfo">{
+@@ -54,28 +53,28 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "feature/learning",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "js.debugger.nextJs.config.created.client": "true",
+-    "js.debugger.nextJs.config.created.server": "true",
+-    "last_opened_file_path": "C:/Users/tj/Genie_Project/src/app/student/learn/sentence",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "npm.Next.js: 서버 측.executor": "Run",
+-    "settings.editor.selected.configurable": "preferences.pluginManager",
+-    "ts.external.directory.path": "C:\\kiylab\\genie_front\\node_modules\\typescript\\lib",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;feature/learning&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
++    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/tj/Genie_Project/src/app/student/learn/sentence&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;npm.Next.js: 서버 측.executor&quot;: &quot;Run&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;C:\\kiylab\\genie_front\\node_modules\\typescript\\lib&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\tj\Genie_Project\src\app\student\learn\sentence" />
+@@ -124,6 +123,7 @@
+       <workItem from="1766017837833" duration="8936000" />
+       <workItem from="1766105309809" duration="25220000" />
+       <workItem from="1766321000009" duration="4248000" />
++      <workItem from="1767252884339" duration="1868000" />
+     </task>
+     <task id="LOCAL-00001" summary="레이아웃 위치 수정(page수정)">
+       <option name="closed" value="true" />
+@@ -197,7 +197,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1766055933130</updated>
+     </task>
+-    <option name="localTasksCounter" value="10" />
++    <task id="LOCAL-00010" summary="학생사이트 인덱스 일부수정">
++      <option name="closed" value="true" />
++      <created>1766329753984</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1766329753984</updated>
++    </task>
++    <option name="localTasksCounter" value="11" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -212,6 +220,7 @@
+     <MESSAGE value="회원가입쪽 수정" />
+     <MESSAGE value="마이페이지 레이아웃 구성(기본정보, 학생관리, 구독&amp;결제, 계정관리&amp;탈퇴)" />
+     <MESSAGE value="마이페이지 수정" />
+-    <option name="LAST_COMMIT_MESSAGE" value="마이페이지 수정" />
++    <MESSAGE value="학생사이트 인덱스 일부수정" />
++    <option name="LAST_COMMIT_MESSAGE" value="학생사이트 인덱스 일부수정" />
+   </component>
+ </project>
+\ No newline at end of file

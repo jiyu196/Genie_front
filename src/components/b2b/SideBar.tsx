@@ -12,10 +12,11 @@ export default function Sidebar() {
     return (
         <aside className="w-[260px] bg-[#F4F6FF] border-r border-[#19344e]/10 px-5 py-8">
             {/* 타이틀 */}
-            <h2 className="text-lg font-bold text-[#19344e] mb-8">
-                마이페이지
-            </h2>
-
+            <Link href="/b2b/mypage">
+                <h2 className="text-3xl font-bold text-[#19344e] mb-8">
+                    마이페이지
+                </h2>
+            </Link>
             <nav className="space-y-6">
                 {sidebarMenu.map((section, idx) => {
                     const isOpen = openIndex === idx;

@@ -7,6 +7,10 @@ export const sidebarMenu = [
                 label: "기관 정보",
                 href: "/b2b/mypage/organization",
             },
+            {
+                label: "비밀번호 변경",
+                href: "/b2b/mypage/password",
+            },
         ],
     },
     {
@@ -31,8 +35,8 @@ export const sidebarMenu = [
         title: "계정관리 & 탈퇴",
         items: [
             {
-                label: "비밀번호 변경 및 회원탈퇴",
-                href: "/b2b/mypage/settings",
+                label: "회원탈퇴",
+                href: "/b2b/mypage/withdraw",
             },
 
         ],

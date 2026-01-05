@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ApolloClientProvider from "@/lib/ApolloProvider";
-import InitializeAuth from "@/app/InitializeAuth";
 import ReduxProvider from "@/app/ReduxProvider";
 import {notoSans} from "@/app/font";
 import AuthGate from "@/app/AuthGate";
@@ -33,7 +32,6 @@ export default function RootLayout({
           dark:bg-background-dark dark:text-text-primary-dark
         `}>
                         <ReduxProvider>
-                            <InitializeAuth/>
                             <AuthGate>
                             <ApolloClientProvider>
                                 {children}
