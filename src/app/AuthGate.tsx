@@ -17,6 +17,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
         "/b2b/resetPassword",
     ];
 
+
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
     const pathname = usePathname();
@@ -75,12 +76,12 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
         /* 로그인 페이지 제어 */
         if (pathname === AUTH_ROUTES.login) {
             // 이미 로그인된 상태면 로그인 페이지 차단
-            if (isAuthenticated && user) {
-                if (user.registerStatus === "PENDING") {
+            if (isAuthenticated) {
+                if (user?.registerStatus === "PENDING") {
                     router.replace(AUTH_ROUTES.pending);
                     return;
                 }
-                if (user.registerStatus === "REJECTED") {
+                if (user?.registerStatus === "REJECTED") {
                     router.replace(AUTH_ROUTES.rejected);
                     return;
                 }
@@ -93,25 +94,30 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
             return;
         }
 
-        const isMyPage =
-            pathname.startsWith("/b2b/mypage"); // b2b인덱스는 공용 페이지
+        const isProtectedB2B =
+            pathname === "/b2b" || pathname.startsWith("/b2b/mypage");
 
         /* 마이페이지 접근 제어 */
-        if (isMyPage) {
+        if (isProtectedB2B) {
             // 로그인 안 됐으면 로그인 페이지로 이동
-            if (!isAuthenticated || !user) {
+            if (!isAuthenticated) {
                 router.replace(AUTH_ROUTES.login);
                 return;
             }
 
             // user 존재 보장 이후에만 접근
-            if (user.registerStatus === "PENDING") {
-                router.replace(AUTH_ROUTES.pending);
-                return;
-            }
+            if (!user || user.registerStatus !== "APPROVED") {
+                if (user?.registerStatus === "PENDING") {
+                    router.replace(AUTH_ROUTES.pending);
+                    return;
+                }
 
-            if (user.registerStatus === "REJECTED") {
-                router.replace(AUTH_ROUTES.rejected);
+                if (user?.registerStatus === "REJECTED") {
+                    router.replace(AUTH_ROUTES.rejected);
+                    return;
+                }
+                // user가 null이면 안전하게 로그인으로
+                router.replace(AUTH_ROUTES.login);
                 return;
             }
         }
@@ -128,17 +134,17 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
         isPublicRoute,
     ]);
 
-    // public route는 AuthGate 자체를 타지 않고 즉시 렌더
-    if (isPublicRoute) {
-        return <>{children}</>;
-    }
-
-    // 렌더링 완전히 차단
-    // 인증 초기화 전, 인증 요청 중, 리다이렉트 판단 완료 전
+    // 판단 끝나지 않았을때에는 무조건 스피너
     if (!initialized || loading || !checked) {
         return <LoadingSpinner />;
     }
 
-    // 모든 조건 통과 후에 실제 페이지 렌더
+    // public route-> checked 이후에만 렌더링
+    if (isPublicRoute && checked) {
+        return <>{children}</>;
+    }
+
+
+    // 모든 조건 통과 후에 실제 페이지 렌더. 나머지는 보호 페이지
     return <>{children}</>;
 }
