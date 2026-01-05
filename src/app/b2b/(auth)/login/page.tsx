@@ -33,6 +33,10 @@ export default function LoginPage() {
         try {
             await dispatch(loginThunk({ email, password })).unwrap();
             // 성공 시 → AuthGate가 이동 처리
+
+            // // 재실행 시 로그아웃 설정 ( AuthGate에서 3분 유예 설정 줌)
+            // sessionStorage.setItem("b2b_session", "alive");
+            // sessionStorage.setItem("b2b_last_active", Date.now().toString());
         } catch (err) {
             setSubmitting(false);
             setError("아이디 또는 비밀번호가 올바르지 않습니다.");

@@ -2,18 +2,20 @@
 
 import { useQuery } from "@apollo/client";
 import { ME_QUERY} from "@/graphql/auth/me";
+import {useSelector} from "react-redux";
+import {RootState} from "@/store";
 
 export default function MyPageHome() {
-    const { data } = useQuery(ME_QUERY);
-    const me = data?.me;
-    if (!me) return null;
+    const { user } = useSelector((state: RootState) => state.auth);
+
+    if (!user) return null; // 사실상 여기까지 올 일 없음
 
     return (
         <section className="max-w-[960px] ml-8 mt-7 space-y-8">
             {/* 타이틀 */}
             <div>
                 <h1 className="text-2xl font-semibold text-[#19344e]">
-                    {me.organizationName} 관리자 페이지
+                    {user.organizationName} 관리자 페이지
                 </h1>
                 <p className="text-sm text-gray-600 mt-1">
                     기관 계정의 기본 정보와 이용 상태를 확인할 수 있습니다.
@@ -24,8 +26,8 @@ export default function MyPageHome() {
             <div className="rounded-xl border bg-white px-8 py-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <Summary label="계정 상태" value="정상 이용 중" accent />
-                    <Summary label="승인 상태" value={me.registerStatus} />
-                    <Summary label="담당자" value={me.contactName} />
+                    <Summary label="승인 상태" value={user.registerStatus} />
+                    <Summary label="담당자" value={user.contactName} />
                 </div>
             </div>
 

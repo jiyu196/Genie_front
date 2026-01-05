@@ -7,7 +7,7 @@ import {logout, User} from "@/store/slice/authSlice";
 
 // 로그인 1. login mutation -> 쿠키발급 / 2. me query -> 사용자 정보(조회)
 export const loginThunk = createAsyncThunk<
-    User,
+    User | null,
     { email: string; password: string },
     { rejectValue: string }
 >(
@@ -28,7 +28,9 @@ export const loginThunk = createAsyncThunk<
                 fetchPolicy: "no-cache",
             });
 
-            if(!meRes.data?.me){
+            console.log("ME RESULT", meRes.data);
+
+            if(!meRes.data){
                 return rejectWithValue("LOGIN_FAILED");
             }
             return meRes.data.me;
@@ -40,7 +42,7 @@ export const loginThunk = createAsyncThunk<
 
 // 앱, 웹 시작 시 인증 초기화. 쿠키 있으면 성공, 없으면 에러남
 export const initializeAuthThunk = createAsyncThunk<
-    User,
+    User | null,
     void,
     { rejectValue: string }
 >(
@@ -66,6 +68,8 @@ export const logoutThunk = createAsyncThunk(
         mutation: LOGOUT_MUTATION,
     });
 
+    // // login page에서 넣었던 세션 스토리지 지움
+    //     sessionStorage.removeItem("b2b_session");
     // redux 상태 초기화
         dispatch(logout());
     }

@@ -1,4 +1,3 @@
-// app/b2b/pending/page.tsx
 import Link from "next/link";
 import Button from "@/components/b2b/Button";
 
@@ -7,29 +6,46 @@ export default function PendingPage() {
         <div className="min-h-[calc(100vh-120px)] flex items-center justify-center bg-[#f6f8fb]">
             <div className="w-full max-w-[520px] bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.06)] px-12 py-12 text-center">
 
+                {/* 제목 */}
                 <h1 className="text-2xl font-bold text-[#19344e] mb-4">
                     관리자 승인 대기 중
                 </h1>
 
+                {/* 설명 */}
                 <p className="text-md text-gray-600 leading-relaxed mb-8">
-                    기관 회원가입이 <b className="text-red-700">정상적</b>으로 접수되었습니다.<br />
+                    기관 회원가입이 <b className="text-blue-700">정상적으로</b> 접수되었습니다.<br />
                     관리자 승인 완료 후 Genie 서비스를 이용하실 수 있습니다.
                 </p>
 
-                <div className="bg-[#f9fafb] rounded-xl px-6 py-5 text-sm text-gray-700 mb-8 text-left">
+                {/* 안내 박스 (반려보다 톤 약하게) */}
+                <div className="bg-[#f9fafb] rounded-xl px-6 py-5 text-sm text-gray-700 mb-10 text-left">
                     <ul className="space-y-2">
                         <li>• 승인까지 <b>영업일 기준 1~2일</b> 소요됩니다.</li>
-                        <li>• 승인 전까지 서비스 이용은 제한됩니다.</li>
+                        <li>• 승인 완료 전까지 서비스 이용은 제한됩니다.</li>
                     </ul>
                 </div>
 
+                {/* 상태 표시 (버튼처럼 보이지만 액션 아님) */}
                 <div className="flex flex-col gap-3">
-                    <Button className="w-full cursor-pointer transition hover:brightness-80" disabled>
+                    <Button
+                        disabled
+                        className="
+                            w-full
+                            cursor-default
+                            opacity-100
+                            hover:brightness-100
+                            active:scale-100
+                        "
+                    >
                         승인 대기 중
                     </Button>
 
+                    {/* 실제 액션 */}
                     <Link href="/b2b">
-                        <Button variant="secondary" className="w-full cursor-pointer transition hover:brightness-90">
+                        <Button
+                            variant="secondary"
+                            className="w-full transition hover:brightness-90"
+                        >
                             메인 페이지로 돌아가기
                         </Button>
                     </Link>
