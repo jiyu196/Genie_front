@@ -22,6 +22,8 @@ export default function LoginPage() {
     const router = useRouter();
 
     const handleLogin = async () => {
+        if(submitting) return; // 중복 방지
+
         if (!email || !password) {
             setError("이메일과 비밀번호를 입력해주세요.");
             return;
@@ -42,6 +44,14 @@ export default function LoginPage() {
             setError("아이디 또는 비밀번호가 올바르지 않습니다.");
         }
     };
+
+    if (submitting) {
+        return (
+            <div className="min-h-[calc(100vh-120px)] flex items-center justify-center">
+                <LoadingSpinner />
+            </div>
+        );
+    }
 
     return (
         <>

@@ -43,3 +43,9 @@ next-env.d.ts
 .idea/workspace.xml
 .idea/
 
+# env files
+.env
+.env.local
+.env.development
+.env.production
+.env.test

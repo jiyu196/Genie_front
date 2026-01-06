@@ -34,6 +34,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
 
     // redirect 판단 완료 여부. children이 렌더 되는 것 방지
     const [checked, setChecked] = useState(false);
+    const [redirecting, setRedirecting] = useState(false);
 
     // 경로 변경 시마다 다시 gate 잠금 (protected route만)
     useEffect(() => {
@@ -77,6 +78,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
         if (pathname === AUTH_ROUTES.login) {
             // 이미 로그인된 상태면 로그인 페이지 차단
             if (isAuthenticated) {
+                setChecked(true); // 로그인 전 페이지 보이는 문제 -> 먼저 gate 통과 처리.
                 if (user?.registerStatus === "PENDING") {
                     router.replace(AUTH_ROUTES.pending);
                     return;
@@ -94,11 +96,11 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
             return;
         }
 
-        const isProtectedB2B =
-            pathname === "/b2b" || pathname.startsWith("/b2b/mypage");
+        const isMypage =
+           pathname.startsWith("/b2b/mypage");
 
         /* 마이페이지 접근 제어 */
-        if (isProtectedB2B) {
+        if (isMypage) {
             // 로그인 안 됐으면 로그인 페이지로 이동
             if (!isAuthenticated) {
                 router.replace(AUTH_ROUTES.login);
@@ -135,7 +137,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
     ]);
 
     // 판단 끝나지 않았을때에는 무조건 스피너
-    if (!initialized || loading || !checked) {
+    if (!initialized || loading || !checked || redirecting) {
         return <LoadingSpinner />;
     }
 
