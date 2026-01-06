@@ -1,4 +1,5 @@
 import Button from "@/components/b2b/Button";
+import Link from "next/link";
 
 export default function StudentsPage() {
     return (
@@ -9,7 +10,7 @@ export default function StudentsPage() {
                     학생 관리
                 </h1>
                 <p className="text-sm text-[#19344e]/60 mt-1">
-                    Genie툰 학생 계정을 생성하고 상태를 관리할 수 있습니다.
+                    발급된 Genie툰 학생 계정을 확인하고 관리할 수 있습니다.
                 </p>
             </div>
 
@@ -21,9 +22,13 @@ export default function StudentsPage() {
                         학생 계정 목록
                     </h2>
 
-                    <Button className="px-4 py-2 hover:brightness-80">
-                        학생 계정 추가
-                    </Button>
+                    {/*{subscription.status === "ACTIVE" && (*/}
+                    {/*나중에 이거 학생계정 발급 되었을때만 서비스 이동 가능하게 하기*/}
+                    <Link href="/student">
+                        <Button className="px-4 py-2 hover:brightness-90">
+                            지니튠 서비스로 이동
+                        </Button>
+                    </Link>
                 </div>
 
                 {/* 테이블 */}
@@ -43,6 +48,7 @@ export default function StudentsPage() {
                     </thead>
 
                     <tbody>
+                    {/* 더미 / 나중에 map */}
                     <tr className="border-b hover:bg-gray-50 transition">
                         <td className="px-6 py-4">김지니</td>
                         <td className="px-6 py-4 text-gray-600">genie01</td>
