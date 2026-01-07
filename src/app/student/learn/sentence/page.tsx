@@ -1,6 +1,4 @@
-import '../learn.css';
-import WordTimeline from '../word/WordTimeline';
-import SentenceTimeline from "@/app/student/learn/sentence/SentenceTimeline";
+import SentenceComingSoonPage from "@/components/student/learn/sentence/SentenceComingSoon";
 
 export default function LearnPage() {
 
@@ -8,7 +6,7 @@ export default function LearnPage() {
     return (
         <div className="learn-bg">
             <section className="learn-card">
-                <SentenceTimeline />
+                <SentenceComingSoonPage />
             </section>
         </div>
     );

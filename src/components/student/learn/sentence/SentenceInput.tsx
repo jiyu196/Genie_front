@@ -1,8 +1,15 @@
+// sentence/SentenceInput.tsx
 'use client';
 
 import { useState } from 'react';
 
-export default function WordInput({ onSubmit }: { onSubmit: (v: string) => void }) {
+export default function SentenceInput({
+      onSubmit,
+      disabled = false,
+}: {
+    onSubmit: (v: string) => void;
+    disabled?: boolean;
+}) {
     const [value, setValue] = useState('');
 
     const send = () => {
@@ -14,21 +21,23 @@ export default function WordInput({ onSubmit }: { onSubmit: (v: string) => void 
     return (
         <div className="flex items-center gap-2 px-4 py-3 border-t bg-[#fffdf9]">
 
-            <input
+            <textarea
                 value={value}
                 onChange={e => setValue(e.target.value)}
-                placeholder="단어를 입력해줘"
+                placeholder="이야기를 문장으로 써보세요"
+                rows={2}
                 className="
                     flex-1
-                    h-11
-                    px-4
+                    h-12
+                    px-4 py-2
                     rounded-2xl
                     border
                     text-sm
+                    resize-none
                     focus:outline-none
                 "
                 onKeyDown={e => {
-                    if (e.key === 'Enter') {
+                    if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault();
                         send();
                     }

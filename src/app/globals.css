@@ -40,3 +40,20 @@ html, body {
     focus:outline-none focus:ring-0 focus:border-gray-300;
 }
 
+/*캐릭터 움직임*/
+@keyframes float-bob {
+    0% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-14px);
+    }
+    60% {
+        transform: translateY(-14px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+

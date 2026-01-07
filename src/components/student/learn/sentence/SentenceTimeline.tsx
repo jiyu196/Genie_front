@@ -1,7 +1,9 @@
+// sentence/SentenceTimeline.tsx
+
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import ChatBubble from '../_components/ChatBubble';
+import ChatBubble from '@/components/student/learn/word/components/chat/ChatBubble';
 import SentenceInput from './SentenceInput';
 
 type Message = {
