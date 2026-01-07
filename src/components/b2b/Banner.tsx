@@ -38,16 +38,43 @@ export default function Banner() {
                     </div>
                 </div>
 
-                {/* 이미지 카드 */}
-                <div className="h-[320px] bg-white rounded-2xl border border-[#1F3A5F]/10 flex items-center justify-center text-[#1F3A5F]/30">
-                    <Image
-                        src="/images/banner.svg"
-                        alt="지니튠 미리보기"
-                        width={1200}
-                        height={800}
-                        className="w-full max-w-[1100px]"
-                    />
+                {/* 이미지 프리뷰 영역 */}
+                <div className="relative flex flex-col items-center">
+                    <div className="relative flex justify-center items-center">
+                        {/* 뒤 이미지들 */}
+                        <Image
+                            src="/images/banner-2.svg"
+                            alt=""
+                            width={1200}
+                            height={800}
+                            className="absolute -rotate-2 translate-x-[-40px] scale-[0.96] opacity-70 rounded-[24px] shadow-lg"
+                        />
+
+                        <Image
+                            src="/images/banner-3.svg"
+                            alt=""
+                            width={1200}
+                            height={800}
+                            className="absolute rotate-1 translate-x-[40px] scale-[0.96] opacity-70 rounded-[24px] shadow-lg"
+                        />
+
+                        {/* 메인 이미지 */}
+                        <Image
+                            src="/images/banner-1.svg"
+                            alt="지니튠 학생 학습 화면"
+                            width={1200}
+                            height={800}
+                            className="relative z-10 rounded-[24px] shadow-[0_40px_100px_rgba(31,58,95,0.28)]"
+                        />
+                    </div>
+
+                    {/* 캡션 */}
+                    <p className="mt-4 text-sm text-[#1F3A5F]/60 text-center">
+                        실제 학생 학습 사이트 화면 예시
+                    </p>
                 </div>
+
+
             </div>
         </section>
     );

@@ -1,44 +1,80 @@
 import Image from "next/image";
+import Button from "@/components/b2b/Button";
+import StudentButton from "@/components/student/StudentButton";
 
 export default function LoginPage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#f6eeee]">
-            {/* 캐릭터 */}
-            <div className="absolute -top-20 left-1/2 -translate-x-1/2">
-                <Image
-                    src="/images/character.svg"
-                    alt="지니"
-                    width={160}
-                    height={160}
-                    className="animate-bounce"
-                />
-            </div>
-            <div className="w-[420px] bg-[#fffdf9] rounded-[32px] px-9 py-12 flex flex-col gap-5 shadow-lg">
-                <h2 className="text-[28px] font-extrabold text-[#4a3b3b] text-center">
+        <div
+            className="
+                min-h-screen relative overflow-hidden
+                flex items-center justify-center
+                bg-gradient-to-b
+                from-[#e6f2ff]
+                via-[#fde7f3]
+                to-[#fff3df]
+            "
+        >
+
+            {/* 로그인 카드 */}
+            <div
+                className="
+                    relative z-10
+                    w-[420px]
+                    bg-white/90 backdrop-blur
+                    rounded-[32px]
+                    px-9 py-12
+                    flex flex-col gap-5
+                    shadow-[0_30px_60px_rgba(239,190,190,0.45)]
+                "
+            >
+                {/* 캐릭터 */}
+                <div className="absolute -top-20 left-1/2 -translate-x-1/2">
+                    <Image
+                        src="/images/mascot-genie.svg"
+                        alt="지니"
+                        width={150}
+                        height={150}
+                        className="animate-[float-bob_3.8s_ease-in-out_infinite]"
+                    />
+                </div>
+
+                <h2 className="mt-5 text-[28px] font-extrabold text-[#4a3b3b] text-center">
                     로그인
                 </h2>
 
                 <input
-                    className="px-4 py-3 rounded-[18px] border-2 border-[#f1dada] bg-[#fff8d6]
-                               text-sm outline-none focus:border-[#d48c8c]  placeholder:text-[#b39a6f]
-                               focus:ring-2 focus:ring-[#d48c8c]/30"
+                    className="
+                        px-4 py-3 rounded-[18px]
+                        border-2 border-[#f1dada]
+                        bg-white
+                        text-sm
+                        outline-none
+                        placeholder:text-[#bfa7a7]
+                        focus:border-[#d48c8c]
+                        focus:ring-2 focus:ring-[#d48c8c]/30
+                    "
                     placeholder="아이디 입력"
                 />
 
                 <input
                     type="password"
-                    className="px-4 py-3 rounded-[18px] border-2 border-[#f1dada] bg-[#fff8d6]
-                               text-sm outline-none focus:border-[#d48c8c]  placeholder:text-[#b39a6f]
-                               focus:ring-2 focus:ring-[#d48c8c]/30"
+                    className="
+                        px-4 py-3 rounded-[18px]
+                        border-2 border-[#f1dada]
+                        bg-white
+                        text-sm
+                        outline-none
+                        placeholder:text-[#bfa7a7]
+                        focus:border-[#d48c8c]
+                        focus:ring-2 focus:ring-[#d48c8c]/30
+                    "
                     placeholder="비밀번호 입력"
                 />
 
-                <button
-                    className="mt-2 py-3 rounded-[20px] bg-[#4a3b3b] text-white
-                               text-[16px] font-bold hover:bg-[#3a2e2e]"
-                >
+                <StudentButton>
                     로그인
-                </button>
+                </StudentButton>
+
             </div>
         </div>
     );

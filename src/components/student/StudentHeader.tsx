@@ -6,20 +6,15 @@ export default function StudentHeader() {
     return (
         <header
             className="
-            relative
-            z-10
-            h-20
-            px-6
-            flex
-            items-center
-            justify-between
-            overflow-hidden
-            mt-6
+                sticky top-0 z-20 h-20 px-6 flex items-center
+                justify-between
+                bg-[#eaeffc]/80 backdrop-blur-sm
+                border-b border-white/40
+                transition
+                overflow-hidden
             "
         >
-
-
-        {/* 로고 */}
+            {/* 로고 */}
             <Link href="/student">
                 <div className="flex items-center gap-2 cursor-pointer">
                     <Image
@@ -33,6 +28,7 @@ export default function StudentHeader() {
                 </div>
             </Link>
 
+            {/* 네비 */}
             <nav className="flex items-center">
                 <Link href="/student/login">
                     <button
@@ -43,6 +39,7 @@ export default function StudentHeader() {
                             text-[#4a3b3b]
                             hover:text-[#d48c8c]
                             transition
+                            cursor-pointer
                         "
                     >
                         로그인
@@ -58,6 +55,7 @@ export default function StudentHeader() {
                             text-[#4a3b3b]
                             hover:text-[#d48c8c]
                             transition
+                            cursor-pointer
                         "
                     >
                         내 학습방

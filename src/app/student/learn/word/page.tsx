@@ -1,34 +1,25 @@
-import '../learn.css';
-import WordTimeline from './WordTimeline';
+import WordTimeline from "@/components/student/learn/word/WordTimeline";
+import WordLearnFlow from "@/components/student/learn/word/WordLearnFlow";
 
 export default function LearnPage() {
-
-
     return (
-        <div className="learn-bg">
-                    <section className="learn-card">
-                        <WordTimeline />
-                    </section>
+        <div className="h-screen flex justify-center items-center">
+            <div
+                className="
+                    mx-auto
+                    w-[420px]
+                    h-[80vh]
+                    min-h-0
+                    bg-white
+                    rounded-3xl
+                    shadow-lg
+                    flex
+                    flex-col
+                    overflow-hidden
+                  "
+            >
+            <WordLearnFlow />
+            </div>
         </div>
     );
 }
-
-// 꽃무늬 채팅배경
-//<div className="learn-bg">
-//             <div className="chat-frame">
-//
-//                 {/* SVG 배경 */}
-//                 <img
-//                     src="/chatFrame.svg"
-//                     alt=""
-//                     className="frame-bg"
-//                 />
-//
-//                 {/* 프레임 안 실제 UI */}
-//                 <div className="chat-content">
-//
-//                     <WordTimeline />
-//                 </div>
-//
-//             </div>
-//         </div>
