@@ -10,19 +10,19 @@ import Button from "@/components/b2b/Button";
 
 // 현재 구독
 type Subscription = {
-    planName: string;
+    productName: string;
     subscriptionCycle: "MONTHLY" | "YEARLY";
-    startDate: string;
-    endDate: string;
+    startedAt: string;
+    endedAt: string;
     status: "ACTIVE" | "EXPIRED" | "CANCELLED";
 };
 
 // 결제 내역
 type PaymentHistory = {
-    id: string;
+    orderUuid: string;
     paidAt: string;
     amount: number;
-    status: "PAID" | "REFUNDED";
+    payStatus: "PAID" | "REFUNDED";
 };
 export default function PlanPage() {
     const { data: subscriptionData } = useQuery(GET_MY_SUBSCRIPTION);
@@ -48,11 +48,11 @@ export default function PlanPage() {
                         <div className="flex justify-between items-start">
                             <div className="space-y-1">
                                 <p className="text-lg font-semibold">
-                                    {subscription.planName}
+                                    {subscription.productName}
                                 </p>
 
                                 <p className="text-sm text-gray-500">
-                                    {subscription.startDate} ~ {subscription.endDate}
+                                    {subscription.startedAt} ~ {subscription.endedAt}
                                 </p>
 
                                 <p className="text-sm text-gray-500">
@@ -95,7 +95,7 @@ export default function PlanPage() {
                     <ul className="divide-y text-sm">
                         {payments.map((payment) => (
                             <li
-                                key={payment.id}
+                                key={payment.orderUuid}
                                 className="py-3 flex justify-between items-center"
                             >
                 <span className="text-gray-600">
@@ -105,7 +105,7 @@ export default function PlanPage() {
                                 <div className="flex items-center gap-4">
                   <span
                       className={`text-sm ${
-                          payment.status === "REFUNDED"
+                          payment.payStatus === "REFUNDED"
                               ? "text-gray-400"
                               : "text-[#19344e]"
                       }`}
@@ -115,12 +115,12 @@ export default function PlanPage() {
 
                                     <span
                                         className={`text-xs px-2 py-0.5 rounded ${
-                                            payment.status === "PAID"
+                                            payment.payStatus === "PAID"
                                                 ? "bg-green-100 text-green-700"
                                                 : "bg-gray-100 text-gray-500"
                                         }`}
                                     >
-                    {payment.status === "PAID"
+                    {payment.payStatus === "PAID"
                         ? "결제 완료"
                         : "환불"}
                   </span>
