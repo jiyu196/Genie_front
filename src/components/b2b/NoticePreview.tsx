@@ -1,27 +1,10 @@
 import Link from "next/link";
-
-const notices = [
-    {
-        id: 1,
-        type: "공지",
-        title: "고객만족도 조사 안내",
-        date: "2025-10-27",
-    },
-    {
-        id: 2,
-        type: "안내",
-        title: "학습 적합 진단 이벤트 발표",
-        date: "2025-09-23",
-    },
-    {
-        id: 3,
-        type: "공지",
-        title: "시스템 점검 안내",
-        date: "2025-09-10",
-    },
-];
+import { notices } from "@/components/b2b/data/notices";
 
 export default function NoticePreview() {
+    // 최신 공지 3개만 노출
+    const previewNotices = notices.slice(0, 3);
+
     return (
         <section className="pt-20 pb-28 bg-[#f6f8fb]">
             <div className="mx-auto max-w-[900px] px-6">
@@ -49,13 +32,13 @@ export default function NoticePreview() {
                     </Link>
                 </div>
 
-                {/* 공지 리스트 3개*/}
-                    <ul className="space-y-4">
-                        {notices.map(notice => (
-                            <li key={notice.id}>
-                                <Link
-                                    href={`/src/app/b2b/(public)/notice/${notice.id}`}
-                                    className="
+                {/* 공지 리스트 (최대 3개) */}
+                <ul className="space-y-4">
+                    {previewNotices.map(notice => (
+                        <li key={notice.id}>
+                            <Link
+                                href={`/b2b/notice/${notice.id}`}
+                                className="
                                     flex items-center justify-between
                                     bg-white
                                     rounded-xl
@@ -64,28 +47,30 @@ export default function NoticePreview() {
                                     hover:shadow-sm
                                     transition
                                 "
-                                >
-                                    <div className="flex items-center gap-3">
-                                    <span className={`
-                                        text-sm font-semibold
-                                        ${notice.type === "공지"
-                                        ? "text-[#F59E0B]"
-                                        : "text-[#19344e]"}
-                                    `}>
+                            >
+                                <div className="flex items-center gap-3">
+                                    <span
+                                        className={`text-sm font-semibold ${
+                                            notice.type === "공지"
+                                                ? "text-[#F59E0B]"
+                                                : "text-[#19344e]"
+                                        }`}
+                                    >
                                         [{notice.type}]
                                     </span>
-                                        <span className="text-gray-800">
+
+                                    <span className="text-gray-800">
                                         {notice.title}
                                     </span>
-                                    </div>
+                                </div>
 
-                                    <span className="text-sm text-gray-400">
+                                <span className="text-sm text-gray-400">
                                     {notice.date}
                                 </span>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </section>
     );

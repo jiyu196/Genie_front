@@ -1,35 +1,44 @@
-// app/b2b/notice/[email]/page.tsx
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { notices } from "@/components/b2b/data/notices";
 
-export default function NoticeDetailPage() {
+type Props = {
+    params: {
+        id: string;
+    };
+};
+
+export default function NoticeDetailPage({ params }: Props) {
+    const noticeId = Number(params.id);
+
+    if (Number.isNaN(noticeId)) {
+        notFound();
+    }
+
+    const notice = notices.find(n => n.id === noticeId);
+
+    if (!notice) {
+        notFound();
+    }
+
     return (
         <div className="bg-white">
+            {/* Header */}
             <section className="py-20 bg-[#f6f8fb] text-center">
                 <h1 className="text-2xl font-bold text-[#19344e]">
-                    GenieTune 서비스 베타 오픈 안내
+                    {notice.title}
                 </h1>
                 <p className="text-sm text-gray-500 mt-2">
-                    2025.01.05
+                    {notice.date}
                 </p>
             </section>
 
+            {/* Content */}
             <section className="max-w-[800px] mx-auto px-6 py-20">
                 <div className="text-gray-700 leading-relaxed space-y-4">
-                    <p>
-                        안녕하세요. GenieTune입니다.
-                    </p>
-                    <p>
-                        GenieTune 교육 솔루션의 베타 서비스가
-                        정식으로 오픈되었습니다.
-                    </p>
-                    <p>
-                        기관 회원가입 및 관리자 승인 완료 후
-                        서비스를 이용하실 수 있으며,
-                        보다 안정적인 운영을 위해 지속적으로 개선해 나갈 예정입니다.
-                    </p>
-                    <p>
-                        많은 관심과 이용 부탁드립니다.
-                    </p>
+                    {notice.content.map((line, idx) => (
+                        <p key={idx}>{line}</p>
+                    ))}
                 </div>
 
                 <div className="mt-12">
