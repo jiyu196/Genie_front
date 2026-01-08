@@ -1,6 +1,5 @@
-// src/app/student/layout.tsx
-import StudentHeader from "@/components/student/StudentHeader";
 import StudentBackground from "@/components/student/StudentBackground";
+import StudentHeader from "@/components/student/StudentHeader";
 
 export default function StudentLayout({
                                           children,
@@ -8,10 +7,12 @@ export default function StudentLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="min-h-screen flex flex-col bg-[#f6eeee]">
-            <StudentBackground/>
+        <div className="relative min-h-screen flex flex-col overflow-hidden">
+            <StudentBackground />
+
             <StudentHeader />
-            <main className="flex-1 relative overflow-hidden">
+
+            <main className="flex-1 relative z-10">
                 {children}
             </main>
         </div>

@@ -9,7 +9,7 @@ type Props = {
     onButtonClick?: () => void;
 };
 
-export default function ChatBubble({ message, onButtonClick }: Props) {
+export default function PromptBubble({ message, onButtonClick }: Props) {
     const isBot = message.sender === 'bot';
 
     // 버튼 타입

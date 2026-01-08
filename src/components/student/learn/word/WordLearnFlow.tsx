@@ -6,7 +6,7 @@ import IntroStep2 from './components/intro/IntroStep2';
 import IntroStep3 from './components/intro/IntroStep3';
 import WordTimeline from './WordTimeline';
 import BotCharacter from "@/components/student/learn/word/components/character/BotCharacter";
-import ChatContainer from "@/components/student/learn/word/components/chat/ChatContainer";
+import ConversationStage from "@/components/student/learn/word/components/chat/ConversationStage";
 
 type FlowStep = 'INTRO_1' | 'INTRO_2' | 'INTRO_3' | 'CHAT';
 
@@ -28,19 +28,21 @@ export default function WordLearnFlow() {
             )}
 
             {step === 'CHAT' && (
-                <div className="relative flex-1 min-h-0">
-                    {/* 캐릭터 */}
-                    <div className="absolute top-6 left-6 w-20 h-20 z-10">
-                        <BotCharacter expression="smile" />
-                    </div>
+                    <div className="relative flex-1 min-h-0">
+                        {/* 캐릭터 */}
+                        <div className="absolute top-6 left-6 w-20 h-20 z-10">
+                            <BotCharacter expression="smile" />
+                        </div>
 
-                    {/* 채팅 */}
-                    <div className="flex-1 h-full pt-28">
-                        <ChatContainer />
+                        {/* 채팅 */}
+                        <div className="flex-1 h-full pt-28">
+                        <div className="flex-1 h-full pt-28">
+                            <ConversationStage />
+                        </div>
                     </div>
                 </div>
             )}
-
         </div>
     );
 }
+

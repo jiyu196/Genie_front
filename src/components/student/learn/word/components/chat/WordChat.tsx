@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ChatInput from "./ChatInput";
+import AnswerInput from "./AnswerInput";
 import BotCharacter from "../character/BotCharacter";
 
 export default function WordChat() {
@@ -32,7 +32,7 @@ export default function WordChat() {
             </div>
 
             {/* 입력창 */}
-            <ChatInput onSend={handleSend} />
+            <AnswerInput onSend={handleSend} />
         </div>
     );
 }

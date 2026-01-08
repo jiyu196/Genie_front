@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 interface StudentButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "ghost";
+    variant?: "primary" | "ghost" ;
     fullWidth?: boolean;
 }
 
@@ -22,20 +22,20 @@ export default function StudentButton({
                 fullWidth && "w-full",
 
                 variant === "primary" && `
-          bg-[#6b4f4f]
-          text-[#fffaf7]
-          shadow-[0_12px_24px_rgba(107,79,79,0.35)]
-          hover:bg-[#5a4242]
-          cursor-pointer
-        `,
+                  bg-[#6b4f4f]
+                  text-[#fffaf7]
+                  shadow-[0_12px_24px_rgba(107,79,79,0.35)]
+                  hover:bg-[#5a4242]
+                  cursor-pointer
+                `,
 
                 variant === "ghost" && `
-          bg-white/70
-          text-[#6b4f4f]
-          border border-[#e8dede]
-          hover:bg-white
-          cursor-pointer
-        `,
+                  bg-white/70
+                  text-[#6b4f4f]
+                  border border-[#e8dede]
+                  hover:bg-white
+                  cursor-pointer
+                `,
 
                 className
             )}

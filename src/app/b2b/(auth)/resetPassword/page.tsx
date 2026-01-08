@@ -4,7 +4,7 @@ import Button from "@/components/b2b/Button";
 import BackButton from "@/components/b2b/BackButton";
 import {useEffect, useState} from "react";
 import {useMutation} from "@apollo/client";
-import {RESET_PASSWORD} from "@/graphql/auth/resetPassword";
+import {RESET_PASSWORD} from "@/graphql/b2b/auth/resetPassword";
 
 export default function FindPasswordPage() {
 

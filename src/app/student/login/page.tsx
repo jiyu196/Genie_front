@@ -39,40 +39,26 @@ export default function LoginPage() {
                 </div>
 
                 <h2 className="mt-5 text-[28px] font-extrabold text-[#4a3b3b] text-center">
-                    로그인
+                    수업 들어가기
                 </h2>
 
                 <input
                     className="
-                        px-4 py-3 rounded-[18px]
+                        px-4 py-4 rounded-[18px]
                         border-2 border-[#f1dada]
                         bg-white
-                        text-sm
+                        text-center tracking-widest text-lg
                         outline-none
                         placeholder:text-[#bfa7a7]
                         focus:border-[#d48c8c]
                         focus:ring-2 focus:ring-[#d48c8c]/30
                     "
-                    placeholder="아이디 입력"
+                    placeholder="서비스 키 입력"
                 />
-
-                <input
-                    type="password"
-                    className="
-                        px-4 py-3 rounded-[18px]
-                        border-2 border-[#f1dada]
-                        bg-white
-                        text-sm
-                        outline-none
-                        placeholder:text-[#bfa7a7]
-                        focus:border-[#d48c8c]
-                        focus:ring-2 focus:ring-[#d48c8c]/30
-                    "
-                    placeholder="비밀번호 입력"
-                />
+                
 
                 <StudentButton>
-                    로그인
+                    수업 시작하기
                 </StudentButton>
 
             </div>

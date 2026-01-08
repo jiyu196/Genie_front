@@ -2,8 +2,8 @@
 
 import Button from "@/components/b2b/Button";
 import {useState} from "react";
-import {CHECK_PASSWORD} from "@/graphql/member/checkPassword";
-import {WITHDRAW} from "@/graphql/member/withdraw";
+import {CHECK_PASSWORD} from "@/graphql/b2b/member/checkPassword";
+import {WITHDRAW} from "@/graphql/b2b/member/withdraw";
 import {useMutation} from "@apollo/client";
 import {useRouter} from "next/navigation";
 import {useDispatch} from "react-redux";

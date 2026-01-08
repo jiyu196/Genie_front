@@ -4,7 +4,7 @@ import { useState } from "react";
 import PlanCard from "@/components/b2b/public/plan/PlanCard";
 import OrderConfirmModal from "@/components/b2b/public/plan/OrderConfirmModal";
 import {useQuery} from "@apollo/client";
-import {GET_ALL_PRODUCTS} from "@/graphql/plan/products";
+import {GET_ALL_PRODUCTS} from "@/graphql/b2b/plan/products";
 
 type ProductGrade = "BASIC" | "PRO" | "PREMIUM";
 

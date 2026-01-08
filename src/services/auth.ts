@@ -28,7 +28,7 @@ export async function refreshApi() {
 }
 
 // src/services/business.ts
-import { CHECK_BIZ_NUMBER } from "@/graphql/business/checkBizNumber";
+import { CHECK_BIZ_NUMBER } from "@/graphql/b2b/business/checkBizNumber";
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 
 export const login = async (

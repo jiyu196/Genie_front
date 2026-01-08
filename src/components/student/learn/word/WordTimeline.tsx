@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import ChatBubble from "@/components/student/learn/word/components/chat/ChatBubble";
-import WordInput from './WordInput';
+import PromptBubble from "@/components/student/learn/word/components/chat/PromptBubble";
+import AnswerInput from "@/components/student/learn/word/components/chat/AnswerInput";
 import { wordQuestions } from "@/components/student/learn/word/domain/questions";
 
 type Message = {
@@ -32,12 +32,12 @@ export default function WordTimeline() {
         setMessages(prev => [...prev, { id: messageIdRef.current, ...msg }]);
     };
 
-    /** 🔽 메시지 추가 시 자동 스크롤 */
+    // 대화 추가되면서 스크롤 나옴
     useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    /** 🔥 진입 시 자동 시작 (버튼 없음) */
+    // 채팅 진입 시 자동 시작
     useEffect(() => {
         pushMessage({
             sender: 'bot',
@@ -63,7 +63,7 @@ export default function WordTimeline() {
         }, 2200);
     }, []);
 
-    /** 🧠 단어 입력 처리 */
+    // 단어 입력처리
     const handleAnswer = (value: string) => {
         pushMessage({ sender: 'user', type: 'text', content: value });
 
@@ -83,7 +83,7 @@ export default function WordTimeline() {
         }
     };
 
-    /** ✨ 문장 생성 */
+    // 문장 생성
     const makeSentence = () => {
         setStep('SENTENCE');
 
@@ -104,7 +104,7 @@ export default function WordTimeline() {
         }, 800);
     };
 
-    /** 🎨 이미지 생성 */
+    // 이미지 생성
     const loadImages = () => {
         setStep('IMAGE_LOADING');
 
@@ -138,7 +138,7 @@ export default function WordTimeline() {
             {/* 채팅 로그 */}
             <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6 space-y-3">
                 {messages.map(msg => (
-                    <ChatBubble key={msg.id} message={msg} />
+                    <PromptBubble key={msg.id} message={msg} />
                 ))}
                 <div ref={bottomRef} />
             </div>
@@ -146,7 +146,7 @@ export default function WordTimeline() {
             {/* 입력창 (항상 하단) */}
             {step === 'WORD_QNA' && (
                 <div className="border-t bg-white shrink-0">
-                    <WordInput onSubmit={handleAnswer} />
+                    <AnswerInput onSend={handleAnswer} />
                 </div>
             )}
         </div>

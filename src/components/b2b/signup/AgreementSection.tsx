@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {useLazyQuery} from "@apollo/client";
-import {GET_TERM_QUERY} from "@/graphql/auth/getTerm";
+import {GET_TERM_QUERY} from "@/graphql/b2b/auth/getTerm";
 
 
 type AgreementSectionProps = {
