@@ -3,8 +3,8 @@
 "use client";
 
 import { useQuery } from "@apollo/client";
-import { GET_MY_SUBSCRIPTION} from "@/graphql/plan/getMySubscription";
-import {GET_PAYMENT_HISTORY} from "@/graphql/plan/getPaymentHistory";
+import { GET_MY_SUBSCRIPTION} from "@/graphql/b2b/plan/getMySubscription";
+import {GET_PAYMENT_HISTORY} from "@/graphql/b2b/plan/getPaymentHistory";
 import Link from "next/link";
 import Button from "@/components/b2b/Button";
 

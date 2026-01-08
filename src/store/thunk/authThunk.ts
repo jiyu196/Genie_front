@@ -1,8 +1,8 @@
 // src/store/thunk/authThunk.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { apolloClient } from "@/lib/apolloClient";
-import {LOGIN_MUTATION, LOGOUT_MUTATION} from "@/graphql/auth/login";
-import { ME_QUERY } from "@/graphql/auth/me";
+import {LOGIN_MUTATION, LOGOUT_MUTATION} from "@/graphql/b2b/auth/login";
+import { ME_QUERY } from "@/graphql/b2b/auth/me";
 import {logout, User} from "@/store/slice/authSlice";
 
 // 로그인 1. login mutation -> 쿠키발급 / 2. me query -> 사용자 정보(조회)

@@ -10,7 +10,6 @@ export const GET_MY_SUBSCRIPTION = gql`
       startedAt
       endedAt
       issuedAccessCount
-      usedAccessCount
       status
     }
   }

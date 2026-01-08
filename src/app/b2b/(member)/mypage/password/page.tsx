@@ -3,8 +3,8 @@
 import Button from "@/components/b2b/Button";
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CHECK_PASSWORD } from "@/graphql/member/checkPassword";
-import { SAVE_NEW_PASSWORD } from "@/graphql/member/saveNewPassword";
+import { CHECK_PASSWORD } from "@/graphql/b2b/member/checkPassword";
+import { SAVE_NEW_PASSWORD } from "@/graphql/b2b/member/saveNewPassword";
 import { useRouter } from "next/navigation";
 import { logout } from "@/store/slice/authSlice";
 import { useDispatch } from "react-redux";

@@ -7,7 +7,7 @@ export default function LearnPage() {
             <div
                 className="
                     mx-auto
-                    w-[420px]
+                    w-[500px]
                     h-[80vh]
                     min-h-0
                     bg-white

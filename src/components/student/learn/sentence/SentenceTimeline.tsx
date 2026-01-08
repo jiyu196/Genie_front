@@ -3,7 +3,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import ChatBubble from '@/components/student/learn/word/components/chat/ChatBubble';
+import PromptBubble from '@/components/student/learn/word/components/chat/PromptBubble';
 import SentenceInput from './SentenceInput';
 
 type Message = {
@@ -82,7 +82,7 @@ export default function SentenceTimeline() {
             {/* 채팅 로그 */}
             <div className="flex-1 overflow-y-auto px-4 py-6 space-y-3">
                 {messages.map(msg => (
-                    <ChatBubble key={msg.id} message={msg} />
+                    <PromptBubble key={msg.id} message={msg} />
                 ))}
                 <div ref={bottomRef} />
             </div>

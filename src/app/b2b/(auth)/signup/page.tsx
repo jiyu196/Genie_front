@@ -3,13 +3,13 @@
 
 import Button from "@/components/b2b/Button";
 import {useState, useEffect} from "react";
-import {REGISTER_MUTATION} from "@/graphql/auth/register";
+import {REGISTER_MUTATION} from "@/graphql/b2b/auth/register";
 import {useRouter} from "next/navigation";
 import {useMutation} from "@apollo/client";
-import {CHECK_BIZ_NUMBER} from "@/graphql/business/checkBizNumber";
-import {SEND_EMAIL_CODE_MUTATION} from "@/graphql/auth/sendEmailCode";
-import {VERIFY_EMAIL_CODE_MUTATION} from "@/graphql/auth/verifyEmailCode";
-import {EMAIL_CHECK_MUTATION} from "@/graphql/auth/checkEmail";
+import {CHECK_BIZ_NUMBER} from "@/graphql/b2b/business/checkBizNumber";
+import {SEND_EMAIL_CODE_MUTATION} from "@/graphql/b2b/auth/sendEmailCode";
+import {VERIFY_EMAIL_CODE_MUTATION} from "@/graphql/b2b/auth/verifyEmailCode";
+import {EMAIL_CHECK_MUTATION} from "@/graphql/b2b/auth/checkEmail";
 import EmailVerificationSection from "@/components/b2b/signup/EmailVerificationSection";
 import BusinessVerificationSection from "@/components/b2b/signup/BusinessVerificationSection";
 import OrganizationInfoSection from "@/components/b2b/signup/OrganizationInfoSection";

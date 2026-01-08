@@ -1,5 +1,5 @@
 import {useMutation} from "@apollo/client";
-import {EMAIL_CHECK_MUTATION} from "@/graphql/auth/checkEmail";
+import {EMAIL_CHECK_MUTATION} from "@/graphql/b2b/auth/checkEmail";
 
 // 이메일 중복 검사
 export function useEmailCheck() {

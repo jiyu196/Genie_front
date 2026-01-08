@@ -5,7 +5,7 @@ export default function IntroStep1({ onNext }: { onNext: () => void }) {
     return (
         <IntroLayout
             character={<BotCharacter expression="smile" />}
-            bubbleText="안녕하세요! 지니예요 ✨"
+            bubbleText="안녕! 난 이야기 요정 지니야 ✨"
             onNext={onNext}
         />
     );

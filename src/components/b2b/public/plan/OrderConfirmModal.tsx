@@ -1,8 +1,8 @@
 import Button from "@/components/b2b/Button";
 import {useMutation} from "@apollo/client";
-import {PREPARE_ORDER} from "@/graphql/plan/orders";
+import {PREPARE_ORDER} from "@/graphql/b2b/plan/orders";
 import PortOne, {PaymentPayMethod} from "@portone/browser-sdk/v2";
-import {CHECK_PAYMENT} from "@/graphql/plan/checkPayment";
+import {CHECK_PAYMENT} from "@/graphql/b2b/plan/checkPayment";
 import {useRouter} from "next/navigation";
 
 export type Product = {

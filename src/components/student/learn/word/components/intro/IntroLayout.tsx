@@ -15,31 +15,31 @@ export default function IntroLayout({
                                         nextLabel = "계속하기",
                                     }: IntroLayoutProps) {
     return (
-        <div className="relative flex-1 flex flex-col items-center justify-center bg-white">
+        <div className="flex items-center justify-center gap-16 py-24 bg-white">
 
             {/* 캐릭터 */}
-            <div className="mb-6">
+            <div>
                 {character}
             </div>
 
-            {/* 말풍선 */}
-            <div className="mb-10 px-6 py-3 bg-white rounded-xl shadow text-sm">
-                {bubbleText}
-            </div>
+            {/* 설명 */}
+            <div className="max-w-md space-y-8">
+                <div className="text-2xl font-bold text-[#19344e]">
+                    단어로 이야기를 만들어볼까?
+                </div>
 
-            {/* 버튼 */}
-            <StudentButton
-                onClick={onNext}
-                className="
-                    mt-4
-                    w-full
-                    h-12
-                    rounded-full
-                    text-white
-                    font-semibold"
+                <div className="px-6 py-4 bg-white rounded-xl shadow text-base leading-relaxed">
+                    {bubbleText}
+                </div>
+
+                <StudentButton
+                    onClick={onNext}
+                    variant="primary"
+                    className="px-10 py-4 text-base"
                 >
-                {nextLabel}
-            </StudentButton>
+                    {nextLabel}
+                </StudentButton>
+            </div>
         </div>
     );
 }

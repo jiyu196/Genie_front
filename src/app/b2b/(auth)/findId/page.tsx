@@ -3,7 +3,7 @@
 import Button from "@/components/b2b/Button";
 import BackButton from "@/components/b2b/BackButton";
 import {useState} from "react";
-import {FIND_EMAIL_MUTATION} from "@/graphql/auth/findId";
+import {FIND_EMAIL_MUTATION} from "@/graphql/b2b/auth/findId";
 import {useMutation} from "@apollo/client";
 import {maskEmail} from "@/utils/maskEmail";
 

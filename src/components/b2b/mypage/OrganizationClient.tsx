@@ -4,7 +4,7 @@ import { useState } from "react";
 import ApprovedHeader from "@/components/b2b/mypage/ApprovalHeader";
 import Button from "@/components/b2b/Button";
 import { User } from "@/store/slice/authSlice";
-import {UPDATE_MEMBER_INFO} from "@/graphql/member/updateInfo";
+import {UPDATE_MEMBER_INFO} from "@/graphql/b2b/member/updateInfo";
 import {useMutation} from "@apollo/client";
 
 type Props = {
