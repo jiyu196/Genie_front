@@ -2,12 +2,22 @@
 import { gql } from "@apollo/client";
 
 export const GET_PAYMENT_HISTORY = gql`
-  query GetPaymentHistory {
-    getPaymentHistory {
-      orderUuid
-      amount
-      paidAt
-      payStatus
+  query GetPaymentHistory($input: GetPaymentRequestDTO!) {
+    getPaymentHistory(input: $input) {
+      content {
+                orderUuid
+                amount
+                paidAt
+                payStatus
+                cardCompany
+                cardNumberMask
+                receiptUrl
+            }
+            totalPages
+            totalElements
+            currentPage
+            isFirst
+            isLast
     }
   }
 `;

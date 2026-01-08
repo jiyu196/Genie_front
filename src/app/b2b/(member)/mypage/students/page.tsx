@@ -1,7 +1,55 @@
-import Button from "@/components/b2b/Button";
+"use client";
+
+import { useQuery } from "@apollo/client";
+import { useState } from "react";
 import Link from "next/link";
+import Button from "@/components/b2b/Button";
+import { GET_MY_SERVICE_ID } from "@/graphql/b2b/plan/getMyServiceId";
+
+// 서비스 계정 타입 (학생 계정으로 사용)
+type ServiceAccount = {
+    decryptedKey: string;
+    accessStatus: "ACTIVE" | "EXPIRED";
+    createdAt: string;
+    expiredAt: string;
+};
+
+// 상태 뱃지 렌더링
+function renderStatus(status: "ACTIVE" | "EXPIRED") {
+    if (status === "ACTIVE") {
+        return (
+            <span className="inline-flex items-center gap-2 text-green-600 font-medium">
+        ● 활성
+      </span>
+        );
+    }
+    return (
+        <span className="inline-flex items-center gap-2 text-gray-400 font-medium">
+        ● 만료
+    </span>
+    );
+}
 
 export default function StudentsPage() {
+    // 페이지네이션 상태
+    const [page, setPage] = useState(1);
+    const size = 10;
+
+    // 서비스 계정 조회
+    const { data, loading } = useQuery(GET_MY_SERVICE_ID, {
+        variables: {
+            input: {
+                page,
+                size,
+            },
+        },
+    });
+
+    const accounts: ServiceAccount[] =
+        data?.getMyAccessIdPage?.content ?? [];
+
+    const pageInfo = data?.getMyAccessIdPage;
+
     return (
         <section className="max-w-[960px] ml-8 mt-7 space-y-8">
             {/* 페이지 헤더 */}
@@ -22,13 +70,14 @@ export default function StudentsPage() {
                         학생 계정 목록
                     </h2>
 
-                    {/*{subscription.status === "ACTIVE" && (*/}
-                    {/*나중에 이거 학생계정 발급 되었을때만 서비스 이동 가능하게 하기*/}
-                    <Link href="/student">
-                        <Button className="px-4 py-2 hover:brightness-90">
-                            지니튠 서비스로 이동
-                        </Button>
-                    </Link>
+                    {/* 학생 계정이 있을 때만 서비스 이동 가능 */}
+                    {accounts.length > 0 && (
+                        <Link href="/student">
+                            <Button className="px-4 py-2 hover:brightness-90">
+                                지니튠 서비스로 이동
+                            </Button>
+                        </Link>
+                    )}
                 </div>
 
                 {/* 테이블 */}
@@ -48,28 +97,82 @@ export default function StudentsPage() {
                     </thead>
 
                     <tbody>
-                    {/* 더미 / 나중에 map */}
-                    <tr className="border-b hover:bg-gray-50 transition">
-                        <td className="px-6 py-4">김지니</td>
-                        <td className="px-6 py-4 text-gray-600">genie01</td>
-                        <td className="px-6 py-4">
-                            <span className="inline-flex items-center gap-2 text-green-600 font-medium">
-                                ● 활성
-                            </span>
-                        </td>
-                    </tr>
+                    {/* 로딩 */}
+                    {loading && (
+                        <tr>
+                            <td
+                                colSpan={3}
+                                className="px-6 py-6 text-center text-gray-400"
+                            >
+                                불러오는 중...
+                            </td>
+                        </tr>
+                    )}
 
-                    <tr className="hover:bg-gray-50 transition">
-                        <td className="px-6 py-4">이툰</td>
-                        <td className="px-6 py-4 text-gray-600">toon02</td>
-                        <td className="px-6 py-4">
-                            <span className="inline-flex items-center gap-2 text-gray-400 font-medium">
-                                ● 비활성
-                            </span>
-                        </td>
-                    </tr>
+                    {/* 데이터 있음 */}
+                    {!loading && accounts.length > 0 &&
+                        accounts.map(account => (
+                            <tr
+                                key={account.decryptedKey}
+                                className="border-b hover:bg-gray-50 transition"
+                            >
+                                {/* 앞에 번호로 바꿀예정 */}
+                                <td className="px-6 py-4 text-gray-500">
+                                    -
+                                </td>
+
+                                {/* 아이디 */}
+                                <td className="px-6 py-4 font-mono text-gray-700">
+                                    {account.decryptedKey}
+                                </td>
+
+                                {/* 상태 */}
+                                <td className="px-6 py-4">
+                                    {renderStatus(account.accessStatus)}
+                                </td>
+                            </tr>
+                        ))}
+
+                    {/* 데이터 없음 */}
+                    {!loading && accounts.length === 0 && (
+                        <tr>
+                            <td
+                                colSpan={3}
+                                className="px-6 py-6 text-center text-gray-400"
+                            >
+                                발급된 학생 계정이 없습니다.
+                            </td>
+                        </tr>
+                    )}
                     </tbody>
                 </table>
+
+                {/* 페이지네이션 */}
+                {pageInfo && (
+                    <div className="flex justify-center items-center gap-3 py-4">
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            disabled={pageInfo.isFirst}
+                            onClick={() => setPage(p => p - 1)}
+                        >
+                            이전
+                        </Button>
+
+                        <span className="text-sm">
+              {pageInfo.currentPage} / {pageInfo.totalPages}
+            </span>
+
+                        <Button
+                            variant="secondary"
+                            size="sm"
+                            disabled={pageInfo.isLast}
+                            onClick={() => setPage(p => p + 1)}
+                        >
+                            다음
+                        </Button>
+                    </div>
+                )}
             </div>
         </section>
     );
