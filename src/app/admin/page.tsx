@@ -4,6 +4,7 @@ import DashboardCard from "@/components/admin/DashboardCard";
 import {useAdminDashboard} from "@/hook/admin/useAdminDashboard";
 import { useRouter } from "next/navigation";
 import StatusBadge from "@/components/admin/StatusBadge";
+import SignupApprovalChart from "@/components/admin/SignupApprovalChart";
 
 export default function AdminDashboardPage() {
     const router = useRouter();
@@ -14,6 +15,7 @@ export default function AdminDashboardPage() {
         rejectedCount,
         recentPending,
     } = useAdminDashboard();
+
 
     if (loading) {
         return <div className="p-6 text-sm text-gray-400">로딩 중...</div>;
@@ -58,7 +60,7 @@ export default function AdminDashboardPage() {
                     가입 / 승인 추이
                 </h2>
                 <div className="h-[220px] flex items-center justify-center text-gray-400 text-sm">
-                    그래프 영역 (추후 Chart 연동)
+                    <SignupApprovalChart  />
                 </div>
             </section>
 
