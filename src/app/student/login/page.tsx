@@ -1,8 +1,52 @@
+"use client"
+
 import Image from "next/image";
-import Button from "@/components/b2b/Button";
 import StudentButton from "@/components/student/StudentButton";
+import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import {useMutation} from "@apollo/client";
+import {SERVICE_ACCESS_LOGIN} from "@/graphql/student/auth/serviceAccess";
+import {useStudentAuth} from "@/contexts/student/StudentAuthContext";
 
 export default function LoginPage() {
+    const router = useRouter();
+    const [serviceKey, setServiceKey] = useState("");
+
+    // context 사용
+    const {isLoggedIn, login} = useStudentAuth();
+
+    const [serviceAccessLogin, {loading}] = useMutation(SERVICE_ACCESS_LOGIN);
+
+    const onLogin = async () => {
+        if(!serviceKey.trim()) {
+            alert("서비스 키를 입력해주세요.");
+            return;
+        }
+
+    try {
+        const {data} = await serviceAccessLogin({
+            variables: {
+                input: {
+                    decryptedKey: serviceKey.trim(),
+                },
+            },
+        });
+            if (data?.serviceAccessLogin.result) {
+                login();
+            } else {
+                alert ("유효하지 않은 서비스 키 입니다.");
+            }
+        } catch (e) {
+            alert("로그인에 실패했습니다.");
+        }
+    };
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            setServiceKey("");
+        }
+    }, [isLoggedIn]);
+
     return (
         <div
             className="
@@ -42,25 +86,52 @@ export default function LoginPage() {
                     수업 들어가기
                 </h2>
 
-                <input
-                    className="
-                        px-4 py-4 rounded-[18px]
-                        border-2 border-[#f1dada]
-                        bg-white
-                        text-center tracking-widest text-lg
-                        outline-none
-                        placeholder:text-[#bfa7a7]
-                        focus:border-[#d48c8c]
-                        focus:ring-2 focus:ring-[#d48c8c]/30
-                    "
-                    placeholder="서비스 키 입력"
-                />
-                
+                {/* 로그인 전 */}
+                {!isLoggedIn && (
+                    <>
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                onLogin();
+                            }}
+                            className="flex flex-col gap-5"
+                        >
+                            <input
+                                value={serviceKey}
+                                onChange={e => setServiceKey(e.target.value)}
+                                className="
+                                    px-4 py-4 rounded-[18px]
+                                    border-2 border-[#f1dada]
+                                    bg-white
+                                    text-center tracking-widest text-lg
+                                    outline-none
+                                    placeholder:text-[#bfa7a7]
+                                    focus:border-[#d48c8c]
+                                    focus:ring-2 focus:ring-[#d48c8c]/30
+                                "
+                                placeholder="서비스 키를 입력해주세요"
+                            />
 
-                <StudentButton>
-                    수업 시작하기
-                </StudentButton>
+                            <StudentButton
+                                type="submit"
+                                disabled={loading}
+                            >
+                                {loading ? "확인 중..." : "수업 시작하기"}
+                            </StudentButton>
+                        </form>
+                    </>
+                )}
 
+                {/* 로그인 후 */}
+                {isLoggedIn && (
+                    <>
+                        <StudentButton
+                            onClick={() => router.push("/student")}
+                        >
+                            수업하러 가기
+                        </StudentButton>
+                    </>
+                )}
             </div>
         </div>
     );
