@@ -1,8 +1,26 @@
 // src/components/common/StudentHeader.tsx
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
+import {useStudentAuth} from "@/contexts/student/StudentAuthContext";
+import StudentButton from "@/components/student/StudentButton";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
 
-export default function StudentHeader() {
+export default function StudentHeader(){
+    const router = useRouter();
+    const [serviceKey, setServiceKey] = useState("");
+
+    // context 사용
+    const {isLoggedIn, login, logout} = useStudentAuth();
+
+    const onLogout = () => {
+        logout();
+        router.push("/student/login");
+    };
+
+
     return (
         <header
             className="
@@ -30,37 +48,37 @@ export default function StudentHeader() {
 
             {/* 네비 */}
             <nav className="flex items-center">
-                <Link href="/student/login">
-                    <button
-                        className="
-                            ml-6
-                            text-md
-                            font-semibold
-                            text-[#4a3b3b]
-                            hover:text-[#d48c8c]
-                            transition
-                            cursor-pointer
-                        "
-                    >
-                        로그인
-                    </button>
-                </Link>
+                {!isLoggedIn && (
+                    <Link href="/student/login">
+                        <StudentButton className="px-4 ml-6 font-semibold text-[#4a3b3b]">
+                            로그인
+                        </StudentButton>
+                    </Link>
+                )}
 
-                <Link href="/student/myPage">
-                    <button
-                        className="
-                            ml-6
-                            text-md
-                            font-semibold
-                            text-[#4a3b3b]
-                            hover:text-[#d48c8c]
-                            transition
-                            cursor-pointer
-                        "
-                    >
-                        내 학습방
-                    </button>
-                </Link>
+                {isLoggedIn && (
+                    <div className="flex items-center gap-3 ml-6">
+                        <Link href="/student/myPage">
+                            <StudentButton className="px-4 font-semibold text-[#4a3b3b]">
+                                내 학습방
+                            </StudentButton>
+                        </Link>
+
+                        <StudentButton
+                            onClick={onLogout}
+                            className="
+                                px-4
+                                text-sm
+                                text-[#8a6f6f]
+                                hover:text-[#d48c8c]
+                            "
+                            variant="ghost"
+                        >
+                            로그아웃
+                        </StudentButton>
+                    </div>
+                )}
+
             </nav>
         </header>
     );

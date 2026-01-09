@@ -80,9 +80,7 @@ export default function PlanPage() {
                 구독 및 결제 내역
             </h1>
 
-            {/* ===================== */}
-            {/* 1. 현재 구독 플랜 */}
-            {/* ===================== */}
+            {/* 현재 구독 플랜 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm space-y-5">
                 <h2 className="font-medium text-[#19344e]">
                     현재 구독 플랜
@@ -146,9 +144,7 @@ export default function PlanPage() {
                 )}
             </div>
 
-            {/* ===================== */}
-            {/* 2. 결제 내역 */}
-            {/* ===================== */}
+            {/* 결제 내역 확인 */}
             <div className="space-y-4">
                 <h2 className="font-medium text-[#19344e]">
                     결제 내역
@@ -215,19 +211,19 @@ export default function PlanPage() {
                                         )}
                                     </div>
 
-                                    {/* 오른쪽 상태 */}
+                                    {/* 오른쪽 상태표시 */}
                                     <div className="flex items-start sm:items-end">
-                            <span
-                                className={`inline-block px-3 py-1 rounded-full text-sm ${
-                                    payment.payStatus === "PAID"
-                                        ? "bg-green-100 text-green-700"
-                                        : "bg-gray-100 text-gray-500"
-                                }`}
-                            >
-                                {payment.payStatus === "PAID"
-                                    ? "결제 완료"
-                                    : "결제 취소"}
-                            </span>
+                                        <span
+                                            className={`inline-block px-3 py-1 rounded-full text-sm ${
+                                                payment.payStatus === "PAID"
+                                                    ? "bg-green-100 text-green-700"
+                                                    : "bg-gray-100 text-gray-500"
+                                            }`}
+                                        >
+                                            {payment.payStatus === "PAID"
+                                                ? "결제 완료"
+                                                : "결제 취소"}
+                                        </span>
                                     </div>
                                 </div>
                             </li>

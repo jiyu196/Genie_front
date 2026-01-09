@@ -12,32 +12,54 @@ export default function IntroLayout({
                                         character,
                                         bubbleText,
                                         onNext,
-                                        nextLabel = "계속하기",
                                     }: IntroLayoutProps) {
     return (
-        <div className="flex items-center justify-center gap-16 py-24 bg-white">
+        <div className="relative z-10 h-full flex flex-col">
 
-            {/* 캐릭터 */}
-            <div>
+            {/* 중앙 캐릭터 */}
+            <div className="flex items-center justify-center flex-col gap-4 mt-24">
+                {/* 말풍선 */}
+                <div
+                    className="
+                        relative
+                        px-4 py-2
+                        bg-white
+                        border border-black/10
+                        rounded-lg
+                        text-sm
+                        shadow-sm
+                    "
+                >
+                    {bubbleText}
+                    <div
+                        className="
+                            absolute
+                            -bottom-1 left-1/2
+                            w-3 h-3
+                            bg-white
+                            border-r border-b border-black/10
+                            rotate-45
+                            -translate-x-1/2
+                        "
+                    />
+                </div>
+
                 {character}
             </div>
 
-            {/* 설명 */}
-            <div className="max-w-md space-y-8">
-                <div className="text-2xl font-bold text-[#19344e]">
-                    단어로 이야기를 만들어볼까?
-                </div>
-
-                <div className="px-6 py-4 bg-white rounded-xl shadow text-base leading-relaxed">
-                    {bubbleText}
-                </div>
-
+            {/* 하단 버튼 */}
+            <div className="mt-auto pb-10 flex justify-center">
                 <StudentButton
                     onClick={onNext}
-                    variant="primary"
-                    className="px-10 py-4 text-base"
+                    className="
+                        px-6 py-2
+                        rounded-full
+                        bg-[#7C5C5C]
+                        text-white
+                        text-sm
+                    "
                 >
-                    {nextLabel}
+                    계속하기
                 </StudentButton>
             </div>
         </div>
