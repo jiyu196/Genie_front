@@ -14,11 +14,11 @@ export const sidebarMenu = [
         ],
     },
     {
-        title: "학생관리",
+        title: "서비스 계정",
         items: [
             {
-                label: "Genie툰 학생계정 관리",
-                href: "/b2b/mypage/students",
+                label: "발급된 Genie튠 서비스계정",
+                href: "/b2b/mypage/serviceId",
             },
         ],
     },
