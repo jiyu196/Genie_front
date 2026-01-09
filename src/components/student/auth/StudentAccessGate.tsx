@@ -1,32 +1,28 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useStudentAuth} from "@/contexts/student/StudentAuthContext";
+import { useStudentAuth } from "@/contexts/student/StudentAuthContext";
 
-// 로그인 안한 사용자는 word, sentence 접근 불가-> 로그인 페이지로 이동
 export default function StudentAccessGate({
                                               children,
                                           }: {
     children: React.ReactNode;
 }) {
-    const auth  = useStudentAuth();
     const router = useRouter();
+    const { initialized, isLoggedIn, hasServiceAccess } = useStudentAuth();
 
-    if (!auth.initialized) return null;
+    useEffect(() => {
+        if (!initialized) return;
 
-    if (!auth.isLoggedIn) {
-        router.replace("/student/login");
-        return null;
-    }
+        // 로그인 안 됐거나 서비스 접근권한 없으면 로그인으로
+        if (!isLoggedIn || !hasServiceAccess) {
+            router.replace("/student/login");
+        }
+    }, [initialized, isLoggedIn, hasServiceAccess, router]);
 
-    if (
-        auth.memberStatus !== "APPROVED" ||
-        auth.subscriptionStatus !== "ACTIVE" ||
-        !auth.hasServiceAccess
-    ) {
-        router.replace("/student/access-denied");
-        return null;
-    }
+    if (!initialized) return null;
+    if (!isLoggedIn || !hasServiceAccess) return null;
 
     return <>{children}</>;
 }

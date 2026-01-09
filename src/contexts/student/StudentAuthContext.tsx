@@ -26,10 +26,17 @@ export function StudentAuthProvider({
     children: React.ReactNode;
 }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [initialized, setInitialized] = useState(true);
+    const [hasServiceAccess, setHasServiceAccess] = useState(false);
 
-    const login = () => setIsLoggedIn(true);
-    const logout = () => setIsLoggedIn(false);
+    const login = () => {
+        setIsLoggedIn(true);
+        setHasServiceAccess(true); // 로그인 성공 시 학습 가능
+    };
+
+    const logout = () => {
+        setIsLoggedIn(false);
+        setHasServiceAccess(false);
+    };
 
     return (
         <StudentAuthContext.Provider
@@ -41,10 +48,10 @@ export function StudentAuthProvider({
                 // 학습 권한
                 memberStatus: "PENDING",
                 subscriptionStatus: "NONE",
-                hasServiceAccess: false,
+                hasServiceAccess,
 
-                login: () => setIsLoggedIn(true),
-                logout: () => setIsLoggedIn(false),
+                login,
+                logout,
         }}
         >
             {children}
