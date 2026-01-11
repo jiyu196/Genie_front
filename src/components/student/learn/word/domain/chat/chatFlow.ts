@@ -1,71 +1,52 @@
-// 현재 몇 컷인지
-// 지금 입력 단계가 뭔지
-// 다음에 무슨 질문 던질지
-// 입력값 어떻게 해석할지
-
 export type ChatPhase =
-    | "CHARACTER"   // 캐릭터 묘사 (여기만 예외적으로 자유도 높음)
-    | "TIME"        // 언제
-    | "PLACE"       // 어디서
-    | "ACTION"      // 무엇을
-    | "STYLE"       // 어떻게 / 분위기
-    | "CUT_RESULT"     // 컷 하나 완성 (작성 단어 + 이미지 + 재생성)
-    | "FINAL_RESULT";  // 4컷 만화 + 최종 문장
+    | "CHARACTER"
+    | "TIME"
+    | "PLACE"
+    | "ACTION"
+    | "STYLE";
 
-export function getPrompt(
-    phase: ChatPhase,
-    currentIndex: number
-): string {
+export function getPrompt(phase: ChatPhase, index: number): string {
+    switch (phase) {
+        case "CHARACTER":
+            return (
+                "🧚‍♀️ 이야기 주인공을 만들어볼까?\n" +
+                "사람, 동물, 요정처럼 떠오르는 모습을 단어로 말해줘 😊\n" +
+                "예) 빨간 모자 소녀, 반짝이는 금발머리 인어공주"
+            );
 
-    if (phase === "CHARACTER") {
-        return (
-            "이야기에 나올 주인공을 만들어보자!\n" +
-            "사람, 동물, 요정처럼 떠오르는 모습들을 단어로 알려줘 😊\n" +
-            "예: 빨간 모자 소녀, 반짝이는 인어공주"
-        );
+        case "TIME":
+            return (
+                `⏰ ${index}번째 장면이야!\n` +
+                "언제 일어나는 이야기일까?\n" +
+                "시간을 단어로 골라줘!\n" +
+                "예) 아침, 밤, 비오는날"
+            );
+
+        case "PLACE":
+            return (
+                `🏰 ${index}번째 장면이야!\n` +
+                "어디에서 이야기가 펼쳐질까?\n" +
+                "장소를 단어로 말해줘 😊\n" +
+                "예) 바닷속, 숲속, 높은 성"
+            );
+
+        case "ACTION":
+            return (
+                `🎈 ${index}번째 장면이야!\n` +
+                "주인공은 지금 뭐 하고 있을까?\n" +
+                "하고 있는 모습을 단어로 말해줘!\n" +
+                "예) 달리고 있어, 노래하고 있어"
+            );
+
+        case "STYLE":
+            return (
+                `✨ ${index}번째 장면이야!\n` +
+                "이야기는 어떤 느낌이면 좋을까?\n" +
+                "느낌을 단어로 골라줘 😊\n" +
+                "예) 신나는, 신비로운, 따뜻한"
+            );
+
+        default:
+            return "";
     }
-
-    if (phase === "TIME") {
-        return (
-            `${currentIndex}번째 장면이야 🌙\n` +
-            "언제일까? 떠오르는 시간을 단어로 골라줘!\n" +
-            "예: 밤, 아침, 비 오는 날"
-        );
-    }
-
-    if (phase === "PLACE") {
-        return (
-            `${currentIndex}번째 장면이야 🏰\n` +
-            "어디에서 일어날까? 장소를 단어로 알려줘!\n" +
-            "예: 바닷속, 숲속, 높은 성"
-        );
-    }
-
-    if (phase === "ACTION") {
-        return (
-            `${currentIndex}번째 장면에서\n` +
-            "주인공이 무엇을 하고 있을까?\n" +
-            "짧은 행동 단어로 알려줘!\n" +
-            "예: 헤엄쳐, 뛰어가, 숨었어"
-        );
-    }
-
-    if (phase === "STYLE") {
-        return (
-            "그 장면은 어떤 느낌일까?\n" +
-            "분위기나 방법을 단어로 골라줘!\n" +
-            "예: 조용히, 신나게, 무섭게"
-        );
-    }
-
-    if (phase === "CUT_RESULT") {
-        return `${currentIndex}번째 장면이 완성됐어! 그림을 확인해볼까?`;
-    }
-
-    if (phase === "FINAL_RESULT") {
-        return "이야기가 완성됐어! 4컷 만화를 볼까?";
-    }
-
-
-    return "";
 }

@@ -73,6 +73,7 @@ export default function StudentMainPage() {
                                     rounded-[32px]
                                     flex flex-col items-center justify-center
                                     cursor-pointer
+                                    text-[#3b2d2d]
                                     shadow-[0_20px_40px_rgba(239,190,190,0.6)]
                                     hover:-translate-y-2
                                     hover:shadow-[0_30px_50px_rgba(239,190,190,0.7)]
@@ -98,6 +99,7 @@ export default function StudentMainPage() {
                                     className="
                                     w-72 h-40 bg-white
                                     rounded-[32px]
+                                    text-[#3b2d2d]
                                     flex flex-col items-center justify-center
                                     cursor-pointer
                                     shadow-[0_20px_40px_rgba(190,210,255,0.6)]

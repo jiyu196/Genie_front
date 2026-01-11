@@ -29,18 +29,12 @@ export default function WordLearnFlow() {
 
             {step === 'CHAT' && (
                     <div className="relative flex-1 min-h-0">
-                        {/* 캐릭터 */}
-                        <div className="absolute top-6 left-6 w-20 h-20 z-10">
-                            <BotCharacter expression="smile" />
-                        </div>
-
                         {/* 채팅 */}
-                        <div className="flex-1 h-full pt-28">
-                        <div className="flex-1 h-full pt-28">
+                        <div className="flex-1 h-full">
                             <ConversationStage />
                         </div>
                     </div>
-                </div>
+
             )}
         </div>
     );

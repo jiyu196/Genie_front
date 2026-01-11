@@ -105,6 +105,7 @@ export default function LoginPage() {
                                     bg-white
                                     text-center tracking-widest text-lg
                                     outline-none
+                                    text-[#3b2d2d]
                                     placeholder:text-[#bfa7a7]
                                     focus:border-[#d48c8c]
                                     focus:ring-2 focus:ring-[#d48c8c]/30
