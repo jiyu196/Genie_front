@@ -51,7 +51,7 @@ export default function MyPageHome() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <ActionLink title="기관 정보 관리" href="/b2b/mypage/organization" />
                 <ActionLink title="비밀번호 변경" href="/b2b/mypage/password" />
-                <ActionLink title="학생 관리" href="/b2b/mypage/students" />
+                <ActionLink title="학생 관리" href="/b2b/mypage/serviceId" />
                 <ActionLink title="구독 & 결제 관리" href="/b2b/mypage/plan" />
             </div>
         </section>

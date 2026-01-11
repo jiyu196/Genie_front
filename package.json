@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^3.9.0",
     "@portone/browser-sdk": "^0.1.2",
     "@reduxjs/toolkit": "^2.2.1",
+    "apollo-upload-client": "^17.0.0",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
     "framer-motion": "^11.3.0",
