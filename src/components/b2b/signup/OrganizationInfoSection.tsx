@@ -48,7 +48,7 @@ export default function OrganizationInfoSection({
 
                 <input
                     type="file"
-                    accept=".pdf,.jpg,.png"
+                    accept="image/*, .pdf"
                     className="auth-input cursor-pointer h-[44px] flex items-center file:h-full"
                     onChange={(e) =>
                         setBusinessFile?.(e.target.files?.[0] ?? null)
@@ -68,7 +68,7 @@ export default function OrganizationInfoSection({
 
                 <input
                     type="file"
-                    accept=".pdf,.jpg,.png"
+                    accept="image/*, .pdf"
                     className="auth-input cursor-pointer h-[44px] flex items-center file:h-full"
                     onChange={(e) =>
                         setEmploymentFile?.(e.target.files?.[0] ?? null)

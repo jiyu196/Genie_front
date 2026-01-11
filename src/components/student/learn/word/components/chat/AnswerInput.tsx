@@ -23,21 +23,23 @@ export default function AnswerInput({
     };
 
     return (
-        <div className="mt-6 rounded-2xl bg-[#fffdf9] p-4 shadow-sm">
-            <div className="flex items-center gap-3">
+        <div className="rounded-2xl bg-white p-4">
+
+        <div className="flex items-center gap-3">
                 <input
                     value={value}
                     onChange={e => setValue(e.target.value)}
                     placeholder={placeholder}
                     className="
-            flex-1
-            h-11
-            px-4
-            rounded-xl
-            border
-            text-sm
-            focus:outline-none
-          "
+                        flex-1
+                        h-11
+                        px-4
+                        rounded-xl
+                        border
+                        text-gray-800
+                        text-sm
+                        focus:outline-none
+                      "
                     onKeyDown={e => {
                         if (e.key === "Enter") {
                             e.preventDefault();

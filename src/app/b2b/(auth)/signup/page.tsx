@@ -82,6 +82,10 @@ export default function SignupRegisterPage() {
         return `${m}:${s.toString().padStart(2, "0")}`;
     };
 
+    // 사업자등록증, 재직증명서 파일 첨부
+    const [businessFile, setBusinessFile] = useState<File | null>(null);
+    const [employmentFile, setEmploymentFile] = useState<File | null>(null);
+
     // 로그인 ID로 사용할 이메일
 // - 이메일 인증 단계에서도 사용
     const [email, setEmail] = useState("");
@@ -116,8 +120,9 @@ export default function SignupRegisterPage() {
         isPasswordValid &&
         isTermsAgreed &&
         organizationName.trim().length > 0 &&
-        contactName.trim().length > 0;
-
+        contactName.trim().length > 0 &&
+        businessFile !== null &&
+        employmentFile !== null;
 
     // // 입력값 바뀌면 사업자 조회 다시 가능
     useEffect(() => {
@@ -284,6 +289,11 @@ export default function SignupRegisterPage() {
 
     // 회원가입 버튼
     const onSubmit = async () => {
+        if(!businessFile || !employmentFile) {
+            alert(("사업자등록증과 재직증명서를 모두 첨부해주세요."))
+            return;
+        }
+
         setIsSubmitting(true);
 
         try {
@@ -298,6 +308,9 @@ export default function SignupRegisterPage() {
                         organizationName,
                         contactName,
                         agreedTermsCategory,
+                        businessFile,
+                        employmentFile,
+
                     },
                 },
             });
@@ -383,6 +396,12 @@ export default function SignupRegisterPage() {
                     contactName={contactName}
                     setContactName={setContactName}
                     isBizVerified={isBizVerified}
+
+                    businessFile={businessFile}
+                    setBusinessFile={setBusinessFile}
+
+                    employmentFile={employmentFile}
+                    setEmploymentFile={setEmploymentFile}
                 />
 
             )}
