@@ -7,16 +7,19 @@ type Props = {
     onSend: (value: string) => void;
     placeholder?: string;
     buttonLabel?: string;
+    disabled?: boolean;
 };
 
 export default function AnswerInput({
                                         onSend,
                                         placeholder = "단어를 입력해줘",
                                         buttonLabel = "알려줄게!",
+                                        disabled = false,
                                     }: Props) {
     const [value, setValue] = useState("");
 
     const handleSend = () => {
+        if (disabled) return;
         if (!value.trim()) return;
         onSend(value);
         setValue("");
@@ -30,12 +33,14 @@ export default function AnswerInput({
                     value={value}
                     onChange={e => setValue(e.target.value)}
                     placeholder={placeholder}
+                    disabled={disabled}
                     className="
                         flex-1
                         h-11
                         px-4
                         rounded-xl
                         border
+                        border-[#6b4f4f]/50
                         text-gray-800
                         text-sm
                         focus:outline-none
@@ -50,13 +55,14 @@ export default function AnswerInput({
 
                 <StudentButton
                     onClick={handleSend}
+                    disabled={disabled}
                     className="
-            h-11
-            px-4
-            text-sm
-            rounded-xl
-            shrink-0
-          "
+                        h-11
+                        px-4
+                        text-sm
+                        rounded-xl
+                        shrink-0
+                      "
                 >
                     {buttonLabel}
                 </StudentButton>

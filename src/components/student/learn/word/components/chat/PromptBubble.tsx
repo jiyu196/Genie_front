@@ -84,7 +84,7 @@ export default function PromptBubble({ message, onButtonClick }: Props) {
                   leading-relaxed
                   ${
                     isBot
-                        ? 'bg-[#FFF8EE] text-[#5A4634]'
+                        ? 'bg-yellow-50 text-[#5A4634]'
                         : 'bg-[#FFD6D6] text-[#7A3A3A]'
                 }
                 `}

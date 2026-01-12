@@ -13,6 +13,8 @@ export const GET_ADMIN_MEMBERS = gql `
                 createdAt
                 registerStatus
                 rejectReason
+                businessLicenseUrl
+                employmentCertUrl
             }
             totalPages
             totalElements

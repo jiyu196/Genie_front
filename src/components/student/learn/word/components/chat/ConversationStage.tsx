@@ -7,6 +7,8 @@ import AnswerInput from "./AnswerInput";
 import { StoryWordsRequestDTO } from "@/graphql/student/story/types";
 import { GENERATE_STORY } from "@/graphql/student/story/generateStory";
 import { useMutation } from "@apollo/client";
+import StoryResult from "@/components/student/learn/word/components/chat/StoryResult";
+import TokenStatusBar from "@/components/student/learn/word/components/chat/TokenStatusBar";
 
 // 컷 하나에 사용된 단어 묶음
 type StoryWords = {
@@ -20,6 +22,13 @@ type ChatMessage = {
     sender: "bot" | "user";
     type: "text" | "button" | "image";
     content: string;
+};
+
+// 4컷 이미지 생성
+type StoryCut = {
+    words: string[];
+    imageUrl: string;
+    text: string;
 };
 
 export default function ConversationStage() {
@@ -38,15 +47,22 @@ export default function ConversationStage() {
     // generateStory 요청 시 accessIdCharacter로 전달
     const [characterWords, setCharacterWords] = useState<string[]>([]);
 
+    /// 컷 생성 토큰
+    const MAX_TOKENS = 20;
+    const [usedTokens, setUsedTokens] = useState(0);
+    // 토큰 끝났을때 막는 역할
+    const remainingTokens = MAX_TOKENS - usedTokens;
+
     // 이미 완성된 컷들 → 나중에 4컷 미리보기, 컷별 이미지 관리용
-    const [stories, setStories] = useState<StoryWordsRequestDTO[]>([]);
+    const [stories, setStories] = useState<StoryCut[]>([]);
 
     // 현재 컷을 만들기 위해 누적 중인 단어들
     // (TIME → PLACE → ACTION → STYLE 단계에서 계속 쌓임)
     const [currentWords, setCurrentWords] = useState<string[]>([]);
 
-    // 토큰 수 (컷 수 카운트 용도)
-    const [usedTokens, setUsedTokens] = useState(0);
+    // 4컷 webtoon groupId (UUID or number)
+    const [groupId, setGroupId] = useState<string | null>(null);
+
 
     // 다음에 완성될 컷 번호
     const currentIndex = stories.length + 1;
@@ -132,8 +148,12 @@ export default function ConversationStage() {
             // 4. STYLE 단계 종료 → 컷 하나 완성
             const completedWords = [...currentWords, ...words];
 
-            // 컷 수 증가
-            setUsedTokens(prev => prev + 1);
+            // groupId 없으면 최초 생성
+            let currentGroupId = groupId;
+            if (!currentGroupId) {
+                currentGroupId = crypto.randomUUID();
+                setGroupId(currentGroupId);
+            }
 
             // 이야기 생성중
             setMessages(prev => [
@@ -151,11 +171,15 @@ export default function ConversationStage() {
                     input: {
                         accessIdCharacter: characterWords,
                         originalContent: completedWords,
+                        webtoonGroupId: currentGroupId,
                     },
                 },
             });
 
             const result = response.data.generateStory;
+
+            // 컷 수 증가
+            setUsedTokens(prev => prev + 1);
 
             // 6. AI가 다듬은 문장 출력
             setMessages(prev => [
@@ -180,16 +204,60 @@ export default function ConversationStage() {
             }
 
             // 8. 컷 완료 처리
-            setStories(prev => [...prev, { words: completedWords }]);
+            setStories(prev => {
+                const nextStories = [
+                    ...prev,
+                    {
+                        words: completedWords,
+                        imageUrl: result.imageUrl,
+                        text: result.refinedContent,
+                    },
+                ];
+
+                if (nextStories.length >= 4) {
+                    setPhase("RESULT");
+                } else {
+                    setPhase("TIME");
+                }
+
+                return nextStories;
+            });
+
             setCurrentWords([]);
 
-            // 다음 컷 시작
-            setPhase("TIME");
         }
+    };
+
+    // 이미지 재생성
+    const regenerateImage = (cutIndex: number) => {
+        return generateStory({
+            variables: {
+                input: {
+                    accessIdCharacter: characterWords,
+                    originalContent: stories[cutIndex].words,
+                    webtoonGroupId: groupId,
+                },
+            },
+        });
     };
 
     return (
         <div className="flex flex-col h-full">
+            {/*남은 토큰 수*/}
+            <TokenStatusBar
+                remaining={MAX_TOKENS - usedTokens}
+                max={MAX_TOKENS}
+            />
+
+            {/*/!*이미지 재생성 및 최종 이미지*!/*/}
+            {/*{phase === "RESULT" && (*/}
+            {/*    <StoryResult*/}
+            {/*        characterWords={characterWords}*/}
+            {/*        stories={stories}*/}
+            {/*        onRegenerate={regenerateImage}*/}
+            {/*    />*/}
+            {/*)}*/}
+
             {/* 채팅 영역 */}
             <div className="flex-1 overflow-y-auto px-4 py-6">
                 <div className="flex gap-3">
@@ -209,15 +277,17 @@ export default function ConversationStage() {
                 <div ref={bottomRef} />
             </div>
 
-            {/* 입력창 (항상 하단) */}
-            <div className="border-t bg-white px-4 py-3">
-                <AnswerInput
-                    key={phase}
-                    onSend={handleSubmit}
-                    placeholder="단어로 입력해줘"
-                    buttonLabel="알려줄게!"
-                />
-            </div>
+
+            {/* 입력창 */}
+                <div className="border-t border-[#6b4f4f]/30 bg-white px-4 py-3">
+                    <AnswerInput
+                        disabled={remainingTokens <= 0}
+                        key={phase}
+                        onSend={handleSubmit}
+                        placeholder="단어로 입력해줘"
+                        buttonLabel="알려줄게!"
+                    />
+                </div>
         </div>
     );
 }
