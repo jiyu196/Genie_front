@@ -130,7 +130,7 @@ export default function PlanPage() {
                     </span>
 
                             {/* 👉 핵심 CTA 위치 */}
-                            <Link href="/b2b/mypage/students">
+                            <Link href="/b2b/mypage/serviceId">
                                 <Button>
                                     발급된 서비스 계정 확인하러가기
                                 </Button>

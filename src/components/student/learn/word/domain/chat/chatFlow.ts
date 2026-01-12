@@ -3,7 +3,8 @@ export type ChatPhase =
     | "TIME"
     | "PLACE"
     | "ACTION"
-    | "STYLE";
+    | "STYLE"
+    | "RESULT";
 
 export function getPrompt(phase: ChatPhase, index: number): string {
     switch (phase) {
@@ -46,6 +47,8 @@ export function getPrompt(phase: ChatPhase, index: number): string {
                 "예) 신나는, 신비로운, 따뜻한"
             );
 
+        case "RESULT":
+            return "";
         default:
             return "";
     }
