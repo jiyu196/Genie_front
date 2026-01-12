@@ -37,6 +37,12 @@ export default function MemberDetailModal({
     // 승인, 반려 후 상태변경
     const [isReopenConfirmOpen, setIsReopenConfirmOpen] = useState(false);
 
+    // 다운로드
+    const makeDownloadUrl = (url: string, filename: string) => {
+        const encoded = encodeURIComponent(filename);
+        return `${url}?response-content-disposition=attachment;filename*=UTF-8''${encoded}`;
+    };
+
     return (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
             <div className="max-w-[450px] w-full bg-white rounded-2xl shadow px-10 py-8 relative">
@@ -128,13 +134,25 @@ export default function MemberDetailModal({
                             <span>사업자등록증</span>
                             <div className="flex gap-2">
                                 {member.businessLicenseUrl ? (
-                                    <a
-                                        href={member.businessLicenseUrl}
-                                        target="_blank"
-                                        className="text-[#19344e] underline"
-                                    >
-                                        미리보기
-                                    </a>
+                                    <>
+                                        <a
+                                            href={member.businessLicenseUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#19344e] underline"
+                                        >
+                                            미리보기
+                                        </a>
+
+                                        <a
+                                            href={member.businessLicenseUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-gray-600 underline"
+                                        >
+                                            다운로드
+                                        </a>
+                                    </>
                                 ) : (
                                     <span className="text-gray-400">
                                         파일 없음
@@ -147,13 +165,25 @@ export default function MemberDetailModal({
                             <span>재직증명서</span>
                             <div className="flex gap-2">
                                 {member.employmentCertUrl ? (
-                                    <a
-                                        href={member.employmentCertUrl}
-                                        target="_blank"
-                                        className="text-[#19344e] underline"
-                                    >
-                                        미리보기
-                                    </a>
+                                    <>
+                                        <a
+                                            href={member.businessLicenseUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[#19344e] underline"
+                                        >
+                                            미리보기
+                                        </a>
+
+                                        <a
+                                            href={member.businessLicenseUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-gray-600 underline"
+                                        >
+                                            다운로드
+                                        </a>
+                                    </>
                                 ) : (
                                     <span className="text-gray-400">
                                         파일 없음
