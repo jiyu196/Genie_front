@@ -5,6 +5,13 @@ import {useAdminDashboard} from "@/hook/admin/useAdminDashboard";
 import { useRouter } from "next/navigation";
 import StatusBadge from "@/components/admin/StatusBadge";
 import SignupApprovalChart from "@/components/admin/SignupApprovalChart";
+import {useQuery} from "@apollo/client";
+import {GET_ALL_SALES} from "@/graphql/admin/getAdminSales";
+
+type Sale = {
+    amount: number;
+};
+
 
 export default function AdminDashboardPage() {
     const router = useRouter();
@@ -16,6 +23,53 @@ export default function AdminDashboardPage() {
         recentPending,
     } = useAdminDashboard();
 
+    // 날짜
+    const now = new Date();
+
+    const startOfThisMonth = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1,
+        0,
+        0,
+        0
+    )
+        .toISOString()
+        .slice(0, 19); // ⬅️ 핵심 (Z 제거)
+
+    const endOfThisMonth = new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        0,
+        23,
+        59,
+        59
+    )
+        .toISOString()
+        .slice(0, 19);
+
+
+    // 총 매출
+    const { data } = useQuery(GET_ALL_SALES, {
+        variables: {
+            input: {
+                page: 1,
+                size: 1000, // 충분히 크게
+                salesSearchCondition: {
+                    payStatus: "PAID",
+                    from: startOfThisMonth,
+                    to: endOfThisMonth,
+                },
+            },
+        },
+    });
+
+    // 합계
+    const thisMonthSales =
+        data?.getAllSales?.content.reduce(
+            (sum: number, sale: Sale) => sum + sale.amount,
+            0
+        ) ?? 0;
 
     if (loading) {
         return <div className="p-6 text-sm text-gray-400">로딩 중...</div>;
@@ -51,7 +105,11 @@ export default function AdminDashboardPage() {
                     value={String(rejectedCount)}
                     onClick={() => router.push("/admin/members?registerStatus=REJECTED")}
                 />
-                <DashboardCard title="이번 달 매출" value="₩4,200,000" />
+                <DashboardCard
+                    title="이번 달 매출"
+                    value={`₩${thisMonthSales.toLocaleString()}`}
+                />
+
             </section>
 
             {/* 그래프 자리 */}
@@ -60,7 +118,7 @@ export default function AdminDashboardPage() {
                     가입 / 승인 추이
                 </h2>
                 <div className="h-[220px] flex items-center justify-center text-gray-400 text-sm">
-                    <SignupApprovalChart  />
+                    <SignupApprovalChart members={recentPending}/>
                 </div>
             </section>
 
