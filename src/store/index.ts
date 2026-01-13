@@ -1,10 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 import authReducer from "./slice/authSlice"
+import studentAuthReducer from "./slice/studentAuthSlice";
 
 
 export const store = configureStore({
     reducer: {
-        auth: authReducer,
+        auth: authReducer,  // b2b 인증
+        studentAuth: studentAuthReducer, // 학생 인증
     },
 });
 
