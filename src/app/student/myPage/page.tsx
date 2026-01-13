@@ -1,84 +1,103 @@
-import StudentButton from "@/components/student/StudentButton";
+"use client";
 
-type Work = {
-    id: number;
-    sentence: string;
-    images: string[]; // 나중에 AI 이미지 URL 배열
+import { useRouter } from "next/navigation";
+import { useQuery } from "@apollo/client";
+import StudentButton from "@/components/student/StudentButton";
+import { GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
+
+type WebtoonCut = {
+    imageUrl: string;
 };
 
-const mockWorks: Work[] = [
-    {
-        id: 1,
-        sentence: "토끼가 숲에서 친구들과 즐겁게 놀았어요",
-        images: ["", "", "", ""], // 최대 4컷
-    },
-    {
-        id: 2,
-        sentence: "용감한 고양이가 별을 찾아 떠났어요",
-        images: ["", ""], // 2컷도 가능
-    },
-];
+type WebtoonGroup = {
+    webtoonGroupId: string;
+    title: string;
+    cuts: WebtoonCut[];
+};
 
-export default function StudentMyWorksPage() {
+export default function StudentMyPage() {
+    const router = useRouter();
+
+    const { data, loading, error } = useQuery(GET_MY_WEBTOON, {
+        variables: {
+            input: {
+                page: 1,
+                size: 6,
+            },
+        },
+        fetchPolicy: "no-cache",
+    });
+
+    if (loading) {
+        return <div className="text-center py-20">불러오는 중...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center py-20">에러 발생 😢</div>;
+    }
+
+    const works: WebtoonGroup[] =
+        data?.getWebtoonPage?.content ?? [];
+
     return (
-        <div
-            className="
-        min-h-screen
-        px-6 py-16
-        bg-gradient-to-b
-        from-[#e6f2ff]
-        via-[#fde7f3]
-        to-[#fff3df]
-      "
-        >
+        <div className="min-h-screen px-6 py-16 bg-gradient-to-b from-[#e6f2ff] via-[#fde7f3] to-[#fff3df]">
             <div className="max-w-7xl mx-auto grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-                {mockWorks.map((work) => (
+                {/* 만들어진 이야기 없을 때 */}
+                {works.length === 0 && (
+                    <div className="col-span-full flex flex-col items-center justify-center py-24 text-center">
+                        <p className="text-lg font-bold text-[#3b2d2d] mb-3">
+                            아직 만들어진 이야기가 없어요 🌱
+                        </p>
+                        <p className="text-sm text-gray-500 mb-6">
+                            단어로 이야기를 만들어볼까요?
+                        </p>
+                        <StudentButton
+                            className="px-6 py-3"
+                            onClick={() => router.push("/student")}
+                        >
+                            이야기 만들러 가기
+                        </StudentButton>
+                    </div>
+                )}
+                {works.map((work) => (
                     <div
-                        key={work.id}
+                        key={work.webtoonGroupId}
+                        onClick={() =>
+                            router.push(`/student/mypage/${work.webtoonGroupId}`)
+                        }
                         className="
-              bg-white
-              rounded-[36px]
-              px-8 py-8
-              flex flex-col
-              shadow-[0_20px_40px_rgba(0,0,0,0.08)]
-            "
+                            cursor-pointer
+                            bg-white
+                            rounded-[36px]
+                            px-8 py-8
+                            flex flex-col
+                            shadow-[0_20px_40px_rgba(0,0,0,0.08)]
+                        "
                     >
                         {/* 문장 */}
-                        <h3 className="text-center text-lg font-extrabold text-[#3b2d2d] mb-5 leading-snug">
-                            {work.sentence}
+                        <h3 className="text-center text-lg font-extrabold text-[#3b2d2d] mb-5">
+                            {work.title}
                         </h3>
 
-                        {/* 만화 프레임 */}
-                        <div
-                            className={`
-                grid gap-3 mb-6
-                ${
-                                work.images.length <= 2
-                                    ? "grid-cols-2"
-                                    : "grid-cols-2"
-                            }
-              `}
-                        >
-                            {work.images.map((_, idx) => (
+                        {/* 미리보기 컷 */}
+                        <div className="grid grid-cols-2 gap-3 mb-6">
+                            {work.cuts.map((cut, idx) => (
                                 <div
                                     key={idx}
-                                    className="
-                    aspect-square
-                    rounded-[18px]
-                    bg-[#f3f1f1]
-                    flex items-center justify-center
-                    text-sm text-[#9c8f8f]
-                  "
+                                    className="aspect-square rounded-[18px] overflow-hidden bg-[#f3f1f1]"
                                 >
-                                    이미지 {idx + 1}
+                                    <img
+                                        src={cut.imageUrl}
+                                        alt={`컷 ${idx + 1}`}
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
                             ))}
                         </div>
 
-                        {/* 버튼 */}
                         <div className="mt-auto flex justify-center">
                             <StudentButton className="px-4 py-2">
-                                이미지 다운로드
+                                크게 보기
                             </StudentButton>
                         </div>
                     </div>

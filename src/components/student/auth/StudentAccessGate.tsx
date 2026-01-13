@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useStudentAuth } from "@/contexts/student/StudentAuthContext";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/store";
 
 export default function StudentAccessGate({
                                               children,
@@ -10,19 +11,22 @@ export default function StudentAccessGate({
     children: React.ReactNode;
 }) {
     const router = useRouter();
-    const { initialized, isLoggedIn, hasServiceAccess } = useStudentAuth();
+
+    const { initialized, isLoggedIn } = useSelector(
+        (state: RootState) => state.studentAuth
+    );
 
     useEffect(() => {
         if (!initialized) return;
 
-        // 로그인 안 됐거나 서비스 접근권한 없으면 로그인으로
-        if (!isLoggedIn || !hasServiceAccess) {
+        // 로그인 안 됐으면 로그인 페이지로
+        if (!isLoggedIn) {
             router.replace("/student/login");
         }
-    }, [initialized, isLoggedIn, hasServiceAccess, router]);
+    }, [initialized, isLoggedIn, router]);
 
     if (!initialized) return null;
-    if (!isLoggedIn || !hasServiceAccess) return null;
+    if (!isLoggedIn) return null;
 
     return <>{children}</>;
 }

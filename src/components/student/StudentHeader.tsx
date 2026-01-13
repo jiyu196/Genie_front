@@ -3,23 +3,27 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {useStudentAuth} from "@/contexts/student/StudentAuthContext";
 import StudentButton from "@/components/student/StudentButton";
-import {useState} from "react";
 import {useRouter} from "next/navigation";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "@/store";
+import {studentLogoutThunk} from "@/store/thunk/studentAuthThunk";
 
 export default function StudentHeader(){
     const router = useRouter();
-    const [serviceKey, setServiceKey] = useState("");
+    const dispatch = useDispatch<AppDispatch>();
 
-    // context 사용
-    const {isLoggedIn, login, logout} = useStudentAuth();
+    const {isLoggedIn,initialized } = useSelector(
+        (state: RootState) => state.studentAuth
+    );
 
-    const onLogout = () => {
-        logout();
+    // 인증 초기화 전일때 아무것도 렌더링 하지 않음.
+    if (!initialized) return null;
+
+    const onLogout = async () => {
+        await dispatch(studentLogoutThunk());
         router.push("/student/login");
     };
-
 
     return (
         <header
@@ -58,7 +62,7 @@ export default function StudentHeader(){
 
                 {isLoggedIn && (
                     <div className="flex items-center gap-3 ml-6">
-                        <Link href="/student/myPage">
+                        <Link href="/student/mypage">
                             <StudentButton className="px-4 font-semibold text-[#4a3b3b]">
                                 내 학습방
                             </StudentButton>
@@ -71,14 +75,13 @@ export default function StudentHeader(){
                                 text-sm
                                 text-[#8a6f6f]
                                 hover:text-[#d48c8c]
-                            "
+                              "
                             variant="ghost"
                         >
                             로그아웃
                         </StudentButton>
                     </div>
                 )}
-
             </nav>
         </header>
     );

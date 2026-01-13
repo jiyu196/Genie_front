@@ -3,49 +3,32 @@
 import Image from "next/image";
 import StudentButton from "@/components/student/StudentButton";
 import {useRouter} from "next/navigation";
-import {useEffect, useState} from "react";
-import {useMutation} from "@apollo/client";
-import {SERVICE_ACCESS_LOGIN} from "@/graphql/student/auth/serviceAccess";
-import {useStudentAuth} from "@/contexts/student/StudentAuthContext";
+import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "@/store";
+import {studentLoginThunk} from "@/store/thunk/studentAuthThunk";
 
 export default function LoginPage() {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
+
+    const { isLoggedIn, loading } = useSelector(
+        (state: RootState) => state.studentAuth
+    );
+
     const [serviceKey, setServiceKey] = useState("");
-
-    // context 사용
-    const {isLoggedIn, login} = useStudentAuth();
-
-    const [serviceAccessLogin, {loading}] = useMutation(SERVICE_ACCESS_LOGIN);
+    const [error, setError] = useState("");
 
     const onLogin = async () => {
-        if(!serviceKey.trim()) {
-            alert("서비스 키를 입력해주세요.");
-            return;
-        }
+        setError("");
+        const res = await dispatch(studentLoginThunk(serviceKey));
 
-    try {
-        const {data} = await serviceAccessLogin({
-            variables: {
-                input: {
-                    decryptedKey: serviceKey.trim(),
-                },
-            },
-        });
-            if (data?.serviceAccessLogin.result) {
-                login();
-            } else {
-                alert ("유효하지 않은 서비스 키 입니다.");
-            }
-        } catch (e) {
-            alert("로그인에 실패했습니다.");
+        if (studentLoginThunk.fulfilled.match(res)) {
+            router.push("/student");
+        } else {
+            setError("서비스 키가 올바르지 않습니다.");
         }
     };
-
-    useEffect(() => {
-        if (!isLoggedIn) {
-            setServiceKey("");
-        }
-    }, [isLoggedIn]);
 
     return (
         <div
@@ -56,19 +39,18 @@ export default function LoginPage() {
                 from-[#e6f2ff]
                 via-[#fde7f3]
                 to-[#fff3df]
-            "
+              "
         >
-
             {/* 로그인 카드 */}
             <div
                 className="
-                    relative z-10
-                    w-[420px]
-                    bg-white/90 backdrop-blur
-                    rounded-[32px]
-                    px-9 py-12
-                    flex flex-col gap-5
-                    shadow-[0_30px_60px_rgba(239,190,190,0.45)]
+                  relative z-10
+                  w-[420px]
+                  bg-white/90 backdrop-blur
+                  rounded-[32px]
+                  px-9 py-12
+                  flex flex-col gap-5
+                  shadow-[0_30px_60px_rgba(239,190,190,0.45)]
                 "
             >
                 {/* 캐릭터 */}
@@ -88,51 +70,46 @@ export default function LoginPage() {
 
                 {/* 로그인 전 */}
                 {!isLoggedIn && (
-                    <>
-                        <form
-                            onSubmit={(e) => {
-                                e.preventDefault();
-                                onLogin();
-                            }}
-                            className="flex flex-col gap-5"
-                        >
-                            <input
-                                value={serviceKey}
-                                onChange={e => setServiceKey(e.target.value)}
-                                className="
-                                    px-4 py-4 rounded-[18px]
-                                    border-2 border-[#f1dada]
-                                    bg-white
-                                    text-center tracking-widest text-lg
-                                    outline-none
-                                    text-[#3b2d2d]
-                                    placeholder:text-[#bfa7a7]
-                                    focus:border-[#d48c8c]
-                                    focus:ring-2 focus:ring-[#d48c8c]/30
-                                "
-                                placeholder="서비스 키를 입력해주세요"
-                            />
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            onLogin();
+                        }}
+                        className="flex flex-col gap-5"
+                    >
+                        <input
+                            value={serviceKey}
+                            onChange={(e) => setServiceKey(e.target.value)}
+                            className="
+                                px-4 py-4 rounded-[18px]
+                                border-2 border-[#f1dada]
+                                bg-white
+                                text-center tracking-widest text-lg
+                                outline-none
+                                text-[#3b2d2d]
+                                placeholder:text-[#bfa7a7]
+                                focus:border-[#d48c8c]
+                                focus:ring-2 focus:ring-[#d48c8c]/30
+                              "
+                            placeholder="서비스 키를 입력해주세요"
+                        />
 
-                            <StudentButton
-                                type="submit"
-                                disabled={loading}
-                            >
-                                {loading ? "확인 중..." : "수업 시작하기"}
-                            </StudentButton>
-                        </form>
-                    </>
-                )}
+                        {error && (
+                            <p className="text-sm text-red-500 text-center">{error}</p>
+                        )}
 
-                {/* 로그인 후 */}
-                {isLoggedIn && (
-                    <>
-                        <StudentButton
-                            onClick={() => router.push("/student")}
-                        >
-                            수업하러 가기
+                        <StudentButton type="submit" disabled={loading}>
+                            {loading ? "확인 중..." : "수업 시작하기"}
                         </StudentButton>
-                    </>
+                    </form>
                 )}
+
+                {/*/!* 로그인 후 *!/*/}
+                {/*{isLoggedIn && (*/}
+                {/*    <StudentButton onClick={() => router.push("/student")}>*/}
+                {/*        수업하러 가기*/}
+                {/*    </StudentButton>*/}
+                {/*)}*/}
             </div>
         </div>
     );
