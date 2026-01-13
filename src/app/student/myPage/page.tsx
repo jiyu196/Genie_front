@@ -7,6 +7,7 @@ import { GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
 
 type WebtoonCut = {
     imageUrl: string;
+    createdAt: string;
 };
 
 type WebtoonGroup = {
@@ -18,7 +19,7 @@ type WebtoonGroup = {
 export default function StudentMyPage() {
     const router = useRouter();
 
-    const { data, loading, error } = useQuery(GET_MY_WEBTOON, {
+    const {data, loading, error} = useQuery(GET_MY_WEBTOON, {
         variables: {
             input: {
                 page: 1,
@@ -59,13 +60,20 @@ export default function StudentMyPage() {
                         </StudentButton>
                     </div>
                 )}
-                {works.map((work) => (
-                    <div
-                        key={work.webtoonGroupId}
-                        onClick={() =>
-                            router.push(`/student/mypage/${work.webtoonGroupId}`)
-                        }
-                        className="
+                {works.map((work) => {
+                    const sortedCuts = [...work.cuts].sort(
+                        (a, b) =>
+                            new Date(a.createdAt).getTime() -
+                            new Date(b.createdAt).getTime()
+                    );
+
+                    return (
+                        <div
+                            key={work.webtoonGroupId}
+                            onClick={() =>
+                                router.push(`/student/mypage/${work.webtoonGroupId}`)
+                            }
+                            className="
                             cursor-pointer
                             bg-white
                             rounded-[36px]
@@ -73,35 +81,34 @@ export default function StudentMyPage() {
                             flex flex-col
                             shadow-[0_20px_40px_rgba(0,0,0,0.08)]
                         "
-                    >
-                        {/* 문장 */}
-                        <h3 className="text-center text-lg font-extrabold text-[#3b2d2d] mb-5">
-                            {work.title}
-                        </h3>
+                        >
+                            <h3 className="text-center text-lg font-extrabold text-[#3b2d2d] mb-5">
+                                {work.title}
+                            </h3>
 
-                        {/* 미리보기 컷 */}
-                        <div className="grid grid-cols-2 gap-3 mb-6">
-                            {work.cuts.map((cut, idx) => (
-                                <div
-                                    key={idx}
-                                    className="aspect-square rounded-[18px] overflow-hidden bg-[#f3f1f1]"
-                                >
-                                    <img
-                                        src={cut.imageUrl}
-                                        alt={`컷 ${idx + 1}`}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                            <div className="grid grid-cols-2 gap-3 mb-6">
+                                {sortedCuts.map((cut, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="aspect-square rounded-[18px] overflow-hidden bg-[#f3f1f1]"
+                                    >
+                                        <img
+                                            src={cut.imageUrl}
+                                            alt={`컷 ${idx + 1}`}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
 
-                        <div className="mt-auto flex justify-center">
-                            <StudentButton className="px-4 py-2">
-                                크게 보기
-                            </StudentButton>
+                            <div className="mt-auto flex justify-center">
+                                <StudentButton className="px-4 py-2">
+                                    크게 보기
+                                </StudentButton>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

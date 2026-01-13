@@ -4,11 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import { ChatPhase, getPrompt } from "@/components/student/learn/word/domain/chat/chatFlow";
 import PromptBubble from "./PromptBubble";
 import AnswerInput from "./AnswerInput";
-import { StoryWordsRequestDTO } from "@/graphql/student/story/types";
 import { GENERATE_STORY } from "@/graphql/student/story/generateStory";
 import { useMutation } from "@apollo/client";
-import StoryResult from "@/components/student/learn/word/components/chat/StoryResult";
 import TokenStatusBar from "@/components/student/learn/word/components/chat/TokenStatusBar";
+import {useRouter} from "next/navigation";
 
 // 컷 하나에 사용된 단어 묶음
 type StoryWords = {
@@ -19,9 +18,10 @@ type StoryWords = {
 // - text  : 일반 텍스트 말풍선
 // - image : AI가 생성한 이미지(첨부파일)
 type ChatMessage = {
+    id: string;
     sender: "bot" | "user";
-    type: "text" | "button" | "image";
-    content: string;
+    type: "text" | "button" | "image" | "image-loading" | "image-failed";
+    content?: string;
 };
 
 // 4컷 이미지 생성
@@ -32,7 +32,9 @@ type StoryCut = {
 };
 
 export default function ConversationStage() {
-    const [generateStory, { loading }] = useMutation(GENERATE_STORY);
+    const router = useRouter();
+    const [generateStory] = useMutation(GENERATE_STORY, { errorPolicy: "all"});
+
 
     // 현재 대화 단계 (캐릭터 → 시간 → 장소 → 행동 → 스타일)
     const [phase, setPhase] = useState<ChatPhase>("CHARACTER");
@@ -99,20 +101,23 @@ export default function ConversationStage() {
         setMessages(prev => [
             ...prev,
             {
+                id: crypto.randomUUID(),
                 sender: "bot",
                 type: "text",
                 content: nextPrompt,
             },
+
         ]);
     }, [phase, currentIndex]);
 
 
     // 사용자가 입력했을 때 호출되는 함수
     const handleSubmit = async (value: string) => {
-        // 1. 사용자 입력을 즉시 채팅에 표시
+        // 사용자 입력 메시지
         setMessages(prev => [
             ...prev,
             {
+                id: crypto.randomUUID(),
                 sender: "user",
                 type: "text",
                 content: value,
@@ -121,112 +126,178 @@ export default function ConversationStage() {
 
         const words = splitWords(value);
 
-        // 2. 캐릭터 단계
-        // 캐릭터 단어를 저장하고 다음 단계로 이동
         if (phase === "CHARACTER") {
             setCharacterWords(words);
             setPhase("TIME");
             return;
         }
 
-        // 3. 컷 구성 단계
-        // TIME → PLACE → ACTION → STYLE 순서
         if (
             phase === "TIME" ||
             phase === "PLACE" ||
             phase === "ACTION" ||
             phase === "STYLE"
         ) {
-            // 현재 컷 단어 누적
             setCurrentWords(prev => [...prev, ...words]);
 
-            // 다음 단계로 이동
             if (phase === "TIME") return setPhase("PLACE");
             if (phase === "PLACE") return setPhase("ACTION");
             if (phase === "ACTION") return setPhase("STYLE");
 
-            // 4. STYLE 단계 종료 → 컷 하나 완성
             const completedWords = [...currentWords, ...words];
 
-            // groupId 없으면 최초 생성
             let currentGroupId = groupId;
             if (!currentGroupId) {
                 currentGroupId = crypto.randomUUID();
                 setGroupId(currentGroupId);
             }
 
-            // 이야기 생성중
+            // 로딩 메시지 추가
+            const loadingMessageId = crypto.randomUUID();
+
             setMessages(prev => [
                 ...prev,
                 {
+                    id: loadingMessageId,
                     sender: "bot",
-                    type: "text",
-                    content: "🎨 이야기를 그리고 있어요… 잠깐만 기다려줘!"
-                }
+                    type: "image-loading",
+                },
             ]);
 
-            // 5. AI 스토리 + 이미지 생성 요청
-            const response = await generateStory({
-                variables: {
-                    input: {
-                        accessIdCharacter: characterWords,
-                        originalContent: completedWords,
-                        webtoonGroupId: currentGroupId,
+            let response;
+
+            try {
+                response = await generateStory({
+                    variables: {
+                        input: {
+                            accessIdCharacter: characterWords,
+                            originalContent: completedWords,
+                            webtoonGroupId: currentGroupId,
+                        },
                     },
-                },
-            });
+                });
+            } catch (e) {
+                // 네트워크 오류
+                setMessages(prev =>
+                    prev.map(msg =>
+                        msg.id === loadingMessageId
+                            ? {...msg, type: "image-failed"}
+                            : msg
+                    )
+                );
 
-            const result = response.data.generateStory;
-
-            // 컷 수 증가
-            setUsedTokens(prev => prev + 1);
-
-            // 6. AI가 다듬은 문장 출력
-            setMessages(prev => [
-                ...prev,
-                {
-                    sender: "bot",
-                    type: "text",
-                    content: result.refinedContent,
-                },
-            ]);
-
-            // 7. AI 이미지가 있으면 첨부파일로 출력
-            if (result.imageUrl) {
                 setMessages(prev => [
                     ...prev,
                     {
+                        id: crypto.randomUUID(),
                         sender: "bot",
-                        type: "image",
-                        content: result.imageUrl,
+                        type: "text",
+                        content: "지금은 그림을 만들 수 없었어. 잠시 후 다시 해볼까?",
                     },
                 ]);
+
+                setUsedTokens(prev => prev + 1);
+                setPhase("TIME");
+                setCurrentWords([]);
+                return;
             }
 
-            // 8. 컷 완료 처리
+            // 정책 위배 등의 오류
+            if (response.errors && response.errors.length > 0) {
+                setMessages(prev =>
+                    prev.map(msg =>
+                        msg.id === loadingMessageId
+                            ? {...msg, type: "image-failed"}
+                            : msg
+                    )
+                );
+
+                setMessages(prev => [
+                    ...prev,
+                    {
+                        id: crypto.randomUUID(),
+                        sender: "bot",
+                        type: "text",
+                        content: "상상 나라에서는  \n" +
+                            "이 장면을 그림으로 못 그려 \n" +
+                            "대신 다음 이야기로 갈게😊",
+                    },
+                ]);
+
+                setUsedTokens(prev => prev + 1);
+                setPhase("TIME");
+                setCurrentWords([]);
+                return;
+            }
+
+            // 이미지 추출 가능할때
+            const storyResult = response.data.generateStory;
+
+            setMessages(prev =>
+                prev.map(msg =>
+                    msg.id === loadingMessageId
+                        ? {
+                            ...msg,
+                            type: "image",
+                            content: storyResult.imageUrl,
+                        }
+                        : msg
+                )
+            );
+
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: crypto.randomUUID(),
+                    sender: "bot",
+                    type: "text",
+                    content: storyResult.refinedContent,
+                },
+            ]);
+
             setStories(prev => {
                 const nextStories = [
                     ...prev,
                     {
                         words: completedWords,
-                        imageUrl: result.imageUrl,
-                        text: result.refinedContent,
+                        imageUrl: storyResult.imageUrl,
+                        text: storyResult.refinedContent,
                     },
                 ];
-
-                if (nextStories.length >= 4) {
-                    setPhase("RESULT");
-                } else {
-                    setPhase("TIME");
-                }
-
+                setPhase(nextStories.length >= 4 ? "RESULT" : "TIME");
                 return nextStories;
             });
 
+            setUsedTokens(prev => prev + 1);
             setCurrentWords([]);
-
         }
     };
+    // 마지막에는 내 학습방으로 이동
+    const resultNotifiedRef = useRef(false);
+
+    useEffect(() => {
+        if (phase !== "RESULT") return;
+        if (resultNotifiedRef.current) return;
+
+        resultNotifiedRef.current = true;
+
+        setMessages(prev => [
+            ...prev,
+            {
+                id: crypto.randomUUID(),
+                sender: "bot",
+                type: "text",
+                content:
+                    "이야기가 완성됐어! 🎉\n내 학습방에서 다시 보고 저장할 수 있어.\n지금 가볼까?",
+            },
+            {
+                id: crypto.randomUUID(),
+                sender: "bot",
+                type: "button",
+                content: "내 학습방 가기",
+            },
+        ]);
+    }, [phase]);
 
     // 이미지 재생성
     const regenerateImage = (cutIndex: number) => {
@@ -240,7 +311,6 @@ export default function ConversationStage() {
             },
         });
     };
-
     return (
         <div className="flex flex-col h-full">
             {/*남은 토큰 수*/}
@@ -264,12 +334,18 @@ export default function ConversationStage() {
 
                     {/* 말풍선 영역 */}
                     <div className="flex-1 space-y-4">
-                        {messages.map((msg, index) => (
+                        {messages.map((msg) => (
                             <PromptBubble
-                                key={index}
+                                key={msg.id}
                                 message={msg}
+                                onButtonClick={
+                                    msg.type === "button"
+                                        ? () => router.push("/student/mypage")
+                                        : undefined
+                                }
                             />
                         ))}
+
                     </div>
                 </div>
 
