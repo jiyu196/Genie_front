@@ -1,16 +1,55 @@
 'use client';
 
+import ImageFailedCard from "@/components/student/learn/ImageFailedCard";
+
+type ChatMessage = {
+    id: string;
+    sender: 'bot' | 'user';
+    type: 'text' | 'button' | 'image' | 'image-loading'| 'image-failed';
+    content?: string;
+};
+
 type Props = {
-    message: {
-        sender: 'bot' | 'user';
-        type: 'text' | 'button' | 'image';
-        content: string;
-    };
+    message: ChatMessage;
     onButtonClick?: () => void;
 };
 
 export default function PromptBubble({ message, onButtonClick }: Props) {
     const isBot = message.sender === 'bot';
+
+    // 이미지 생성중일때 loading
+    if (message.type === "image-loading") {
+        return (
+            <div className="flex items-start gap-2 justify-start">
+                {/* 캐릭터 */}
+                <img
+                    src="/images/bot-ready.svg"
+                    alt="bot"
+                    className="w-13 h-13 mt-1 shrink-0"
+                />
+
+                {/* 로딩 박스 */}
+                <div className="
+                    w-60 h-60
+                    rounded-xl
+                    bg-gray-100
+                    animate-pulse
+                    flex
+                    items-center
+                    justify-center
+                    text-sm
+                    text-gray-600
+                ">
+                    지니가 그림을 만들고 있어!
+                </div>
+            </div>
+        );
+    }
+// 이미지 생성 실패 (정책 위배 등)
+    if (message.type === "image-failed") {
+        return <ImageFailedCard />;
+    }
+
 
     // 버튼 타입
     if (message.type === 'button') {
@@ -82,6 +121,7 @@ export default function PromptBubble({ message, onButtonClick }: Props) {
                   rounded-2xl
                   text-sm
                   leading-relaxed
+                  whitespace-pre-line   
                   ${
                     isBot
                         ? 'bg-yellow-50 text-[#5A4634]'

@@ -12,20 +12,17 @@ export default function StudentAccessGate({
 }) {
     const router = useRouter();
 
-    const { initialized, isLoggedIn } = useSelector(
+    const { isLoggedIn } = useSelector(
         (state: RootState) => state.studentAuth
     );
 
     useEffect(() => {
-        if (!initialized) return;
-
         // 로그인 안 됐으면 로그인 페이지로
         if (!isLoggedIn) {
             router.replace("/student/login");
         }
-    }, [initialized, isLoggedIn, router]);
+    }, [isLoggedIn, router]);
 
-    if (!initialized) return null;
     if (!isLoggedIn) return null;
 
     return <>{children}</>;

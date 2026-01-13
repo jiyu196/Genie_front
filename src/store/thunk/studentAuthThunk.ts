@@ -1,26 +1,6 @@
-// src/store/thunk/studentAuthThunk.ts
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {apolloClient} from "@/lib/apolloClient";
-import { SERVICE_ACCESS_LOGIN, SERVICE_ACCESS_LOGOUT, GET_MY_ACCESS_ID_PAGE} from "@/graphql/student/auth/serviceAccess";
-
-// 인증 초기화(새로고침 했을 때 대응)
-export const initializeStudentAuthThunk = createAsyncThunk(
-    "studentAuth/initialize",
-    async (_, { rejectWithValue }) => {
-        try {
-            await apolloClient.query({
-                query: GET_MY_ACCESS_ID_PAGE,
-                variables: {
-                    input: { page: 1, size: 1 }, // 최소 호출
-                },
-                fetchPolicy: "no-cache",
-            });
-            return true;
-        } catch {
-            return rejectWithValue("NO_SESSION");
-        }
-    }
-);
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { apolloClient } from "@/lib/apolloClient";
+import { SERVICE_ACCESS_LOGIN, SERVICE_ACCESS_LOGOUT } from "@/graphql/student/auth/serviceAccess";
 
 // 로그인
 export const studentLoginThunk = createAsyncThunk(
@@ -45,7 +25,7 @@ export const studentLoginThunk = createAsyncThunk(
     }
 );
 
-//로그아웃
+// 로그아웃
 export const studentLogoutThunk = createAsyncThunk(
     "studentAuth/logout",
     async (_, { rejectWithValue }) => {

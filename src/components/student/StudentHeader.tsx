@@ -13,12 +13,9 @@ export default function StudentHeader(){
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
 
-    const {isLoggedIn,initialized } = useSelector(
+    const {isLoggedIn } = useSelector(
         (state: RootState) => state.studentAuth
     );
-
-    // 인증 초기화 전일때 아무것도 렌더링 하지 않음.
-    if (!initialized) return null;
 
     const onLogout = async () => {
         await dispatch(studentLogoutThunk());

@@ -144,14 +144,14 @@ export default function MemberDetailModal({
                                             미리보기
                                         </a>
 
-                                        <a
-                                            href={member.businessLicenseUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-gray-600 underline"
-                                        >
-                                            다운로드
-                                        </a>
+                                        {/*<a*/}
+                                        {/*    href={member.businessLicenseUrl}*/}
+                                        {/*    target="_blank"*/}
+                                        {/*    rel="noopener noreferrer"*/}
+                                        {/*    className="text-gray-600 underline"*/}
+                                        {/*>*/}
+                                        {/*    다운로드*/}
+                                        {/*</a>*/}
                                     </>
                                 ) : (
                                     <span className="text-gray-400">
@@ -175,14 +175,14 @@ export default function MemberDetailModal({
                                             미리보기
                                         </a>
 
-                                        <a
-                                            href={member.businessLicenseUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-gray-600 underline"
-                                        >
-                                            다운로드
-                                        </a>
+                                        {/*<a*/}
+                                        {/*    href={member.businessLicenseUrl}*/}
+                                        {/*    target="_blank"*/}
+                                        {/*    rel="noopener noreferrer"*/}
+                                        {/*    className="text-gray-600 underline"*/}
+                                        {/*>*/}
+                                        {/*    다운로드*/}
+                                        {/*</a>*/}
                                     </>
                                 ) : (
                                     <span className="text-gray-400">

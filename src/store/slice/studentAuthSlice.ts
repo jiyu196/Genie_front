@@ -1,16 +1,13 @@
-// src/store/slice/studentAuthSlice.ts
-import {createSlice} from "@reduxjs/toolkit";
-import {initializeStudentAuthThunk, studentLoginThunk, studentLogoutThunk} from "@/store/thunk/studentAuthThunk";
+import { createSlice } from "@reduxjs/toolkit";
+import { studentLoginThunk, studentLogoutThunk } from "@/store/thunk/studentAuthThunk";
 
 interface StudentAuthState {
     isLoggedIn: boolean;
-    initialized: boolean;
     loading: boolean;
 }
 
 const initialState: StudentAuthState = {
     isLoggedIn: false,
-    initialized: false,
     loading: false,
 };
 
@@ -20,24 +17,17 @@ const studentAuthSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            // 초기화
-            .addCase(initializeStudentAuthThunk.pending, (state) => {
+            // 로그인
+            .addCase(studentLoginThunk.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(initializeStudentAuthThunk.fulfilled, (state) => {
-                state.loading = false;
-                state.initialized = true;
-                state.isLoggedIn = true;
-            })
-            .addCase(initializeStudentAuthThunk.rejected, (state) => {
-                state.loading = false;
-                state.initialized = true;
-                state.isLoggedIn = false;
-            })
-
-            // 로그인
             .addCase(studentLoginThunk.fulfilled, (state) => {
+                state.loading = false;
                 state.isLoggedIn = true;
+            })
+            .addCase(studentLoginThunk.rejected, (state) => {
+                state.loading = false;
+                state.isLoggedIn = false;
             })
 
             // 로그아웃
