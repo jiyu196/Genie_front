@@ -44,7 +44,7 @@ export function getPrompt(phase: ChatPhase, index: number): string {
                 `✨ ${index}번째 장면이야!\n` +
                 "이야기는 어떤 느낌이면 좋을까?\n" +
                 "느낌을 단어로 골라줘 😊\n" +
-                "예) 신나는, 신비로운, 따뜻한"
+                "예) 신나게, 신비롭게, 따뜻하게"
             );
 
         case "RESULT":

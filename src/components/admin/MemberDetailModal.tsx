@@ -130,11 +130,13 @@ export default function MemberDetailModal({
                     </h2>
 
                     <div className="border rounded-lg p-4 space-y-3 text-sm">
+                        {/* 사업자등록증 */}
                         <div className="flex justify-between items-center">
                             <span>사업자등록증</span>
-                            <div className="flex gap-2">
+                            <div className="flex gap-3">
                                 {member.businessLicenseUrl ? (
                                     <>
+                                        {/* 미리보기 */}
                                         <a
                                             href={member.businessLicenseUrl}
                                             target="_blank"
@@ -144,30 +146,30 @@ export default function MemberDetailModal({
                                             미리보기
                                         </a>
 
-                                        {/*<a*/}
-                                        {/*    href={member.businessLicenseUrl}*/}
-                                        {/*    target="_blank"*/}
-                                        {/*    rel="noopener noreferrer"*/}
-                                        {/*    className="text-gray-600 underline"*/}
-                                        {/*>*/}
-                                        {/*    다운로드*/}
-                                        {/*</a>*/}
+                                        {/* 다운로드 */}
+                                        <a
+                                            href={member.businessLicenseUrl}
+                                            download="business_license"
+                                            className="text-gray-600 underline"
+                                        >
+                                            다운로드
+                                        </a>
                                     </>
                                 ) : (
-                                    <span className="text-gray-400">
-                                        파일 없음
-                                    </span>
+                                    <span className="text-gray-400">파일 없음</span>
                                 )}
                             </div>
                         </div>
 
+                        {/* 재직증명서 */}
                         <div className="flex justify-between items-center">
                             <span>재직증명서</span>
-                            <div className="flex gap-2">
+                            <div className="flex gap-3">
                                 {member.employmentCertUrl ? (
                                     <>
+                                        {/* 미리보기 */}
                                         <a
-                                            href={member.businessLicenseUrl}
+                                            href={member.employmentCertUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="text-[#19344e] underline"
@@ -175,19 +177,17 @@ export default function MemberDetailModal({
                                             미리보기
                                         </a>
 
-                                        {/*<a*/}
-                                        {/*    href={member.businessLicenseUrl}*/}
-                                        {/*    target="_blank"*/}
-                                        {/*    rel="noopener noreferrer"*/}
-                                        {/*    className="text-gray-600 underline"*/}
-                                        {/*>*/}
-                                        {/*    다운로드*/}
-                                        {/*</a>*/}
+                                        {/* 다운로드 */}
+                                        <a
+                                            href={member.employmentCertUrl}
+                                            download="employment_certificate"
+                                            className="text-gray-600 underline"
+                                        >
+                                            다운로드
+                                        </a>
                                     </>
                                 ) : (
-                                    <span className="text-gray-400">
-                                        파일 없음
-                                    </span>
+                                    <span className="text-gray-400">파일 없음</span>
                                 )}
                             </div>
                         </div>
