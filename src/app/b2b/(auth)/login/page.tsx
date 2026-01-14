@@ -28,8 +28,6 @@ export default function LoginPage() {
             setError("이메일과 비밀번호를 입력해주세요.");
             return;
         }
-
-        setError(null);
         setSubmitting(true);
 
         try {
@@ -39,19 +37,20 @@ export default function LoginPage() {
             // // 재실행 시 로그아웃 설정 ( AuthGate에서 3분 유예 설정 줌)
             // sessionStorage.setItem("b2b_session", "alive");
             // sessionStorage.setItem("b2b_last_active", Date.now().toString());
-        } catch (err) {
+        } catch (err: any) {
             setSubmitting(false);
-            setError("아이디 또는 비밀번호가 올바르지 않습니다.");
+
+            console.log("LOGIN ERROR FINAL >>>", err);
+
+            // unwrap() 기준: rejectWithValue 객체가 그대로 들어옴
+            if (err?.code === "MEMBER_NOT_APPROVED") {
+                setError("관리자 승인 후 서비스 이용이 가능합니다.");
+                return;
+            }
+
+            setError(err?.message ?? "아이디 또는 비밀번호가 올바르지 않습니다.");
         }
     };
-
-    if (submitting) {
-        return (
-            <div className="min-h-[calc(100vh-120px)] flex items-center justify-center">
-                <LoadingSpinner />
-            </div>
-        );
-    }
 
     return (
         <>
@@ -72,7 +71,10 @@ export default function LoginPage() {
                         className="auth-input"
                         placeholder="아이디"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                            setError(null);
+                        }}
                         autoComplete="username"
                     />
 
@@ -81,10 +83,12 @@ export default function LoginPage() {
                         type="password"
                         placeholder="비밀번호"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                            setError(null);
+                        }}
                         autoComplete="current-password"
                     />
-
 
                     <Button
                         type="submit"

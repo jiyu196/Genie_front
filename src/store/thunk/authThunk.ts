@@ -9,7 +9,7 @@ import {logout, User} from "@/store/slice/authSlice";
 export const loginThunk = createAsyncThunk<
     User | null,
     { email: string; password: string },
-    { rejectValue: string }
+    { rejectValue: { code: string; message: string } }
 >(
     "auth/login",
     async (payload, { rejectWithValue }) => {
@@ -20,7 +20,10 @@ export const loginThunk = createAsyncThunk<
             });
 
             if (!loginRes.data?.login?.login) {
-                return rejectWithValue("LOGIN_FAILED");
+                return rejectWithValue({
+                    code: "LOGIN_FAILED",
+                    message: "아이디 또는 비밀번호가 올바르지 않습니다.",
+                });
             }
 
             const meRes = await apolloClient.query({
@@ -28,17 +31,29 @@ export const loginThunk = createAsyncThunk<
                 fetchPolicy: "no-cache",
             });
 
-            console.log("ME RESULT", meRes.data);
-
-            if(!meRes.data){
-                return rejectWithValue("LOGIN_FAILED");
+            if (!meRes.data?.me) {
+                return rejectWithValue({
+                    code: "NO_SESSION",
+                    message: "로그인 세션을 확인할 수 없습니다.",
+                });
             }
+
             return meRes.data.me;
-        } catch(e) {
-            return rejectWithValue("LOGIN_FAILED");
+        } catch (e: any) {
+            // GraphQL 에러 메시지
+            const graphQLErrorMessage =
+                e?.graphQLErrors?.[0]?.message;
+
+            return rejectWithValue({
+                code: "LOGIN_FAILED",
+                message:
+                    graphQLErrorMessage ||
+                    "아이디 또는 비밀번호가 올바르지 않습니다.",
+            });
         }
     }
 );
+
 
 // 앱, 웹 시작 시 인증 초기화. 쿠키 있으면 성공, 없으면 에러남
 export const initializeAuthThunk = createAsyncThunk<
