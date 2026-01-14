@@ -6,6 +6,7 @@ import {GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
 import {useQuery} from "@apollo/client";
 import {useWebtoonDownload} from "@/hook/student/useWebtoonDownload";
 import {downloadByLink} from "@/utils/downLoad";
+import {sortWebtoonCutsInStoryOrder} from "@/utils/sortWebtoonCuts";
 
 type WebtoonCut = {
     imageUrl: string;
@@ -47,6 +48,8 @@ export default function MyWorkDetailPage() {
             </div>
         );
     }
+    // 이미지 순서 정렬
+    const sortedCuts = sortWebtoonCutsInStoryOrder(work.cuts)
 
     return (
         <div className="min-h-screen px-6 py-16 bg-gradient-to-b from-[#e6f2ff] via-[#fde7f3] to-[#fff3df]">
@@ -73,7 +76,7 @@ export default function MyWorkDetailPage() {
 
                 {/* 4컷 */}
                 <div className="grid grid-cols-2 gap-4">
-                    {work.cuts.map((cut, idx) => (
+                    {sortedCuts.map((cut, idx) => (
                         <div
                             key={idx}
                             className="rounded-2xl overflow-hidden bg-white shadow p-2 flex flex-col gap-2"
@@ -101,10 +104,10 @@ export default function MyWorkDetailPage() {
                     <StudentButton
                         className="px-6 py-3"
                         onClick={() => {
-                            work.cuts.forEach((cut, idx) => {
+                            sortedCuts.forEach((cut, idx) => {
                                 setTimeout(() => {
                                     downloadByLink(cut.imageUrl);
-                                }, idx * 300); // 연속 다운로드 방지용 딜레이
+                                }, idx * 300);
                             });
                         }}
                     >

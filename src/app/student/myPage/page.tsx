@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@apollo/client";
 import StudentButton from "@/components/student/StudentButton";
 import { GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
+import {sortWebtoonCutsInStoryOrder} from "@/utils/sortWebtoonCuts";
 
 type WebtoonCut = {
     imageUrl: string;
@@ -61,11 +62,8 @@ export default function StudentMyPage() {
                     </div>
                 )}
                 {works.map((work) => {
-                    const sortedCuts = [...work.cuts].sort(
-                        (a, b) =>
-                            new Date(a.createdAt).getTime() -
-                            new Date(b.createdAt).getTime()
-                    );
+                    // 이미지 순서 정렬
+                    const sortedCuts = sortWebtoonCutsInStoryOrder(work.cuts)
 
                     return (
                         <div
@@ -112,4 +110,4 @@ export default function StudentMyPage() {
             </div>
         </div>
     );
-}
+};

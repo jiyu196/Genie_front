@@ -166,6 +166,7 @@ export default function ConversationStage() {
 
             let response;
 
+
             try {
                 response = await generateStory({
                     variables: {
@@ -196,7 +197,6 @@ export default function ConversationStage() {
                     },
                 ]);
 
-                setUsedTokens(prev => prev + 1);
                 setPhase("TIME");
                 setCurrentWords([]);
                 return;
@@ -224,7 +224,6 @@ export default function ConversationStage() {
                     },
                 ]);
 
-                setUsedTokens(prev => prev + 1);
                 setPhase("TIME");
                 setCurrentWords([]);
                 return;
@@ -232,6 +231,8 @@ export default function ConversationStage() {
 
             // 이미지 추출 가능할때
             const storyResult = response.data.generateStory;
+            // 서버 기준 토큰 동기화
+            setUsedTokens(storyResult.promptCount);
 
             setMessages(prev =>
                 prev.map(msg =>
@@ -268,7 +269,6 @@ export default function ConversationStage() {
                 return nextStories;
             });
 
-            setUsedTokens(prev => prev + 1);
             setCurrentWords([]);
         }
     };

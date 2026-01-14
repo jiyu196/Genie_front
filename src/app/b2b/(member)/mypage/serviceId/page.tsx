@@ -6,6 +6,7 @@ import Link from "next/link";
 import Button from "@/components/b2b/Button";
 import { GET_MY_SERVICE_ID } from "@/graphql/b2b/plan/getMyServiceId";
 import {Copy} from "lucide-react";
+import WebtoonSummaryModal from "@/components/b2b/mypage/WebtoonSummaryModal";
 
 // 서비스 계정 타입 (학생 계정으로 사용)
 type ServiceAccount = {
@@ -35,7 +36,8 @@ export default function StudentsPage() {
     // 페이지네이션 상태
     const [page, setPage] = useState(1);
     const size = 10;
-
+    //선택된 key값
+    const [selectedKey, setSelectedKey] = useState<string | null>(null);
     // 서비스 계정 조회
     const { data, loading } = useQuery(GET_MY_SERVICE_ID, {
         variables: {
@@ -44,7 +46,7 @@ export default function StudentsPage() {
                 size,
             },
         },
-            fetchPolicy: "no-cache",
+        fetchPolicy: "no-cache",
     });
     // 전체 계정 복사(현재페이지 10개씩 복사가능)
     const copyAllAccounts = async () => {
@@ -148,7 +150,9 @@ export default function StudentsPage() {
                                 const rowNumber = (page - 1) * size + index + 1;
 
                                 return (
-                                    <tr key={account.decryptedKey} className="border-b hover:bg-gray-50">
+                                    <tr key={account.decryptedKey} className="border-b hover:bg-gray-50 cursor-pointer"
+                                        onClick={() => setSelectedKey(account.decryptedKey)}
+                                    >
                                         <td className="px-6 py-4 text-gray-500">{rowNumber}</td>
                                         <td className="px-6 py-4 font-mono text-gray-700">
                                             <div className="flex items-center gap-2 max-w-[360px]">
@@ -206,6 +210,14 @@ export default function StudentsPage() {
                     )}
                 </div>
             )}
+            {/* 모달 렌더링 영역 */}
+            {selectedKey && (
+                <WebtoonSummaryModal
+                    decryptedKey={selectedKey}
+                    onClose={() => setSelectedKey(null)}
+                />
+            )}
+
         </section>
 
     );
