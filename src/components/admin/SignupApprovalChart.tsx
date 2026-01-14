@@ -78,9 +78,9 @@ export default function SignupApprovalChart() {
                 <Tooltip />
                 <Legend />
 
-                <Bar dataKey="pending" stackId="a" fill="#94a3b8" name="승인 대기" />
-                <Bar dataKey="approved" stackId="a" fill="#4ade80" name="승인 완료" />
-                <Bar dataKey="rejected" stackId="a" fill="#f87171" name="반려" />
+                <Bar dataKey="pending"  stackId="a" fill="#c7d2fe" name="승인 대기" />
+                <Bar dataKey="approved" stackId="a" fill="#4f46e5" name="승인 완료" />
+                <Bar dataKey="rejected" stackId="a" fill="#fca5a5" name="반려" radius={[0, 8, 8, 0]}/>
             </BarChart>
         </ResponsiveContainer>
     );
