@@ -54,7 +54,7 @@ export default function MyWorkDetailPage() {
                 <div className="bg-white rounded-3xl p-5 shadow space-y-4">
                     {/* 타이틀 */}
                     <h2 className="text-2xl font-extrabold text-center">
-                        📖 내가 만든 문장 📖
+                        📖 단어로 만든 이야기 📖
                     </h2>
                     {/* 문장 */}
                     <div

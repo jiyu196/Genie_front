@@ -61,3 +61,41 @@ html, body {
     50% { transform: translateY(-6px); }
 }
 
+/* 캐릭터 둥둥 */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animate-float {
+    animation: float 1.8s ease-in-out infinite;
+}
+
+
+/* 이미지 생성 중 박스 안 그리는 배경 */
+@keyframes brush {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-brush {
+    background: linear-gradient(
+            120deg,
+            #fde7f3,
+            #e6f2ff,
+            #fff3df
+    );
+    background-size: 300% 300%;
+    animation: brush 3s ease infinite;
+}
