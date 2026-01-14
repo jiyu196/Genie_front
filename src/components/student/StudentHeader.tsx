@@ -13,9 +13,11 @@ export default function StudentHeader(){
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
 
-    const {isLoggedIn } = useSelector(
+    const {isLoggedIn, initialized } = useSelector(
         (state: RootState) => state.studentAuth
     );
+
+    if (!initialized) return null;
 
     const onLogout = async () => {
         await dispatch(studentLogoutThunk());

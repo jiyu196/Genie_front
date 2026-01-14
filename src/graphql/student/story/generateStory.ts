@@ -15,6 +15,7 @@ export const GENERATE_STORY = gql`
       revisedPrompt
       imageUrl
       errorMessage
+      promptCount
     }
   }
 `;

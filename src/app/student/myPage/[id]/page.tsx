@@ -5,6 +5,7 @@ import StudentButton from "@/components/student/StudentButton";
 import {GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
 import {useQuery} from "@apollo/client";
 import {useWebtoonDownload} from "@/hook/student/useWebtoonDownload";
+import {downloadByLink} from "@/utils/downLoad";
 
 type WebtoonCut = {
     imageUrl: string;
@@ -75,13 +76,22 @@ export default function MyWorkDetailPage() {
                     {work.cuts.map((cut, idx) => (
                         <div
                             key={idx}
-                            className="aspect-square rounded-2xl overflow-hidden bg-white shadow"
+                            className="rounded-2xl overflow-hidden bg-white shadow p-2 flex flex-col gap-2"
                         >
-                            <img
-                                src={cut.imageUrl}
-                                alt={`컷 ${idx + 1}`}
-                                className="w-full h-full object-cover"
-                            />
+                            <div className="aspect-square overflow-hidden rounded-xl">
+                                <img
+                                    src={cut.imageUrl}
+                                    alt={`컷 ${idx + 1}`}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+
+                            <StudentButton
+                                variant="primary"
+                                onClick={() => downloadByLink(cut.imageUrl)}
+                            >
+                                컷 {idx + 1} 다운로드
+                            </StudentButton>
                         </div>
                     ))}
                 </div>
@@ -90,16 +100,18 @@ export default function MyWorkDetailPage() {
                 <div className="flex justify-center">
                     <StudentButton
                         className="px-6 py-3"
-                        onClick={() =>
-                        downloadCombinedImage(
-                           work.cuts.map(c => c.imageUrl),
-                           `${work.webtoonGroupId}.png`
-                        )
-                    }
-                >
-                        이미지 다운로드 하기
+                        onClick={() => {
+                            work.cuts.forEach((cut, idx) => {
+                                setTimeout(() => {
+                                    downloadByLink(cut.imageUrl);
+                                }, idx * 300); // 연속 다운로드 방지용 딜레이
+                            });
+                        }}
+                    >
+                        이미지 전부 다운로드
                     </StudentButton>
                 </div>
+
             </div>
         </div>
     );
