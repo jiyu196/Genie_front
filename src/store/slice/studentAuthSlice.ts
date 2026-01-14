@@ -26,7 +26,6 @@ const studentAuthSlice = createSlice({
             })
             .addCase(studentInitThunk.fulfilled, (state) => {
                 state.loading = false;
-                state.isLoggedIn = true;
                 state.initialized = true;
             })
             .addCase(studentInitThunk.rejected, (state) => {
@@ -53,7 +52,6 @@ const studentAuthSlice = createSlice({
             // 로그아웃
             .addCase(studentLogoutThunk.fulfilled, (state) => {
                 state.isLoggedIn = false;
-                state.initialized = true;
             });
     },
 });
