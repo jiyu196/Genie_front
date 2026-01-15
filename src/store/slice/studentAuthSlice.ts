@@ -26,6 +26,7 @@ const studentAuthSlice = createSlice({
             })
             .addCase(studentInitThunk.fulfilled, (state) => {
                 state.loading = false;
+                state.isLoggedIn = true;
                 state.initialized = true;
             })
             .addCase(studentInitThunk.rejected, (state) => {
