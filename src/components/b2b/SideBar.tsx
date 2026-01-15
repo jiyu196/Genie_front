@@ -51,7 +51,7 @@ export default function Sidebar({ isOpen, onClose }: Props) {
                                 onClick={() =>
                                     setOpenIndex(isOpenSection ? null : idx)
                                 }
-                                className="w-full flex justify-between py-2 text-sm font-semibold"
+                                className="w-full flex justify-between py-2 text-sm font-semibold cursor-pointer"
                             >
                                 <span>{section.title}</span>
                                 <span>{isOpenSection ? "▾" : "▸"}</span>

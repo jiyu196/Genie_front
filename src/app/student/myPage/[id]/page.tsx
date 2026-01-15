@@ -1,11 +1,12 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import StudentButton from "@/components/student/StudentButton";
 import {GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
 import {useQuery} from "@apollo/client";
 import {useWebtoonDownload} from "@/hook/student/useWebtoonDownload";
 import {downloadByLink} from "@/utils/downLoad";
+import {sortWebtoonCutsInStoryOrder} from "@/utils/sortWebtoonCuts";
 
 type WebtoonCut = {
     imageUrl: string;
@@ -19,6 +20,7 @@ type WebtoonGroup = {
 
 export default function MyWorkDetailPage() {
     const { id } = useParams<{ id: string }>();
+    const router = useRouter();
 
     const { data, loading, error } = useQuery(GET_MY_WEBTOON, {
         variables: {
@@ -47,11 +49,27 @@ export default function MyWorkDetailPage() {
             </div>
         );
     }
+    // 이미지 순서 정렬
+    const sortedCuts = sortWebtoonCutsInStoryOrder(work.cuts)
 
     return (
         <div className="min-h-screen px-6 py-16 bg-gradient-to-b from-[#e6f2ff] via-[#fde7f3] to-[#fff3df]">
             <div className="max-w-4xl mx-auto space-y-10">
                 <div className="bg-white rounded-3xl p-5 shadow space-y-4">
+                    <div
+                        onClick={() => router.push("/student/mypage")}
+                        className="
+                            inline-flex items-center gap-1
+                            text-sm
+                            text-[#7a5c5c]
+                            hover:text-[#3b2d2d]
+                            cursor-pointer
+                            transition
+                          "
+                    >
+                        ← 내 학습방으로 돌아가기
+                    </div>
+
                     {/* 타이틀 */}
                     <h2 className="text-2xl font-extrabold text-center">
                         📖 단어로 만든 이야기 📖
@@ -73,7 +91,7 @@ export default function MyWorkDetailPage() {
 
                 {/* 4컷 */}
                 <div className="grid grid-cols-2 gap-4">
-                    {work.cuts.map((cut, idx) => (
+                    {sortedCuts.map((cut, idx) => (
                         <div
                             key={idx}
                             className="rounded-2xl overflow-hidden bg-white shadow p-2 flex flex-col gap-2"
@@ -101,10 +119,10 @@ export default function MyWorkDetailPage() {
                     <StudentButton
                         className="px-6 py-3"
                         onClick={() => {
-                            work.cuts.forEach((cut, idx) => {
+                            sortedCuts.forEach((cut, idx) => {
                                 setTimeout(() => {
                                     downloadByLink(cut.imageUrl);
-                                }, idx * 300); // 연속 다운로드 방지용 딜레이
+                                }, idx * 300);
                             });
                         }}
                     >

@@ -6,10 +6,12 @@ import Link from "next/link";
 import Button from "@/components/b2b/Button";
 import { GET_MY_SERVICE_ID } from "@/graphql/b2b/plan/getMyServiceId";
 import {Copy} from "lucide-react";
+import WebtoonSummaryModal from "@/components/b2b/mypage/WebtoonSummaryModal";
 
 // 서비스 계정 타입 (학생 계정으로 사용)
 type ServiceAccount = {
-    decryptedKey: string;
+    serviceAccessId: number;  // (URL / 조회용)
+    decryptedKey: string; // 사용자 노출 / 복사용
     accessStatus: "ACTIVE" | "EXPIRED";
     createdAt: string;
     expiredAt: string;
@@ -36,6 +38,11 @@ export default function StudentsPage() {
     const [page, setPage] = useState(1);
     const size = 10;
 
+    const [selectedServiceAccountId, setSelectedServiceAccountId] =
+        useState<string | null>(null);
+
+
+
     // 서비스 계정 조회
     const { data, loading } = useQuery(GET_MY_SERVICE_ID, {
         variables: {
@@ -44,8 +51,12 @@ export default function StudentsPage() {
                 size,
             },
         },
-            fetchPolicy: "no-cache",
+        fetchPolicy: "no-cache",
     });
+    console.log(data);
+
+    const[serviceAccessId, setServiceAccessId] = useState<number>(0);
+
     // 전체 계정 복사(현재페이지 10개씩 복사가능)
     const copyAllAccounts = async () => {
         const allKeys = accounts.map(a => a.decryptedKey).join("\n");
@@ -148,7 +159,15 @@ export default function StudentsPage() {
                                 const rowNumber = (page - 1) * size + index + 1;
 
                                 return (
-                                    <tr key={account.decryptedKey} className="border-b hover:bg-gray-50">
+                                    <tr key={account.serviceAccessId} className="border-b hover:bg-gray-50 cursor-pointer"
+                                        onClick={() => {
+                                            console.log(account.decryptedKey);
+                                            setSelectedServiceAccountId(account.decryptedKey)
+                                            console.log(account.serviceAccessId)
+                                            setServiceAccessId(account.serviceAccessId)
+                                        }
+                                    }
+                                    >
                                         <td className="px-6 py-4 text-gray-500">{rowNumber}</td>
                                         <td className="px-6 py-4 font-mono text-gray-700">
                                             <div className="flex items-center gap-2 max-w-[360px]">
@@ -160,7 +179,10 @@ export default function StudentsPage() {
                                                 {/* 복사 버튼 */}
                                                 <button
                                                     type="button"
-                                                    onClick={() => copyToClipboard(account.decryptedKey)}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();  // 이벤트 분리(복사는 복사만, 계정클릭 이벤트는 따로)
+                                                        copyToClipboard(account.decryptedKey)
+                                                    }}
                                                     className="text-gray-400 hover:text-[#19344e] transition cursor-pointer"
                                                     title="계정 복사"
                                                 >
@@ -191,8 +213,8 @@ export default function StudentsPage() {
                             </Button>
 
                             <span className="text-sm">
-                        {pageInfo.currentPage} / {pageInfo.totalPages}
-                    </span>
+                                {pageInfo.currentPage} / {pageInfo.totalPages}
+                            </span>
 
                             <Button
                                 variant="secondary"
@@ -206,6 +228,15 @@ export default function StudentsPage() {
                     )}
                 </div>
             )}
+            {/* 모달 렌더링 영역 */}
+            {selectedServiceAccountId !== null && (
+                <WebtoonSummaryModal
+                    serviceAccessId={serviceAccessId}
+                    decryptedKey={selectedServiceAccountId}
+                    onClose={() => setSelectedServiceAccountId(null)}
+                />
+            )}
+
         </section>
 
     );

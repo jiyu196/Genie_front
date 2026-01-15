@@ -4,6 +4,7 @@ import Button from "@/components/b2b/Button";
 import StatusBadge from "@/components/admin/StatusBadge";
 import {useState} from "react";
 import ConfirmModal from "@/components/admin/ConfirmModal";
+import {adminDownloadByLink} from "@/utils/adminDownload";
 
 type MemberStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 
@@ -147,13 +148,18 @@ export default function MemberDetailModal({
                                         </a>
 
                                         {/* 다운로드 */}
-                                        <a
-                                            href={member.businessLicenseUrl}
-                                            download="business_license"
-                                            className="text-gray-600 underline"
+                                        <button
+                                            type="button"
+                                            className="text-gray-600 underline cursor-pointer"
+                                            onClick={() =>
+                                                adminDownloadByLink(
+                                                    member.businessLicenseUrl!,
+                                                    `${member.organizationName}_사업자등록증`
+                                                )
+                                            }
                                         >
                                             다운로드
-                                        </a>
+                                        </button>
                                     </>
                                 ) : (
                                     <span className="text-gray-400">파일 없음</span>
@@ -178,13 +184,18 @@ export default function MemberDetailModal({
                                         </a>
 
                                         {/* 다운로드 */}
-                                        <a
-                                            href={member.employmentCertUrl}
-                                            download="employment_certificate"
-                                            className="text-gray-600 underline"
+                                        <button
+                                            type="button"
+                                            className="text-gray-600 underline cursor-pointer"
+                                            onClick={() =>
+                                                adminDownloadByLink(
+                                                    member.employmentCertUrl!,
+                                                    `${member.organizationName}_재직증명서`
+                                                )
+                                            }
                                         >
                                             다운로드
-                                        </a>
+                                        </button>
                                     </>
                                 ) : (
                                     <span className="text-gray-400">파일 없음</span>
