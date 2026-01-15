@@ -31,12 +31,28 @@ export default function LoginPage() {
         setSubmitting(true);
 
         try {
-            await dispatch(loginThunk({ email, password })).unwrap();
+            const user = await dispatch(loginThunk({ email, password })).unwrap();
             // 성공 시 → AuthGate가 이동 처리
-
+            const AUTH_ROUTES = {
+                pending: "/b2b/pending",
+                rejected: "/b2b/rejected",
+                mypage: "/b2b", // 혹은 /b2b/mypage
+                login: "/b2b/login",
+            };
             // // 재실행 시 로그아웃 설정 ( AuthGate에서 3분 유예 설정 줌)
             // sessionStorage.setItem("b2b_session", "alive");
             // sessionStorage.setItem("b2b_last_active", Date.now().toString());
+            if(!user || user.accountStatus === "INACTIVE") {
+                alert("정지된 계정입니다.")
+                router.replace(AUTH_ROUTES.login);
+                return;
+            } else if(!user || user.accountStatus === "DELETED") {
+                alert("삭제된 계정입니다.")
+                router.replace(AUTH_ROUTES.mypage);
+                return;
+            }
+
+
         } catch (err: any) {
             setSubmitting(false);
 
