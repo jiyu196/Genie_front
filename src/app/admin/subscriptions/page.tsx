@@ -133,7 +133,7 @@ export default function SubscriptionsPage() {
                 {/* 기간 초기화 버튼 (추가) */}
                 <button
                     onClick={() => setSearchCondition(prev => ({ ...prev, from: null, to: null }))}
-                    className="text-xs text-gray-400 hover:text-gray-600 underline ml-1"
+                    className="text-xs text-gray-400 hover:text-gray-600 underline ml-1 cursor-pointer"
                 >
                     날짜 초기화
                 </button>

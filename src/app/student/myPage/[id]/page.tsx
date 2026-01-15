@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import StudentButton from "@/components/student/StudentButton";
 import {GET_MY_WEBTOON} from "@/graphql/student/story/getWebtoonPage";
 import {useQuery} from "@apollo/client";
@@ -20,6 +20,7 @@ type WebtoonGroup = {
 
 export default function MyWorkDetailPage() {
     const { id } = useParams<{ id: string }>();
+    const router = useRouter();
 
     const { data, loading, error } = useQuery(GET_MY_WEBTOON, {
         variables: {
@@ -55,6 +56,20 @@ export default function MyWorkDetailPage() {
         <div className="min-h-screen px-6 py-16 bg-gradient-to-b from-[#e6f2ff] via-[#fde7f3] to-[#fff3df]">
             <div className="max-w-4xl mx-auto space-y-10">
                 <div className="bg-white rounded-3xl p-5 shadow space-y-4">
+                    <div
+                        onClick={() => router.push("/student/mypage")}
+                        className="
+                            inline-flex items-center gap-1
+                            text-sm
+                            text-[#7a5c5c]
+                            hover:text-[#3b2d2d]
+                            cursor-pointer
+                            transition
+                          "
+                    >
+                        ← 내 학습방으로 돌아가기
+                    </div>
+
                     {/* 타이틀 */}
                     <h2 className="text-2xl font-extrabold text-center">
                         📖 단어로 만든 이야기 📖

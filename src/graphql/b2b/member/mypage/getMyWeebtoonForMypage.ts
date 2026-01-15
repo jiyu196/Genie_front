@@ -15,6 +15,7 @@ export const GET_MY_WEBTOON_FOR_MY_PAGE = gql`
       currentPage
       isFirst
       isLast
+      serviceAccessId
     }
   }
 `;

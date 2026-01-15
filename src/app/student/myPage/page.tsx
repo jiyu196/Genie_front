@@ -43,6 +43,22 @@ export default function StudentMyPage() {
 
     return (
         <div className="min-h-screen px-6 py-16 bg-gradient-to-b from-[#e6f2ff] via-[#fde7f3] to-[#fff3df]">
+            <div className="max-w-7xl mx-auto mb-6">
+                <span
+                    onClick={() => router.push("/student")}
+                    className="
+                        inline-flex items-center gap-1
+                        text-sm
+                        text-[#7a5c5c]
+                        hover:text-[#3b2d2d]
+                        cursor-pointer
+                        transition
+                    "
+                >
+                    ← 내 학습방으로 돌아가기
+                </span>
+            </div>
+
             <div className="max-w-7xl mx-auto grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
                 {/* 만들어진 이야기 없을 때 */}
                 {works.length === 0 && (
